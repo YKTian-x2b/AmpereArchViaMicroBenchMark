@@ -15,7 +15,7 @@ void __device_stub__Z19regbank_test_kernel4int2i6float4Pf(const struct int2&__pa
 void regbank_test_kernel( const struct int2 __cuda_0,const int __cuda_1,const struct float4 __cuda_2,float *__cuda_3)
 # 21 "regBankTest.cu"
 {__device_stub__Z19regbank_test_kernel4int2i6float4Pf( __cuda_0,__cuda_1,__cuda_2,__cuda_3);
-# 54 "regBankTest.cu"
+# 45 "regBankTest.cu"
 }
 # 1 "regBankTest.cudafe1.stub.c"
 static void __nv_cudaEntityRegisterCallback( void **__T11) {  __nv_dummy_param_ref(__T11); __nv_save_fatbinhandle_for_managed_rt(__T11); __cudaRegisterEntry(__T11, ((void ( *)(const struct int2, const int, const struct float4, float *))regbank_test_kernel), _Z19regbank_test_kernel4int2i6float4Pf, (-1)); }

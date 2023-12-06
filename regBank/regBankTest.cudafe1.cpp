@@ -71479,139 +71479,130 @@ float v0 = v.x;
 float v1 = v.y; 
 # 29
 float v2 = v.z; 
-# 31
-if (wid < (c.x)) 
 # 32
-{ 
+for (int i = 0; i < NIter; i++) 
 # 33
-for (int i = 0; i < NIter; i++) 
-# 34
 { 
-# 36
+# 35
 #pragma unroll
 for (
+# 35
+int n = 0; n < 256; n++) { 
 # 36
-int n = 0; n < 256; n++) { 
-# 37
-v0 = (v0 + v1); }  
-# 38
-}  
-# 39
-} else 
-# 40
-{ 
-# 41
-for (int i = 0; i < NIter; i++) 
-# 42
-{ 
-# 44
-#pragma unroll
-for (
-# 44
-int n = 0; n < 256; n++) { 
-# 45
 v0 = fmaf(v0, v2, v1); }  
-# 46
+# 37
 }  
-# 47
-}  
-# 49
+# 40
 __syncthreads(); 
-# 52
+# 43
 if ((bid == 0) && (lid == 0)) { 
-# 53
+# 44
 (a[wid]) = v0; }  
-# 54
+# 45
 } 
 #endif
-# 56 "regBankTest.cu"
+# 47 "regBankTest.cu"
 float regbank_test_run(const int2 c, const int NIter, const float4 v, float *a, cudaEvent_t &event_start, cudaEvent_t &event_stop) 
-# 57
+# 48
 { 
+# 49
+float elapsedTime; 
+# 50
+check(cudaEventRecord(event_start, 0), "cudaEventRecord(event_start, 0)", "regBankTest.cu", 50); 
+# 52
+(__cudaPushCallConfiguration(1800, 128)) ? (void)0 : regbank_test_kernel(c, NIter, v, a); 
+# 54
+check(cudaEventRecord(event_stop, 0), "cudaEventRecord(event_stop, 0)", "regBankTest.cu", 54); 
+# 55
+check(cudaEventSynchronize(event_stop), "cudaEventSynchronize(event_stop)", "regBankTest.cu", 55); 
+# 56
+check(cudaEventElapsedTime(&elapsedTime, event_start, event_stop), "cudaEventElapsedTime(&elapsedTime, event_start, event_stop)", "regBankTest.cu", 56); 
 # 58
-float elapsedTime; 
+return elapsedTime; 
 # 59
-check(cudaEventRecord(event_start, 0), "cudaEventRecord(event_start, 0)", "regBankTest.cu", 59); 
+} 
 # 61
-(__cudaPushCallConfiguration(7200, 128)) ? (void)0 : regbank_test_kernel(c, NIter, v, a); 
-# 63
-check(cudaEventRecord(event_stop, 0), "cudaEventRecord(event_stop, 0)", "regBankTest.cu", 63); 
-# 64
-check(cudaEventSynchronize(event_stop), "cudaEventSynchronize(event_stop)", "regBankTest.cu", 64); 
-# 65
-check(cudaEventElapsedTime(&elapsedTime, event_start, event_stop), "cudaEventElapsedTime(&elapsedTime, event_start, event_stop)", "regBankTest.cu", 65); 
-# 67
-return elapsedTime; 
-# 68
-} 
-# 70
 float regbank_test_run_drv(const int2 c, const int NIter, const float4 v, float *a, cudaEvent_t &event_start, cudaEvent_t &event_stop) 
-# 71
+# 62
 { 
-# 72
+# 63
 static CUmodule cuModule; 
-# 73
+# 64
 static CUfunction kernel; 
-# 74
+# 65
 static bool isInitialized = false; 
-# 76
+# 67
 if (!isInitialized) 
-# 77
+# 68
 { 
-# 78
+# 69
 cuInit(0); 
-# 81
+# 72
 cuModuleLoad(&cuModule, "regBankTest.sm_86.cubin"); 
-# 84
+# 75
 cuModuleGetFunction(&kernel, cuModule, "_Z19regbank_test_kernel4int2i6float4Pf"); 
-# 86
+# 77
 printf("cuModule = %#llx\n", (unsigned long long)cuModule); 
-# 87
+# 78
 printf("cuFunction = %#llx\n", (unsigned long long)kernel); 
-# 88
+# 79
 isInitialized = true; 
-# 89
+# 80
 }  
-# 91
+# 82
 float elapsedTime; 
-# 92
-check(cudaEventRecord(event_start, 0), "cudaEventRecord(event_start, 0)", "regBankTest.cu", 92); 
-# 94
+# 83
+check(cudaEventRecord(event_start, 0), "cudaEventRecord(event_start, 0)", "regBankTest.cu", 83); 
+# 85
 void *args[] = {(void *)(&c), (void *)(&NIter), (void *)(&v), (void *)(&a)}; 
+# 86
+cuLaunchKernel(kernel, 1800, 1, 1, 128, 1, 1, 0, 0, args, 0); 
+# 91
+check(cudaEventRecord(event_stop, 0), "cudaEventRecord(event_stop, 0)", "regBankTest.cu", 91); 
+# 92
+check(cudaEventSynchronize(event_stop), "cudaEventSynchronize(event_stop)", "regBankTest.cu", 92); 
+# 93
+check(cudaEventElapsedTime(&elapsedTime, event_start, event_stop), "cudaEventElapsedTime(&elapsedTime, event_start, event_stop)", "regBankTest.cu", 93); 
 # 95
-cuLaunchKernel(kernel, 7200, 1, 1, 128, 1, 1, 0, 0, args, 0); 
-# 100
-check(cudaEventRecord(event_stop, 0), "cudaEventRecord(event_stop, 0)", "regBankTest.cu", 100); 
-# 101
-check(cudaEventSynchronize(event_stop), "cudaEventSynchronize(event_stop)", "regBankTest.cu", 101); 
-# 102
-check(cudaEventElapsedTime(&elapsedTime, event_start, event_stop), "cudaEventElapsedTime(&elapsedTime, event_start, event_stop)", "regBankTest.cu", 102); 
-# 104
 return elapsedTime; 
-# 105
+# 96
 } 
-# 107
+# 98
 void dotest() 
-# 108
+# 99
 { 
-# 109
+# 100
 CuPtr< float>  da(4096); 
-# 110
+# 101
 int NIter = 256; 
-# 112
+# 103
 cudaEvent_t event_start, event_stop; 
-# 113
-check(cudaEventCreate(&event_start), "cudaEventCreate(&event_start)", "regBankTest.cu", 113); 
-# 114
-check(cudaEventCreate(&event_stop), "cudaEventCreate(&event_stop)", "regBankTest.cu", 114); 
-# 118
+# 104
+check(cudaEventCreate(&event_start), "cudaEventCreate(&event_start)", "regBankTest.cu", 104); 
+# 105
+check(cudaEventCreate(&event_stop), "cudaEventCreate(&event_stop)", "regBankTest.cu", 105); 
+# 109
 int2 c = make_int2(4, 0); 
-# 119
+# 110
 float4 v = make_float4(0, (1.0F), 0, 0); 
-# 121
+# 112
 printf("### Warm up...\n"); 
-# 122
+# 113
 for (int i = 0; i < 3; i++) 
+# 114
+{ 
+# 115
+da.SetZeros(); 
+# 116
+float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); 
+# 118
+printf("  Warmup %2d: %10.3f ms\n", i, elapsedTime); 
+# 119
+}  
+# 121
+printf("### Testing...\n"); 
+# 122
+for (int i = 0; i < 5; i++) 
 # 123
 { 
 # 124
@@ -71619,58 +71610,44 @@ da.SetZeros();
 # 125
 float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); 
 # 127
-printf("  Warmup %2d: %10.3f ms\n", i, elapsedTime); 
+printf("  Test %2d: %10.3f ms\n", i, elapsedTime); 
 # 128
 }  
 # 130
-printf("### Testing...\n"); 
+check(cudaEventDestroy(event_start), "cudaEventDestroy(event_start)", "regBankTest.cu", 130); 
 # 131
-for (int i = 0; i < 5; i++) 
-# 132
-{ 
+check(cudaEventDestroy(event_stop), "cudaEventDestroy(event_stop)", "regBankTest.cu", 131); 
 # 133
-da.SetZeros(); 
-# 134
-float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); 
-# 136
-printf("  Test %2d: %10.3f ms\n", i, elapsedTime); 
-# 137
-}  
-# 139
-check(cudaEventDestroy(event_start), "cudaEventDestroy(event_start)", "regBankTest.cu", 139); 
-# 140
-check(cudaEventDestroy(event_stop), "cudaEventDestroy(event_stop)", "regBankTest.cu", 140); 
-# 142
 printf("\n### Result checking...\n"); 
-# 144
+# 135
 HostPtr< float>  ha; 
-# 145
+# 136
 da.ToHostPtr(ha); 
-# 146
+# 137
 for (int i = 0; i < (128 / 32); i++) 
-# 147
+# 138
 { 
-# 148
+# 139
 unsigned xa = *((unsigned *)(&ha(i))); 
-# 149
+# 140
 printf("res[%2d] : %8g  0x%08x\n", i, ha(i), xa); 
-# 150
+# 141
 }  
-# 151
+# 142
 } 
-# 153
+# 144
 int main() 
-# 154
+# 145
 { 
-# 155
+# 146
 dotest(); 
-# 156
+# 147
 return 0; 
-# 157
+# 148
 } 
 
 # 1 "regBankTest.cudafe1.stub.c"
-#define _NV_ANON_NAMESPACE _GLOBAL__N__25f954d7_14_regBankTest_cu_3ea3990e
+#define _NV_ANON_NAMESPACE _GLOBAL__N__c56ad0dc_14_regBankTest_cu_3ea3990e
 #ifdef _NV_ANON_NAMESPACE
 #endif
 # 1 "regBankTest.cudafe1.stub.c"

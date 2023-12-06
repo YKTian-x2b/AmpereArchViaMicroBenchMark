@@ -753,19 +753,19 @@ ___device__(extern  __no_sc__) enum cudaError __cudaCDP2EventDestroy(struct CUev
 # 256 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 ___device__(extern  __no_sc__) enum cudaError __cudaCDP2Free(void *);
 # 388 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
-___device__(static  __no_sc__) __inline__ const char *_ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e18cudaGetErrorStringE9cudaError(enum cudaError);
+___device__(static  __no_sc__) __inline__ const char *_ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e18cudaGetErrorStringE9cudaError(enum cudaError);
 # 433 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
-___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e15cudaEventRecordEP10CUevent_stP11CUstream_st(struct CUevent_st *, struct CUstream_st *);
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e15cudaEventRecordEP10CUevent_stP11CUstream_st(struct CUevent_st *, struct CUstream_st *);
 # 453 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
-___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e16cudaEventDestroyEP10CUevent_st(struct CUevent_st *);
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e16cudaEventDestroyEP10CUevent_st(struct CUevent_st *);
 # 463 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
-___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e8cudaFreeEPv(void *);
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e8cudaFreeEPv(void *);
 # 468 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
-___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e10cudaMallocEPPvm(void **, size_t);
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e10cudaMallocEPPvm(void **, size_t);
 # 163 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/vector_functions.hpp"
-___device__(static  __no_sc__) __inline__ struct int2 _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e9make_int2Eii(int, int);
+___device__(static  __no_sc__) __inline__ struct int2 _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e9make_int2Eii(int, int);
 # 248 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/vector_functions.hpp"
-___device__(static  __no_sc__) __inline__ struct float4 _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e11make_float4Effff(float, float, float, float);
+___device__(static  __no_sc__) __inline__ struct float4 _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e11make_float4Effff(float, float, float, float);
 #if !defined(__CUDABE__)
 # 153 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/crt/common_functions.h"
  __device_builtin__ ___device__(extern  __no_sc__) int printf(const char *__restrict__, ...);
@@ -959,7 +959,7 @@ ___device__(static  __no_sc__) __inline__ struct float4 _ZN45_INTERNAL_25f954d7_
 # 3634 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/crt/device_functions.h"
 ___device__(extern  __no_sc__) unsigned __cudaPushCallConfiguration(struct dim3, struct dim3, size_t, struct CUstream_st *);
 # 730 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
-___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e10cudaMallocIfEE9cudaErrorPPT_m(float **, size_t);
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e10cudaMallocIfEE9cudaErrorPPT_m(float **, size_t);
 # 20 "regBankTest.cu"
 __global__ __var_used__ extern void _Z19regbank_test_kernel4int2i6float4Pf(const struct int2, const int, const struct float4, float *);
 #include "common_functions.h"
@@ -982,7 +982,7 @@ return cudaErrorUnknown;
 # 112 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 }}
 # 388 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
-___device__(static  __no_sc__) __inline__ const char *_ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e18cudaGetErrorStringE9cudaError(
+___device__(static  __no_sc__) __inline__ const char *_ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e18cudaGetErrorStringE9cudaError(
 # 388 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 enum cudaError error){
 # 389 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
@@ -992,7 +992,7 @@ return __cudaCDP2GetErrorString(error);
 # 391 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 }}
 # 433 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
-___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e15cudaEventRecordEP10CUevent_stP11CUstream_st(
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e15cudaEventRecordEP10CUevent_stP11CUstream_st(
 # 433 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 struct CUevent_st *event, 
 # 433 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
@@ -1005,7 +1005,7 @@ return ((__T0 = event) , (void)(__T1 = stream)) , (__cudaCDP2EventRecord(__T0, _
 # 436 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 }}
 # 453 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
-___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e16cudaEventDestroyEP10CUevent_st(
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e16cudaEventDestroyEP10CUevent_st(
 # 453 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 struct CUevent_st *event){
 # 454 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
@@ -1015,7 +1015,7 @@ return __cudaCDP2EventDestroy(event);
 # 456 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 }}
 # 463 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
-___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e8cudaFreeEPv(
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e8cudaFreeEPv(
 # 463 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 void *devPtr){
 # 464 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
@@ -1025,7 +1025,7 @@ return __cudaCDP2Free(devPtr);
 # 466 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 }}
 # 468 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
-___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e10cudaMallocEPPvm(
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e10cudaMallocEPPvm(
 # 468 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 void **devPtr, 
 # 468 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
@@ -1038,7 +1038,7 @@ return ((__T2 = devPtr) , (void)(__T3 = size)) , (__cudaCDP2Malloc(__T2, __T3));
 # 471 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
 }}
 # 163 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/vector_functions.hpp"
-___device__(static  __no_sc__) __inline__ struct int2 _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e9make_int2Eii(
+___device__(static  __no_sc__) __inline__ struct int2 _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e9make_int2Eii(
 # 163 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/vector_functions.hpp"
 int x, 
 # 163 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/vector_functions.hpp"
@@ -1060,7 +1060,7 @@ return __T4; }
 # 166 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/vector_functions.hpp"
 }}
 # 248 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/vector_functions.hpp"
-___device__(static  __no_sc__) __inline__ struct float4 _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e11make_float4Effff(
+___device__(static  __no_sc__) __inline__ struct float4 _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e11make_float4Effff(
 # 248 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/vector_functions.hpp"
 float x, 
 # 248 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/vector_functions.hpp"
@@ -1274,7 +1274,7 @@ return __T5; }
 #if !defined(__CUDABE__)
 #endif
 # 730 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
-___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e10cudaMallocIfEE9cudaErrorPPT_m(
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e10cudaMallocIfEE9cudaErrorPPT_m(
 # 731 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
 float **devPtr, 
 # 732 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
@@ -1283,7 +1283,7 @@ size_t size){
 {  void **__T6;
  size_t __T7;
 # 735 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
-return ((__T6 = ((void **)((void *)devPtr))) , (void)(__T7 = size)) , (_ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990e10cudaMallocEPPvm(__T6, __T7));
+return ((__T6 = ((void **)((void *)devPtr))) , (void)(__T7 = size)) , (_ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990e10cudaMallocEPPvm(__T6, __T7));
 # 736 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
 }}
 # 20 "regBankTest.cu"
@@ -1326,73 +1326,37 @@ __cuda_local_var_70698_11_non_const_v0 = (v.x);
 __cuda_local_var_70699_11_non_const_v1 = (v.y);
 # 29 "regBankTest.cu"
 __cuda_local_var_70700_11_non_const_v2 = (v.z);
-# 31 "regBankTest.cu"
-if (__cuda_local_var_70695_9_non_const_wid < (c.x))
 # 32 "regBankTest.cu"
 {
-# 33 "regBankTest.cu"
-{
-# 33 "regBankTest.cu"
+# 32 "regBankTest.cu"
  int i;
-# 33 "regBankTest.cu"
+# 32 "regBankTest.cu"
 i = 0;
+# 32 "regBankTest.cu"
+for (; (i < NIter); i++)
 # 33 "regBankTest.cu"
-for (; (i < NIter); i++)
-# 34 "regBankTest.cu"
 {
-# 36 "regBankTest.cu"
+# 35 "regBankTest.cu"
 {
-# 36 "regBankTest.cu"
+# 35 "regBankTest.cu"
  int n;
-# 36 "regBankTest.cu"
+# 35 "regBankTest.cu"
 n = 0;
-# 36 "regBankTest.cu"
-
-#pragma unroll 2147483647
-for (; (n < 256); n++) {
-# 37 "regBankTest.cu"
-__cuda_local_var_70698_11_non_const_v0 = (__cuda_local_var_70698_11_non_const_v0 + __cuda_local_var_70699_11_non_const_v1); } }
-# 38 "regBankTest.cu"
-} }
-# 39 "regBankTest.cu"
-}
-# 40 "regBankTest.cu"
-else 
-# 40 "regBankTest.cu"
-{
-# 41 "regBankTest.cu"
-{
-# 41 "regBankTest.cu"
- int i;
-# 41 "regBankTest.cu"
-i = 0;
-# 41 "regBankTest.cu"
-for (; (i < NIter); i++)
-# 42 "regBankTest.cu"
-{
-# 44 "regBankTest.cu"
-{
-# 44 "regBankTest.cu"
- int n;
-# 44 "regBankTest.cu"
-n = 0;
-# 44 "regBankTest.cu"
+# 35 "regBankTest.cu"
 
 #pragma unroll 2147483647
 for (; (n < 256); n++) {  float __T8;
  float __T9;
  float __T10;
-# 45 "regBankTest.cu"
+# 36 "regBankTest.cu"
 __cuda_local_var_70698_11_non_const_v0 = ((((__T8 = __cuda_local_var_70698_11_non_const_v0) , (void)(__T9 = __cuda_local_var_70700_11_non_const_v2)) , (void)(__T10 = __cuda_local_var_70699_11_non_const_v1)) , (fmaf(__T8, __T9, __T10))); } }
-# 46 "regBankTest.cu"
+# 37 "regBankTest.cu"
 } }
-# 47 "regBankTest.cu"
-}
-# 49 "regBankTest.cu"
+# 40 "regBankTest.cu"
 __syncthreads();
-# 52 "regBankTest.cu"
+# 43 "regBankTest.cu"
 if ((__cuda_local_var_70694_9_non_const_bid == 0) && (__cuda_local_var_70696_9_non_const_lid == 0)) {
-# 53 "regBankTest.cu"
+# 44 "regBankTest.cu"
 (a[__cuda_local_var_70695_9_non_const_wid]) = __cuda_local_var_70698_11_non_const_v0; } 
-# 54 "regBankTest.cu"
+# 45 "regBankTest.cu"
 }}

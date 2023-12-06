@@ -11,8 +11,8 @@
 	.__elf_machine          EM_CUDA
 	.__elf_version          121 		// CUDA toolkit version 
 	.__elf_entry            0 		// entry point address 
-	.__elf_phoff            0x2b80 		// program header offset, maybe updated by assembler
-	.__elf_shoff            0x2900 		// section header offset, maybe updated by assembler
+	.__elf_phoff            0x1b00 		// program header offset, maybe updated by assembler
+	.__elf_shoff            0x1880 		// section header offset, maybe updated by assembler
 	.__elf_flags            0x560556 		// Flags, SM_86(0x56), COMPUTE_86(0x56) 
 	.__elf_ehsize           64 		// elf header size 
 	.__elf_phentsize        56 		// program entry size
@@ -260,10 +260,10 @@
     /*0050*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
     /*0058*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
-    // Symbol[4] "_Z19regbank_test_kernel4int2i6float4Pf": Container({'st_name': 64, 'st_info': Container({'bind': 'STB_GLOBAL', 'type': 'STT_FUNC'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 9, 'st_value': 0, 'st_size': 8960})
+    // Symbol[4] "_Z19regbank_test_kernel4int2i6float4Pf": Container({'st_name': 64, 'st_info': Container({'bind': 'STB_GLOBAL', 'type': 'STT_FUNC'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 9, 'st_value': 0, 'st_size': 4736})
     /*0060*/ .byte 0x40, 0x00, 0x00, 0x00, 0x12, 0x10, 0x09, 0x00
     /*0068*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
-    /*0070*/ .byte 0x00, 0x23, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0070*/ .byte 0x80, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
 
 
 // --------------------- .debug_frame                     --------------------------
@@ -285,8 +285,8 @@
           /*0030*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0x34, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
           /*0040*/ 	.byte	0x00, 0x00, 0x00, 0x00
           /*0044*/ 	.dword	_Z19regbank_test_kernel4int2i6float4Pf
-          /*004c*/ 	.byte	0x00, 0x23, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x04, 0x20, 0x00
-          /*005c*/ 	.byte	0x00, 0x00, 0x0c, 0x81, 0x80, 0x80, 0x28, 0x00, 0x04, 0x6c, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*004c*/ 	.byte	0x80, 0x12, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x04, 0x1c, 0x00
+          /*005c*/ 	.byte	0x00, 0x00, 0x0c, 0x81, 0x80, 0x80, 0x28, 0x00, 0x04, 0x3c, 0x04, 0x00, 0x00, 0x00, 0x00, 0x00
           /*006c*/ 	.byte	0x00, 0x00, 0x00, 0x00
   
   
@@ -356,7 +356,7 @@
 	.__section_flags        0x0
 	.__section_addr         0x0
 	.__section_offset       0x3f0 	// maybe updated by assembler
-	.__section_size         0x74 	// maybe updated by assembler
+	.__section_size         0x6c 	// maybe updated by assembler
 	.__section_link         5
 	.__section_info         0x9
 	.__section_entsize      0
@@ -459,21 +459,12 @@
   
   	//   ....[0]....
   .L_20:
-          /*0064*/ 	.word	0x000021f0
+          /*0064*/ 	.word	0x000010f0
   
   
   	//   ....[1]....
-          /*0068*/ 	.word	0x00002240
-  
-  
-  	//----- nvinfo : EIATTR_CRS_STACK_SIZE
-  	.align		4
+          /*0068*/ 	.word	0x00001170
   .L_21:
-          /*006c*/ 	.byte	0x04, 0x1e
-          /*006e*/ 	.short	(.L_23 - .L_22)
-  .L_22:
-          /*0070*/ 	.word	0x00000000
-  .L_23:
   
   
 // --------------------- .rel.debug_frame                 --------------------------
@@ -484,7 +475,7 @@
 	.__section_type         SHT_REL
 	.__section_flags        0x0
 	.__section_addr         0x0
-	.__section_offset       0x468 	// maybe updated by assembler
+	.__section_offset       0x460 	// maybe updated by assembler
 	.__section_size         0x10 	// maybe updated by assembler
 	.__section_link         5
 	.__section_info         0x4
@@ -498,7 +489,7 @@
 	.__section_type         SHT_PROGBITS
 	.__section_flags        0x2
 	.__section_addr         0x0
-	.__section_offset       0x478 	// maybe updated by assembler
+	.__section_offset       0x470 	// maybe updated by assembler
 	.__section_size         0x188 	// maybe updated by assembler
 	.__section_link         0
 	.__section_info         0x9
@@ -516,7 +507,7 @@
 	.__section_flags        0x100006
 	.__section_addr         0x0
 	.__section_offset       0x600 	// maybe updated by assembler
-	.__section_size         0x2300 	// maybe updated by assembler
+	.__section_size         0x1280 	// maybe updated by assembler
 	.__section_link         5
 	.__section_info         0x8000004
 	.__section_entsize      0
@@ -526,98 +517,320 @@
   	.align	128
           .global         _Z19regbank_test_kernel4int2i6float4Pf
           .type           _Z19regbank_test_kernel4int2i6float4Pf,@function
-          .size           _Z19regbank_test_kernel4int2i6float4Pf,(.L_x_7 - _Z19regbank_test_kernel4int2i6float4Pf)
+          .size           _Z19regbank_test_kernel4int2i6float4Pf,(.L_x_3 - _Z19regbank_test_kernel4int2i6float4Pf)
           .other          _Z19regbank_test_kernel4int2i6float4Pf,@"STO_CUDA_ENTRY STV_DEFAULT"
   _Z19regbank_test_kernel4int2i6float4Pf:
   .text._Z19regbank_test_kernel4int2i6float4Pf:
       [B------:R-:W-:Y:S02]         /*0000*/                   MOV R1, c[0x0][0x28] ;
       [B------:R-:W0:-:S01]         /*0010*/                   S2R R0, SR_TID.X ;
-      [B------:R-:W-:-:S01]         /*0020*/                   BSSY B0, `(.L_x_0) ;
-      [B------:R-:W-:-:S02]         /*0030*/                   MOV R4, c[0x0][0x170] ;
-      [B0-----:R-:W-:Y:S04]         /*0040*/                   SHF.R.S32.HI R3, RZ, 0x1f, R0 ;
-      [B------:R-:W-:Y:S04]         /*0050*/                   LEA.HI R2, R3, R0, RZ, 0x5 ;
-      [B------:R-:W-:Y:S04]         /*0060*/                   SHF.R.S32.HI R2, RZ, 0x5, R2 ;
-      [B------:R-:W-:Y:S13]         /*0070*/                   ISETP.GE.AND P0, PT, R2, c[0x0][0x160], PT ;
-      // @CUASM_INSERT_MARKER_POS.INIT      
-[B------:R-:W-:-:S01]  MOV R4, RZ ; 
+      [B------:R-:W-:-:S02]         /*0020*/                   MOV R2, c[0x0][0x168] ;
+      [B------:R-:W-:-:S01]         /*0030*/                   MOV R5, c[0x0][0x170] ;
+      [B------:R-:W0:-:S01]         /*0040*/                   S2R R3, SR_CTAID.X ;
+      [B------:R-:W-:-:S02]         /*0050*/                   ISETP.GE.AND P1, PT, R2, 0x1, PT ;
+      [B0-----:R-:W-:Y:S11]         /*0060*/                   LOP3.LUT P0, RZ, R3, 0x1f, R0, 0xf8, !PT ;
+        // @CUASM_INSERT_MARKER_POS.INIT
+[B------:R-:W-:-:S01]  MOV R5, RZ ; 
 [B------:R-:W-:-:S01]  MOV R8, 0x3f800000 ; 
 [B------:R-:W-:-:S01]  MOV R9, 0x3f800000 ; 
 [B------:R-:W-:-:S01]  MOV R10, 0x3f800000 ; 
 [B------:R-:W-:-:S01]  MOV R11, 0x3f800000 ; 
 [B------:R-:W-:-:S01]  MOV R12, 0x3f800000 ; 
 [B------:R-:W-:-:S01]  MOV R13, 0x3f800000 ; 
-[B------:R-:W-:-:S01]  MOV R14, 0x3f800000 ; 
-[B------:R-:W-:-:S01]  MOV R15, 0x3f800000 ; 
-[B------:R-:W-:-:S01]  MOV R16, 0x3f800000 ; 
 
-      [B------:R-:W-:-:S05]         /*0080*/              @!P0 BRA `(.L_x_1) ;
-      [B------:R-:W-:Y:S04]         /*0090*/                   MOV R3, c[0x0][0x168] ;
-      [B------:R-:W-:Y:S13]         /*00a0*/                   ISETP.GE.AND P0, PT, R3, 0x1, PT ;
-      [B------:R-:W-:-:S05]         /*00b0*/              @!P0 BRA `(.L_x_2) ;
-      [B------:R-:W-:Y:S02]         /*00c0*/                   MOV R5, RZ ;
-  .L_x_4:
-      [B------:R-:W-:Y:S03]         /*00e0*/                   IADD3 R5, R5, 0x1, RZ ;
-      [B------:R-:W-:Y:S03]         /*0100*/                   ISETP.GE.AND P0, PT, R5, c[0x0][0x168], PT ;
-      // @CUASM_INSERT_MARKER_POS.WORK_2
-      [B------:R-:W-:Y:S15]  FFMA R4, R9, R10, R4; 
-      [B------:R-:W-:Y:S01]  FFMA R12, R9, R10, R11; 
-      [B------:R-:W-:Y:S01]  FFMA R13, R9, R10, R11; 
-      [B------:R-:W-:Y:S01]  FFMA R14, R9, R10, R11; 
-      [B------:R-:W-:Y:S15]  FFMA R4, R9, R10, R4; 
-      [B------:R-:W-:Y:S01]  FFMA R12, R9, R10, R11; 
-      [B------:R-:W-:Y:S01]  FFMA R13, R9, R10, R11; 
-      [B------:R-:W-:Y:S01]  FFMA R14, R9, R10, R11; 
-
-      [B------:R-:W-:-:S01]         /*1100*/               @P0 CALL.REL.NOINC `(.L_x_3) ;
-      [B------:R-:W-:-:S05]         /*1110*/                   BRA `(.L_x_4) ;
-  .L_x_3:
-      [B------:R-:W-:-:S05]         /*1120*/                   BRA `(.L_x_2) ;
+      [B------:R-:W-:-:S05]         /*0070*/              @!P1 BRA `(.L_x_0) ;
+      [B------:R-:W-:Y:S02]         /*0080*/                   MOV R3, RZ ;
   .L_x_1:
-      [B------:R-:W-:Y:S04]         /*1130*/                   MOV R3, c[0x0][0x168] ;
-      [B------:R-:W-:Y:S13]         /*1140*/                   ISETP.GE.AND P0, PT, R3, 0x1, PT ;
-      [B------:R-:W-:-:S05]         /*1150*/              @!P0 BRA `(.L_x_2) ;
-      [B------:R-:W-:Y:S03]         /*1160*/                   MOV R3, RZ ;
-  .L_x_5:
-      [B------:R-:W-:Y:S03]         /*1180*/                   IADD3 R3, R3, 0x1, RZ ;
-      [B------:R-:W-:Y:S03]         /*11a0*/                   ISETP.GE.AND P0, PT, R3, c[0x0][0x168], PT ;
-      // @CUASM_INSERT_MARKER_POS.WORK_1
-      [B------:R-:W-:Y:S15]  FFMA R4, R9, R10, R4; 
-      [B------:R-:W-:Y:S01]  FFMA R12, R9, R10, R11; 
-      [B------:R-:W-:Y:S01]  FFMA R13, R9, R10, R11; 
-      [B------:R-:W-:Y:S01]  FFMA R14, R9, R10, R11; 
-      [B------:R-:W-:Y:S15]  FFMA R4, R9, R10, R4; 
-      [B------:R-:W-:Y:S01]  FFMA R12, R9, R10, R11; 
-      [B------:R-:W-:Y:S01]  FFMA R13, R9, R10, R11; 
-      [B------:R-:W-:Y:S01]  FFMA R14, R9, R10, R11; 
+      [B------:R-:W-:Y:S03]         /*00a0*/                   IADD3 R3, R3, 0x1, RZ ;
+      [B------:R-:W-:Y:S03]         /*00c0*/                   ISETP.GE.AND P1, PT, R3, c[0x0][0x168], PT ;
+        // @CUASM_INSERT_MARKER_POS.WORK_1
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
+      [B------:R-:W-:Y:S15]  FFMA R5, R8, R9, R5; 
+      [B------:R-:W-:Y:S01]  FFMA R11, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R12, R8, R9, R10; 
+      [B------:R-:W-:Y:S01]  FFMA R13, R8, R9, R10; 
 
-      [B------:R-:W-:-:S01]         /*2190*/               @P0 CALL.REL.NOINC `(.L_x_2) ;
-      [B------:R-:W-:-:S05]         /*21a0*/                   BRA `(.L_x_5) ;
-  .L_x_2:
-      [B------:R-:W-:-:S05]         /*21b0*/                   BSYNC B0 ;
+      [B------:R-:W-:-:S01]         /*10c0*/               @P1 CALL.REL.NOINC `(.L_x_0) ;
+      [B------:R-:W-:-:S05]         /*10d0*/                   BRA `(.L_x_1) ;
   .L_x_0:
-      // @CUASM_INSERT_MARKER_POS.FINALIZE
-      [B------:R-:W0:-:S04]         /*21c0*/                   S2R R3, SR_CTAID.X ;
-      [B------:R-:W-:-:S06]         /*21d0*/                   BAR.SYNC 0x0 ;
-      [B0-----:R-:W-:Y:S13]         /*21e0*/                   LOP3.LUT P0, RZ, R3, 0x1f, R0, 0xf8, !PT ;
-      [B------:R-:W-:-:S05]         /*21f0*/               @P0 EXIT ;
-      [B------:R-:W-:-:S01]         /*2200*/                   MOV R3, 0x4 ;
-      [B------:R-:W-:Y:S04]         /*2210*/                   ULDC.64 UR4, c[0x0][0x118] ;
-      [B------:R-:W-:Y:S05]         /*2220*/                   IMAD.WIDE R2, R2, R3, c[0x0][0x180] ;
-      [B------:R-:W-:-:S01]         /*2230*/                   STG.E desc[UR4][R2.64], R4 ;
-      [B------:R-:W-:-:S05]         /*2240*/                   EXIT ;
-  .L_x_6:
-      [B------:R-:W-:Y:S00]         /*2250*/                   BRA `(.L_x_6);
-      [B------:R-:W-:Y:S00]         /*2260*/                   NOP;
-      [B------:R-:W-:Y:S00]         /*2270*/                   NOP;
-      [B------:R-:W-:Y:S00]         /*2280*/                   NOP;
-      [B------:R-:W-:Y:S00]         /*2290*/                   NOP;
-      [B------:R-:W-:Y:S00]         /*22a0*/                   NOP;
-      [B------:R-:W-:Y:S00]         /*22b0*/                   NOP;
-      [B------:R-:W-:Y:S00]         /*22c0*/                   NOP;
-      [B------:R-:W-:Y:S00]         /*22d0*/                   NOP;
-      [B------:R-:W-:Y:S00]         /*22e0*/                   NOP;
-      [B------:R-:W-:Y:S00]         /*22f0*/                   NOP;
-  .L_x_7:
+      [B------:R-:W-:-:S06]         /*10e0*/                   BAR.SYNC 0x0 ;
+      [B------:R-:W-:-:S05]         /*10f0*/               @P0 EXIT ;
+      [B------:R-:W-:-:S01]         /*1100*/                   SHF.R.S32.HI R3, RZ, 0x1f, R0 ;
+      [B------:R-:W-:-:S01]         /*1110*/                   ULDC.64 UR4, c[0x0][0x118] ;
+      [B------:R-:W-:-:S02]         /*1120*/                   MOV R2, 0x4 ;
+      [B------:R-:W-:Y:S04]         /*1130*/                   LEA.HI R3, R3, R0, RZ, 0x5 ;
+      [B------:R-:W-:Y:S05]         /*1140*/                   SHF.R.S32.HI R3, RZ, 0x5, R3 ;
+      [B------:R-:W-:Y:S05]         /*1150*/                   IMAD.WIDE R2, R3, R2, c[0x0][0x180] ;
+      [B------:R-:W-:-:S01]         /*1160*/                   STG.E desc[UR4][R2.64], R5 ;
+      [B------:R-:W-:-:S05]         /*1170*/                   EXIT ;
+  .L_x_2:
+      [B------:R-:W-:Y:S00]         /*1180*/                   BRA `(.L_x_2);
+      [B------:R-:W-:Y:S00]         /*1190*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*11a0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*11b0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*11c0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*11d0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*11e0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*11f0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*1200*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*1210*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*1220*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*1230*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*1240*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*1250*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*1260*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*1270*/                   NOP;
+  .L_x_3:
 
   //-------------------------------------------------
   //---------------- END of sections ----------------
@@ -626,7 +839,7 @@
 
 // Program segment PT_PHDR, 5 
   .__segment  "PT_PHDR", 5 
-  .__segment_offset  0x2b80   		// maybe updated by assembler 
+  .__segment_offset  0x1b00   		// maybe updated by assembler 
   .__segment_vaddr   0x0   		// Seems always 0? 
   .__segment_paddr   0x0   		// ??? 
   .__segment_filesz  0xa8   		// file size, maybe updated by assembler 
@@ -635,18 +848,18 @@
 
 // Program segment PT_LOAD, 5 
   .__segment  "PT_LOAD", 5 
-  .__segment_offset  0x478   		// maybe updated by assembler 
+  .__segment_offset  0x470   		// maybe updated by assembler 
   .__segment_vaddr   0x0   		// Seems always 0? 
   .__segment_paddr   0x0   		// ??? 
-  .__segment_filesz  0x2488   		// file size, maybe updated by assembler 
-  .__segment_memsz   0x2488   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_filesz  0x1410   		// file size, maybe updated by assembler 
+  .__segment_memsz   0x1410   		// file size + nobits sections, maybe updated by assembler 
   .__segment_align     8   		//  
   .__segment_startsection    ".nv.constant0._Z19regbank_test_kernel4int2i6float4Pf"  		// first section in this segment 
   .__segment_endsection      ".text._Z19regbank_test_kernel4int2i6float4Pf"  		// last  section in this segment 
 
 // Program segment PT_LOAD, 5 
   .__segment  "PT_LOAD", 5 
-  .__segment_offset  0x2b80   		// maybe updated by assembler 
+  .__segment_offset  0x1b00   		// maybe updated by assembler 
   .__segment_vaddr   0x0   		// Seems always 0? 
   .__segment_paddr   0x0   		// ??? 
   .__segment_filesz  0xa8   		// file size, maybe updated by assembler 

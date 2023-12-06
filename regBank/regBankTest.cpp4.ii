@@ -68414,41 +68414,32 @@ __attribute__((global)) void regbank_test_kernel(const int2 c, const int NIter, 
     float v1 = v.y;
     float v2 = v.z;
 
-    if (wid<c.x)
+
+    for(int i=0; i<NIter; i++)
     {
-        for(int i=0; i<NIter; i++)
-        {
 #pragma unroll
-            for(int n=0; n<(256); n++)
-                v0 = v0+v1;
-        }
+        for(int n=0; n<(256); n++)
+            v0 = fmaf(v0, v2, v1);
     }
-    else{
-        for(int i=0; i<NIter; i++)
-        {
-#pragma unroll
-            for(int n=0; n<(256); n++)
-                v0 = fmaf(v0, v2, v1);
-        }
-    }
+
 
     __syncthreads();
 
 
-    if( bid ==0 && lid==0)
+    if(bid ==0 && lid==0)
         a[wid] = v0;
 }
 
 float regbank_test_run(const int2 c, const int NIter, const float4 v, float* a, cudaEvent_t &event_start, cudaEvent_t &event_stop)
 {
     float elapsedTime;
-    check((cudaEventRecord(event_start, 0)), "cudaEventRecord(event_start, 0)", "regBankTest.cu", 59);
+    check((cudaEventRecord(event_start, 0)), "cudaEventRecord(event_start, 0)", "regBankTest.cu", 50);
 
-    regbank_test_kernel<<<(7200), (128)>>>(c, NIter, v, a);
+    regbank_test_kernel<<<(1800), (128)>>>(c, NIter, v, a);
 
-    check((cudaEventRecord(event_stop, 0)), "cudaEventRecord(event_stop, 0)", "regBankTest.cu", 63);
-    check((cudaEventSynchronize(event_stop)), "cudaEventSynchronize(event_stop)", "regBankTest.cu", 64);
-    check((cudaEventElapsedTime(&elapsedTime, event_start, event_stop)), "cudaEventElapsedTime(&elapsedTime, event_start, event_stop)", "regBankTest.cu", 65);
+    check((cudaEventRecord(event_stop, 0)), "cudaEventRecord(event_stop, 0)", "regBankTest.cu", 54);
+    check((cudaEventSynchronize(event_stop)), "cudaEventSynchronize(event_stop)", "regBankTest.cu", 55);
+    check((cudaEventElapsedTime(&elapsedTime, event_start, event_stop)), "cudaEventElapsedTime(&elapsedTime, event_start, event_stop)", "regBankTest.cu", 56);
 
     return elapsedTime;
 }
@@ -68475,17 +68466,17 @@ float regbank_test_run_drv(const int2 c, const int NIter, const float4 v, float*
     }
 
     float elapsedTime;
-    check((cudaEventRecord(event_start, 0)), "cudaEventRecord(event_start, 0)", "regBankTest.cu", 92);
+    check((cudaEventRecord(event_start, 0)), "cudaEventRecord(event_start, 0)", "regBankTest.cu", 83);
 
     void* args[] = { (void*)&c, (void*)&NIter, (void*)&v, (void*)&a };
     cuLaunchKernel(kernel,
-                   (7200), 1, 1, (128), 1, 1,
+                   (1800), 1, 1, (128), 1, 1,
                     0, 0, args, 0);
 
 
-    check((cudaEventRecord(event_stop, 0)), "cudaEventRecord(event_stop, 0)", "regBankTest.cu", 100);
-    check((cudaEventSynchronize(event_stop)), "cudaEventSynchronize(event_stop)", "regBankTest.cu", 101);
-    check((cudaEventElapsedTime(&elapsedTime, event_start, event_stop)), "cudaEventElapsedTime(&elapsedTime, event_start, event_stop)", "regBankTest.cu", 102);
+    check((cudaEventRecord(event_stop, 0)), "cudaEventRecord(event_stop, 0)", "regBankTest.cu", 91);
+    check((cudaEventSynchronize(event_stop)), "cudaEventSynchronize(event_stop)", "regBankTest.cu", 92);
+    check((cudaEventElapsedTime(&elapsedTime, event_start, event_stop)), "cudaEventElapsedTime(&elapsedTime, event_start, event_stop)", "regBankTest.cu", 93);
 
     return elapsedTime;
 }
@@ -68496,8 +68487,8 @@ void dotest()
     int NIter = (256);
 
     cudaEvent_t event_start, event_stop;
-    check((cudaEventCreate(&event_start)), "cudaEventCreate(&event_start)", "regBankTest.cu", 113);
-    check((cudaEventCreate(&event_stop)), "cudaEventCreate(&event_stop)", "regBankTest.cu", 114);
+    check((cudaEventCreate(&event_start)), "cudaEventCreate(&event_start)", "regBankTest.cu", 104);
+    check((cudaEventCreate(&event_stop)), "cudaEventCreate(&event_stop)", "regBankTest.cu", 105);
 
 
 
@@ -68522,8 +68513,8 @@ void dotest()
         printf("  Test %2d: %10.3f ms\n", i, elapsedTime);
     }
 
-    check((cudaEventDestroy(event_start)), "cudaEventDestroy(event_start)", "regBankTest.cu", 139);
-    check((cudaEventDestroy(event_stop)), "cudaEventDestroy(event_stop)", "regBankTest.cu", 140);
+    check((cudaEventDestroy(event_start)), "cudaEventDestroy(event_start)", "regBankTest.cu", 130);
+    check((cudaEventDestroy(event_stop)), "cudaEventDestroy(event_stop)", "regBankTest.cu", 131);
 
     printf("\n### Result checking...\n");
 

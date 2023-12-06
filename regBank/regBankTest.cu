@@ -9,7 +9,7 @@ using namespace std;
 
 typedef unsigned int uint;
 
-#define GRD_SIZE (7200)
+#define GRD_SIZE (1800)
 #define BLK_SIZE (128)
 #define WARP_CUT (4)
 #define N_ITER (256)
@@ -28,28 +28,19 @@ __global__ void regbank_test_kernel(const int2 c, const int NIter, const float4 
     float v1 = v.y;
     float v2 = v.z;
 
-    if (wid<c.x)
+
+    for(int i=0; i<NIter; i++)
     {
-        for(int i=0; i<NIter; i++)
-        {
-            #pragma unroll
-            for(int n=0; n<N_UNROLL; n++)
-                v0 = v0+v1;
-        }
+        #pragma unroll
+        for(int n=0; n<N_UNROLL; n++)
+            v0 = fmaf(v0, v2, v1);
     }
-    else{
-        for(int i=0; i<NIter; i++)
-        {
-            #pragma unroll
-            for(int n=0; n<N_UNROLL; n++)
-                v0 = fmaf(v0, v2, v1);
-        }
-    }
+    
 
     __syncthreads();
     
     // only first lane of warp in first block writes to memory
-    if( bid ==0 && lid==0)
+    if(bid ==0 && lid==0)
         a[wid] = v0;
 }
 

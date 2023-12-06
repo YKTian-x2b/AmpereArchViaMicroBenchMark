@@ -1,7 +1,7 @@
 # 1 "regBankTest.cu"
 # 145 "/usr/include/stdio.h" 3
 extern FILE *stderr;
-# 72 "regBankTest.cu"
+# 63 "regBankTest.cu"
 static CUmodule _ZZ20regbank_test_run_drv4int2i6float4PfRP10CUevent_stS4_E8cuModule;
 static CUfunction _ZZ20regbank_test_run_drv4int2i6float4PfRP10CUevent_stS4_E6kernel;
 static char _ZZ20regbank_test_run_drv4int2i6float4PfRP10CUevent_stS4_E13isInitialized;
@@ -790,13 +790,13 @@ extern  __attribute__((__weak__)) /* COMDAT group: _ZSt8in_place */ const struct
 # 62 "/usr/include/c++/11/iostream" 3
 extern _ZSt7ostream _ZSt4cerr __attribute__((visibility("default")));
 # 74 "/usr/include/c++/11/iostream" 3
-static struct _ZNSt8ios_base4InitE _ZN45_INTERNAL_25f954d7_14_regBankTest_cu_3ea3990eSt8__ioinitE __attribute__((visibility("default"))) = {};
+static struct _ZNSt8ios_base4InitE _ZN45_INTERNAL_c56ad0dc_14_regBankTest_cu_3ea3990eSt8__ioinitE __attribute__((visibility("default"))) = {};
 # 53 "/usr/include/c++/11/bits/uses_allocator.h" 3
 extern  __attribute__((__weak__)) /* COMDAT group: _ZSt13allocator_arg */ const struct _ZSt15allocator_arg_t _ZSt13allocator_arg __attribute__((visibility("default")));
 # 1785 "/usr/include/c++/11/tuple" 3
 extern  __attribute__((__weak__)) /* COMDAT group: _ZSt6ignore */ const struct _ZSt15_Swallow_assign _ZSt6ignore __attribute__((visibility("default")));
 extern void *__dso_handle __attribute__((visibility("hidden")));
-# 74 "regBankTest.cu"
+# 65 "regBankTest.cu"
 static char _ZZ20regbank_test_run_drv4int2i6float4PfRP10CUevent_stS4_E13isInitialized = ((char)0);
 # 534 "/usr/include/c++/11/bits/cpp_type_traits.h" 3
  __attribute__((__weak__)) /* COMDAT group: _ZNSt24__is_memcmp_ordered_withISt4byteS0_Lb1EE7__valueE */ const char _ZNSt24__is_memcmp_ordered_withISt4byteS0_Lb1EE7__valueE __attribute__((visibility("default"))) = ((char)1);

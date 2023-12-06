@@ -1,10 +1,10 @@
-#include "../Common.cuh"
+#include "helper_cuda.h"
 #include <iostream>
 #include <random>
 #include <ctime>
 #include "cublas_v2.h"
 
-// Bytes for total L1/SharedMem 128*1024
+// Bytes for total L1/SharedMem is 128*1024; L1 max is 128*1024B
 #define L1_SIZE 96 * 256
 #define THREADS_NUM 512
 #define WARP_SIZE 32
@@ -20,12 +20,12 @@ __host__ void assignData(){
     }
 }
 
-__global__ void l1_bw( uint32_t *startClk, uint32_t *stopClk, float *dsink, float *posArray){
+__global__ void l1_bw(uint32_t *startClk, uint32_t *stopClk, float *dsink, float *posArray){
     // 线程索引
     uint32_t tid = threadIdx.x;
     // 侧效变量，目的是避免编译器删除这段代码
     float sink = 0;
-    // 通过填充 L1 缓存来预热
+    // 通过填充 L1 缓存来预热 且 保证L1缓存了全部数据
     for (uint32_t i = tid; i < L1_SIZE; i += THREADS_NUM) {
         float * ptr = posArray+i;
         // sink += *ptr;
@@ -49,10 +49,10 @@ __global__ void l1_bw( uint32_t *startClk, uint32_t *stopClk, float *dsink, floa
             uint32_t offset = (tid+j)%THREADS_NUM;
             // sink += ptr[offset];
             asm volatile ("{\t\n"
-            ".reg .f32 data;\n\t" 
-            "ld.global.ca.f32 data, [%1];\n\t"
-            "add.f32 %0, data, %0;\n\t"
-            "}" : "+f"(sink) : "l"(ptr+offset) : "memory"
+                ".reg .f32 data;\n\t" 
+                "ld.global.ca.f32 data, [%1];\n\t"
+                "add.f32 %0, data, %0;\n\t"
+                "}" : "+f"(sink) : "l"(ptr+offset) : "memory"
             );
         }
     }
@@ -79,11 +79,11 @@ int main(){
     uint32_t *h_startClk, *h_stopClk;
     float *hsink;
 
-    CHECK(cudaMalloc(&d_arr, arrBytes));
-    CHECK(cudaMalloc(&d_startClk, clkBytes));
-    CHECK(cudaMalloc(&d_stopClk, clkBytes));
-    CHECK(cudaMalloc(&dsink, sinkBytes));
-    CHECK(cudaMemcpy(d_arr, posArray, arrBytes, cudaMemcpyHostToDevice));
+    checkCudaErrors(cudaMalloc(&d_arr, arrBytes));
+    checkCudaErrors(cudaMalloc(&d_startClk, clkBytes));
+    checkCudaErrors(cudaMalloc(&d_stopClk, clkBytes));
+    checkCudaErrors(cudaMalloc(&dsink, sinkBytes));
+    checkCudaErrors(cudaMemcpy(d_arr, posArray, arrBytes, cudaMemcpyHostToDevice));
 
     l1_bw<<<1, THREADS_NUM>>>(d_startClk, d_stopClk, dsink, d_arr);
     cudaDeviceSynchronize();
@@ -91,9 +91,9 @@ int main(){
     h_startClk = (uint32_t*)malloc(clkBytes);
     h_stopClk = (uint32_t*)malloc(clkBytes);
     hsink = (float*)malloc(sinkBytes);
-    CHECK(cudaMemcpy(h_startClk, d_startClk, clkBytes, cudaMemcpyDeviceToHost));
-    CHECK(cudaMemcpy(h_stopClk, d_stopClk, clkBytes, cudaMemcpyDeviceToHost));
-    CHECK(cudaMemcpy(hsink, dsink, sinkBytes, cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_startClk, d_startClk, clkBytes, cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(h_stopClk, d_stopClk, clkBytes, cudaMemcpyDeviceToHost));
+    checkCudaErrors(cudaMemcpy(hsink, dsink, sinkBytes, cudaMemcpyDeviceToHost));
 
     float clockCycles_avg = 0.0;
     float sink_total = 0.0;
@@ -108,18 +108,17 @@ int main(){
     std::cout << "sink_total: " << sink_total << std::endl;
     // 每个warp都会加载一级缓存中的所有数据 一个SM启动了 128/32个warp 所以一共读取了BytesAll个字节 per SM
     uint32_t BytesAll = L1_SIZE * sizeof(float) * (THREADS_NUM / WARP_SIZE); 
-    // 理论上限是64B 实测结果是62B左右
+    // 理论上限是64B 16个LD_ST单元 * 4B/LD_ST单元/周期 实测结果是62B左右
     float BpCpSM = BytesAll / clockCycles_avg;
-    std::cout << "L1 real throughput is  " << BpCpSM <<  " Bytes per cycle per SM: " << std::endl;
+    std::cout << "L1 real throughput is  " << BpCpSM <<  " Bytes per cycle per SM" << std::endl;
 
-    CHECK(cudaFree(d_arr));
-    CHECK(cudaFree(d_startClk));
-    CHECK(cudaFree(d_stopClk));
-    CHECK(cudaFree(dsink));
+    checkCudaErrors(cudaFree(d_arr));
+    checkCudaErrors(cudaFree(d_startClk));
+    checkCudaErrors(cudaFree(d_stopClk));
+    checkCudaErrors(cudaFree(dsink));
     free(h_startClk);
     free(h_stopClk);
     free(hsink);
 }
 
-// nvcc L1cacheMB_bkp.cu -o res/L1cacheMB_bkp -gencode=arch=compute_86,code=\"sm_86,compute_86\"
-// 
+// nvcc -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I../../Utils -L /usr/local/cuda/lib64 -l cuda -o res/L1cacheBW L1cacheBW.cu

@@ -51,6 +51,7 @@ def run_exe():
 def test_L0CacheSize(n_FFMA_seqs):
     cat = CuAsmTemplate('/opt/kaiProjects/MicroBenchmark/cache_Size_Throughput_Latency/L0_Cache_Size/save/L0CacheSizeTest.template.sm_86.cuasm')
 
+    # FFMA指令要执行两次，以进行预热。选择操作数寄存器，避免相邻指令的寄存器依赖。
     s_work1  = f'      [B------:R-:W-:Y:S04]    FFMA R9, R9, R2, c[0x0][0x164] ;\n' # R9 += 1
     s_work1 = s_work1 * n_FFMA_seqs
 
@@ -95,7 +96,7 @@ def doTest_L0CacheSize():
 
 if __name__ == '__main__':
     
-    os.system('nvidia-smi -ac 7001,1702')
+    os.system('nvidia-smi -ac 7000,1702')
 
     # CuAsmLogger.disable()
     

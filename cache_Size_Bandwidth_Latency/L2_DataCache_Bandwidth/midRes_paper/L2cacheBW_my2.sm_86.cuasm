@@ -1,0 +1,1637 @@
+// --------------------- FileHeader --------------------------
+	// All file header info is kept as is (unless offset/size attributes)
+	// The original header flags is not complete, thus discarded. 
+	// 	.headerflags	@"EF_CUDA_TEXMODE_UNIFIED EF_CUDA_64BIT_ADDRESS EF_CUDA_SM86 EF_CUDA_VIRTUAL_SM(EF_CUDA_SM86)"
+	// 	.elftype	@"ET_EXEC"
+	// 
+	// 
+	.__elf_ident_osabi      51
+	.__elf_ident_abiversion 7
+	.__elf_type             ET_EXEC
+	.__elf_machine          EM_CUDA
+	.__elf_version          121 		// CUDA toolkit version 
+	.__elf_entry            0 		// entry point address 
+	.__elf_phoff            0x3680 		// program header offset, maybe updated by assembler
+	.__elf_shoff            0x3280 		// section header offset, maybe updated by assembler
+	.__elf_flags            0x560556 		// Flags, SM_86(0x56), COMPUTE_86(0x56) 
+	.__elf_ehsize           64 		// elf header size 
+	.__elf_phentsize        56 		// program entry size
+	.__elf_phnum            3 		// number of program entries
+	.__elf_shentsize        64 		// section entry size
+	.__elf_shnum            16 		// number of sections, currently no sections can be appended/removed
+	.__elf_shstrndx         1 		// Section name string table index 
+
+
+  //-------------------------------------------------
+  //------------ END of FileHeader ------------------
+  //-------------------------------------------------
+
+
+
+// ---------------------                                  --------------------------
+	// there will always be an empty section at index 0
+	.section  "", 0, SHT_NULL
+	.__section_name         0x0 	// offset in .shstrtab
+	.__section_type         SHT_NULL
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x0 	// maybe updated by assembler
+	.__section_size         0x0 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                0 	// equivalent to set sh_addralign
+
+// --------------------- .shstrtab                        --------------------------
+	.section  ".shstrtab", 0, SHT_STRTAB
+	// all strings in .shstrtab section will be kept as is.
+	.__section_name         0x1 	// offset in .shstrtab
+	.__section_type         SHT_STRTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x40 	// maybe updated by assembler
+	.__section_size         0x18c 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                1 	// equivalent to set sh_addralign
+    // .shstrtab[0] = b'\x00' 
+    /*0000*/ .byte 0x00
+
+    // .shstrtab[1] = b'.shstrtab\x00' 
+    /*0001*/ .byte 0x2e, 0x73, 0x68, 0x73, 0x74, 0x72, 0x74, 0x61
+    /*0009*/ .byte 0x62, 0x00
+
+    // .shstrtab[2] = b'.strtab\x00' 
+    /*000b*/ .byte 0x2e, 0x73, 0x74, 0x72, 0x74, 0x61, 0x62, 0x00
+
+    // .shstrtab[3] = b'.symtab\x00' 
+    /*0013*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x00
+
+    // .shstrtab[4] = b'.symtab_shndx\x00' 
+    /*001b*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x5f
+    /*0023*/ .byte 0x73, 0x68, 0x6e, 0x64, 0x78, 0x00
+
+    // .shstrtab[5] = b'.nv.uft.entry\x00' 
+    /*0029*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x75, 0x66, 0x74, 0x2e
+    /*0031*/ .byte 0x65, 0x6e, 0x74, 0x72, 0x79, 0x00
+
+    // .shstrtab[6] = b'.nv.info\x00' 
+    /*0037*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*003f*/ .byte 0x00
+
+    // .shstrtab[7] = b'.text._Z6l2_bw3PfS_\x00' 
+    /*0040*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*0048*/ .byte 0x36, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x33, 0x50
+    /*0050*/ .byte 0x66, 0x53, 0x5f, 0x00
+
+    // .shstrtab[8] = b'.nv.info._Z6l2_bw3PfS_\x00' 
+    /*0054*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*005c*/ .byte 0x2e, 0x5f, 0x5a, 0x36, 0x6c, 0x32, 0x5f, 0x62
+    /*0064*/ .byte 0x77, 0x33, 0x50, 0x66, 0x53, 0x5f, 0x00
+
+    // .shstrtab[9] = b'.nv.shared._Z6l2_bw3PfS_\x00' 
+    /*006b*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*0073*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x36, 0x6c, 0x32
+    /*007b*/ .byte 0x5f, 0x62, 0x77, 0x33, 0x50, 0x66, 0x53, 0x5f
+    /*0083*/ .byte 0x00
+
+    // .shstrtab[10] = b'.nv.constant0._Z6l2_bw3PfS_\x00' 
+    /*0084*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*008c*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*0094*/ .byte 0x36, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x33, 0x50
+    /*009c*/ .byte 0x66, 0x53, 0x5f, 0x00
+
+    // .shstrtab[11] = b'.text._Z6l2_bw2PfS_\x00' 
+    /*00a0*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*00a8*/ .byte 0x36, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x32, 0x50
+    /*00b0*/ .byte 0x66, 0x53, 0x5f, 0x00
+
+    // .shstrtab[12] = b'.nv.info._Z6l2_bw2PfS_\x00' 
+    /*00b4*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*00bc*/ .byte 0x2e, 0x5f, 0x5a, 0x36, 0x6c, 0x32, 0x5f, 0x62
+    /*00c4*/ .byte 0x77, 0x32, 0x50, 0x66, 0x53, 0x5f, 0x00
+
+    // .shstrtab[13] = b'.nv.shared._Z6l2_bw2PfS_\x00' 
+    /*00cb*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*00d3*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x36, 0x6c, 0x32
+    /*00db*/ .byte 0x5f, 0x62, 0x77, 0x32, 0x50, 0x66, 0x53, 0x5f
+    /*00e3*/ .byte 0x00
+
+    // .shstrtab[14] = b'.nv.constant0._Z6l2_bw2PfS_\x00' 
+    /*00e4*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*00ec*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*00f4*/ .byte 0x36, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x32, 0x50
+    /*00fc*/ .byte 0x66, 0x53, 0x5f, 0x00
+
+    // .shstrtab[15] = b'.text._Z5l2_bwPfS_\x00' 
+    /*0100*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*0108*/ .byte 0x35, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x50, 0x66
+    /*0110*/ .byte 0x53, 0x5f, 0x00
+
+    // .shstrtab[16] = b'.nv.info._Z5l2_bwPfS_\x00' 
+    /*0113*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*011b*/ .byte 0x2e, 0x5f, 0x5a, 0x35, 0x6c, 0x32, 0x5f, 0x62
+    /*0123*/ .byte 0x77, 0x50, 0x66, 0x53, 0x5f, 0x00
+
+    // .shstrtab[17] = b'.nv.shared._Z5l2_bwPfS_\x00' 
+    /*0129*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*0131*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x35, 0x6c, 0x32
+    /*0139*/ .byte 0x5f, 0x62, 0x77, 0x50, 0x66, 0x53, 0x5f, 0x00
+
+    // .shstrtab[18] = b'.nv.constant0._Z5l2_bwPfS_\x00' 
+    /*0141*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*0149*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*0151*/ .byte 0x35, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x50, 0x66
+    /*0159*/ .byte 0x53, 0x5f, 0x00
+
+    // .shstrtab[19] = b'.debug_frame\x00' 
+    /*015c*/ .byte 0x2e, 0x64, 0x65, 0x62, 0x75, 0x67, 0x5f, 0x66
+    /*0164*/ .byte 0x72, 0x61, 0x6d, 0x65, 0x00
+
+    // .shstrtab[20] = b'.rel.debug_frame\x00' 
+    /*0169*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x2e, 0x64, 0x65, 0x62
+    /*0171*/ .byte 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d, 0x65
+    /*0179*/ .byte 0x00
+
+    // .shstrtab[21] = b'.rela.debug_frame\x00' 
+    /*017a*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x61, 0x2e, 0x64, 0x65
+    /*0182*/ .byte 0x62, 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d
+    /*018a*/ .byte 0x65, 0x00
+
+
+// --------------------- .strtab                          --------------------------
+	.section  ".strtab", 0, SHT_STRTAB
+	// all strings in .strtab section will be kept as is.
+	.__section_name         0xb 	// offset in .shstrtab
+	.__section_type         SHT_STRTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x1cc 	// maybe updated by assembler
+	.__section_size         0x1bc 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                1 	// equivalent to set sh_addralign
+    // .strtab[0] = b'\x00' 
+    /*0000*/ .byte 0x00
+
+    // .strtab[1] = b'.shstrtab\x00' 
+    /*0001*/ .byte 0x2e, 0x73, 0x68, 0x73, 0x74, 0x72, 0x74, 0x61
+    /*0009*/ .byte 0x62, 0x00
+
+    // .strtab[2] = b'.strtab\x00' 
+    /*000b*/ .byte 0x2e, 0x73, 0x74, 0x72, 0x74, 0x61, 0x62, 0x00
+
+    // .strtab[3] = b'.symtab\x00' 
+    /*0013*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x00
+
+    // .strtab[4] = b'.symtab_shndx\x00' 
+    /*001b*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x5f
+    /*0023*/ .byte 0x73, 0x68, 0x6e, 0x64, 0x78, 0x00
+
+    // .strtab[5] = b'.nv.uft.entry\x00' 
+    /*0029*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x75, 0x66, 0x74, 0x2e
+    /*0031*/ .byte 0x65, 0x6e, 0x74, 0x72, 0x79, 0x00
+
+    // .strtab[6] = b'.nv.info\x00' 
+    /*0037*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*003f*/ .byte 0x00
+
+    // .strtab[7] = b'_Z6l2_bw3PfS_\x00' 
+    /*0040*/ .byte 0x5f, 0x5a, 0x36, 0x6c, 0x32, 0x5f, 0x62, 0x77
+    /*0048*/ .byte 0x33, 0x50, 0x66, 0x53, 0x5f, 0x00
+
+    // .strtab[8] = b'.text._Z6l2_bw3PfS_\x00' 
+    /*004e*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*0056*/ .byte 0x36, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x33, 0x50
+    /*005e*/ .byte 0x66, 0x53, 0x5f, 0x00
+
+    // .strtab[9] = b'.nv.info._Z6l2_bw3PfS_\x00' 
+    /*0062*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*006a*/ .byte 0x2e, 0x5f, 0x5a, 0x36, 0x6c, 0x32, 0x5f, 0x62
+    /*0072*/ .byte 0x77, 0x33, 0x50, 0x66, 0x53, 0x5f, 0x00
+
+    // .strtab[10] = b'.nv.shared._Z6l2_bw3PfS_\x00' 
+    /*0079*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*0081*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x36, 0x6c, 0x32
+    /*0089*/ .byte 0x5f, 0x62, 0x77, 0x33, 0x50, 0x66, 0x53, 0x5f
+    /*0091*/ .byte 0x00
+
+    // .strtab[11] = b'.nv.constant0._Z6l2_bw3PfS_\x00' 
+    /*0092*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*009a*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*00a2*/ .byte 0x36, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x33, 0x50
+    /*00aa*/ .byte 0x66, 0x53, 0x5f, 0x00
+
+    // .strtab[12] = b'_param\x00' 
+    /*00ae*/ .byte 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x00
+
+    // .strtab[13] = b'_Z6l2_bw2PfS_\x00' 
+    /*00b5*/ .byte 0x5f, 0x5a, 0x36, 0x6c, 0x32, 0x5f, 0x62, 0x77
+    /*00bd*/ .byte 0x32, 0x50, 0x66, 0x53, 0x5f, 0x00
+
+    // .strtab[14] = b'.text._Z6l2_bw2PfS_\x00' 
+    /*00c3*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*00cb*/ .byte 0x36, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x32, 0x50
+    /*00d3*/ .byte 0x66, 0x53, 0x5f, 0x00
+
+    // .strtab[15] = b'.nv.info._Z6l2_bw2PfS_\x00' 
+    /*00d7*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*00df*/ .byte 0x2e, 0x5f, 0x5a, 0x36, 0x6c, 0x32, 0x5f, 0x62
+    /*00e7*/ .byte 0x77, 0x32, 0x50, 0x66, 0x53, 0x5f, 0x00
+
+    // .strtab[16] = b'.nv.shared._Z6l2_bw2PfS_\x00' 
+    /*00ee*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*00f6*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x36, 0x6c, 0x32
+    /*00fe*/ .byte 0x5f, 0x62, 0x77, 0x32, 0x50, 0x66, 0x53, 0x5f
+    /*0106*/ .byte 0x00
+
+    // .strtab[17] = b'.nv.constant0._Z6l2_bw2PfS_\x00' 
+    /*0107*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*010f*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*0117*/ .byte 0x36, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x32, 0x50
+    /*011f*/ .byte 0x66, 0x53, 0x5f, 0x00
+
+    // .strtab[18] = b'_Z5l2_bwPfS_\x00' 
+    /*0123*/ .byte 0x5f, 0x5a, 0x35, 0x6c, 0x32, 0x5f, 0x62, 0x77
+    /*012b*/ .byte 0x50, 0x66, 0x53, 0x5f, 0x00
+
+    // .strtab[19] = b'.text._Z5l2_bwPfS_\x00' 
+    /*0130*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*0138*/ .byte 0x35, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x50, 0x66
+    /*0140*/ .byte 0x53, 0x5f, 0x00
+
+    // .strtab[20] = b'.nv.info._Z5l2_bwPfS_\x00' 
+    /*0143*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*014b*/ .byte 0x2e, 0x5f, 0x5a, 0x35, 0x6c, 0x32, 0x5f, 0x62
+    /*0153*/ .byte 0x77, 0x50, 0x66, 0x53, 0x5f, 0x00
+
+    // .strtab[21] = b'.nv.shared._Z5l2_bwPfS_\x00' 
+    /*0159*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*0161*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x35, 0x6c, 0x32
+    /*0169*/ .byte 0x5f, 0x62, 0x77, 0x50, 0x66, 0x53, 0x5f, 0x00
+
+    // .strtab[22] = b'.nv.constant0._Z5l2_bwPfS_\x00' 
+    /*0171*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*0179*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*0181*/ .byte 0x35, 0x6c, 0x32, 0x5f, 0x62, 0x77, 0x50, 0x66
+    /*0189*/ .byte 0x53, 0x5f, 0x00
+
+    // .strtab[23] = b'.debug_frame\x00' 
+    /*018c*/ .byte 0x2e, 0x64, 0x65, 0x62, 0x75, 0x67, 0x5f, 0x66
+    /*0194*/ .byte 0x72, 0x61, 0x6d, 0x65, 0x00
+
+    // .strtab[24] = b'.rel.debug_frame\x00' 
+    /*0199*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x2e, 0x64, 0x65, 0x62
+    /*01a1*/ .byte 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d, 0x65
+    /*01a9*/ .byte 0x00
+
+    // .strtab[25] = b'.rela.debug_frame\x00' 
+    /*01aa*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x61, 0x2e, 0x64, 0x65
+    /*01b2*/ .byte 0x62, 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d
+    /*01ba*/ .byte 0x65, 0x00
+
+
+// --------------------- .symtab                          --------------------------
+	.section  ".symtab", 0, SHT_SYMTAB
+	// all symbols in .symtab sections will be kept
+	// but the symbol size may be changed accordingly
+	.__section_name         0x13 	// offset in .shstrtab
+	.__section_type         SHT_SYMTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x388 	// maybe updated by assembler
+	.__section_size         0x108 	// maybe updated by assembler
+	.__section_link         2
+	.__section_info         0x8
+	.__section_entsize      24
+	.align                8 	// equivalent to set sh_addralign
+    // Symbol[0] "": Container({'st_name': 0, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_NOTYPE'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 'SHN_UNDEF', 'st_value': 0, 'st_size': 0})
+    /*0000*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0008*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0010*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[1] ".text._Z6l2_bw3PfS_": Container({'st_name': 78, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 13, 'st_value': 0, 'st_size': 0})
+    /*0018*/ .byte 0x4e, 0x00, 0x00, 0x00, 0x03, 0x00, 0x0d, 0x00
+    /*0020*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0028*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[2] ".nv.constant0._Z6l2_bw3PfS_": Container({'st_name': 146, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 10, 'st_value': 0, 'st_size': 0})
+    /*0030*/ .byte 0x92, 0x00, 0x00, 0x00, 0x03, 0x00, 0x0a, 0x00
+    /*0038*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0040*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[3] ".text._Z6l2_bw2PfS_": Container({'st_name': 195, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 14, 'st_value': 0, 'st_size': 0})
+    /*0048*/ .byte 0xc3, 0x00, 0x00, 0x00, 0x03, 0x00, 0x0e, 0x00
+    /*0050*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0058*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[4] ".nv.constant0._Z6l2_bw2PfS_": Container({'st_name': 263, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 11, 'st_value': 0, 'st_size': 0})
+    /*0060*/ .byte 0x07, 0x01, 0x00, 0x00, 0x03, 0x00, 0x0b, 0x00
+    /*0068*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0070*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[5] ".text._Z5l2_bwPfS_": Container({'st_name': 304, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 15, 'st_value': 0, 'st_size': 0})
+    /*0078*/ .byte 0x30, 0x01, 0x00, 0x00, 0x03, 0x00, 0x0f, 0x00
+    /*0080*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0088*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[6] ".nv.constant0._Z5l2_bwPfS_": Container({'st_name': 369, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 12, 'st_value': 0, 'st_size': 0})
+    /*0090*/ .byte 0x71, 0x01, 0x00, 0x00, 0x03, 0x00, 0x0c, 0x00
+    /*0098*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*00a0*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[7] ".debug_frame": Container({'st_name': 396, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 4, 'st_value': 0, 'st_size': 0})
+    /*00a8*/ .byte 0x8c, 0x01, 0x00, 0x00, 0x03, 0x00, 0x04, 0x00
+    /*00b0*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*00b8*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[8] "_Z6l2_bw3PfS_": Container({'st_name': 64, 'st_info': Container({'bind': 'STB_GLOBAL', 'type': 'STT_FUNC'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 13, 'st_value': 0, 'st_size': 3584})
+    /*00c0*/ .byte 0x40, 0x00, 0x00, 0x00, 0x12, 0x10, 0x0d, 0x00
+    /*00c8*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*00d0*/ .byte 0x00, 0x0e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[9] "_Z6l2_bw2PfS_": Container({'st_name': 181, 'st_info': Container({'bind': 'STB_GLOBAL', 'type': 'STT_FUNC'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 14, 'st_value': 0, 'st_size': 2304})
+    /*00d8*/ .byte 0xb5, 0x00, 0x00, 0x00, 0x12, 0x10, 0x0e, 0x00
+    /*00e0*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*00e8*/ .byte 0x00, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[10] "_Z5l2_bwPfS_": Container({'st_name': 291, 'st_info': Container({'bind': 'STB_GLOBAL', 'type': 'STT_FUNC'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 15, 'st_value': 0, 'st_size': 3968})
+    /*00f0*/ .byte 0x23, 0x01, 0x00, 0x00, 0x12, 0x10, 0x0f, 0x00
+    /*00f8*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0100*/ .byte 0x80, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+
+// --------------------- .debug_frame                     --------------------------
+	.section	.debug_frame,"",@progbits
+	.__section_name         0x15c 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x490 	// maybe updated by assembler
+	.__section_size         0x150 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                1 	// equivalent to set sh_addralign
+  .debug_frame:
+          /*0000*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0x24, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff
+          /*0010*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0x03, 0x00, 0x04, 0x7c, 0xff, 0xff, 0xff, 0xff, 0x0f, 0x0c, 0x81, 0x80
+          /*0020*/ 	.byte	0x80, 0x28, 0x00, 0x08, 0xff, 0x81, 0x80, 0x28, 0x08, 0x81, 0x80, 0x80, 0x28, 0x00, 0x00, 0x00
+          /*0030*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0x34, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*0040*/ 	.byte	0x00, 0x00, 0x00, 0x00
+          /*0044*/ 	.dword	_Z6l2_bw3PfS_
+          /*004c*/ 	.byte	0x00, 0x0e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x04, 0x10, 0x01
+          /*005c*/ 	.byte	0x00, 0x00, 0x0c, 0x81, 0x80, 0x80, 0x28, 0x00, 0x04, 0x30, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*006c*/ 	.byte	0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x24, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*007c*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x03, 0x00, 0x04, 0x7c, 0xff, 0xff, 0xff, 0xff
+          /*008c*/ 	.byte	0x0f, 0x0c, 0x81, 0x80, 0x80, 0x28, 0x00, 0x08, 0xff, 0x81, 0x80, 0x28, 0x08, 0x81, 0x80, 0x80
+          /*009c*/ 	.byte	0x28, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x34, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*00ac*/ 	.byte	0x70, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*00b4*/ 	.dword	_Z6l2_bw2PfS_
+          /*00bc*/ 	.byte	0x00, 0x09, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x04, 0x88, 0x00
+          /*00cc*/ 	.byte	0x00, 0x00, 0x0c, 0x81, 0x80, 0x80, 0x28, 0x00, 0x04, 0x80, 0x01, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*00dc*/ 	.byte	0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x24, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*00ec*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0x03, 0x00, 0x04, 0x7c, 0xff, 0xff, 0xff, 0xff
+          /*00fc*/ 	.byte	0x0f, 0x0c, 0x81, 0x80, 0x80, 0x28, 0x00, 0x08, 0xff, 0x81, 0x80, 0x28, 0x08, 0x81, 0x80, 0x80
+          /*010c*/ 	.byte	0x28, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff, 0x34, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*011c*/ 	.byte	0xe0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*0124*/ 	.dword	_Z5l2_bwPfS_
+          /*012c*/ 	.byte	0x80, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x04, 0xe0, 0x00
+          /*013c*/ 	.byte	0x00, 0x00, 0x0c, 0x81, 0x80, 0x80, 0x28, 0x00, 0x04, 0xc0, 0x02, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*014c*/ 	.byte	0x00, 0x00, 0x00, 0x00
+  
+  
+// --------------------- .nv.info                         --------------------------
+	.section	.nv.info,"",@"SHT_CUDA_INFO"
+	.__section_name         0x37 	// offset in .shstrtab
+	.__section_type         1879048192
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x5e0 	// maybe updated by assembler
+	.__section_size         0x90 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  
+  
+  	//----- nvinfo : EIATTR_REGCOUNT
+  	.align		4
+          /*0000*/ 	.byte	0x04, 0x2f
+          /*0002*/ 	.short	(.L_1 - .L_0)
+  	.align		4
+  .L_0:
+          /*0004*/ 	.word	index@(_Z5l2_bwPfS_)
+          /*0008*/ 	.word	0x00000030
+  
+  
+  	//----- nvinfo : EIATTR_MAX_STACK_SIZE
+  	.align		4
+  .L_1:
+          /*000c*/ 	.byte	0x04, 0x23
+          /*000e*/ 	.short	(.L_3 - .L_2)
+  	.align		4
+  .L_2:
+          /*0010*/ 	.word	index@(_Z5l2_bwPfS_)
+          /*0014*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_MIN_STACK_SIZE
+  	.align		4
+  .L_3:
+          /*0018*/ 	.byte	0x04, 0x12
+          /*001a*/ 	.short	(.L_5 - .L_4)
+  	.align		4
+  .L_4:
+          /*001c*/ 	.word	index@(_Z5l2_bwPfS_)
+          /*0020*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_FRAME_SIZE
+  	.align		4
+  .L_5:
+          /*0024*/ 	.byte	0x04, 0x11
+          /*0026*/ 	.short	(.L_7 - .L_6)
+  	.align		4
+  .L_6:
+          /*0028*/ 	.word	index@(_Z5l2_bwPfS_)
+          /*002c*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_REGCOUNT
+  	.align		4
+  .L_7:
+          /*0030*/ 	.byte	0x04, 0x2f
+          /*0032*/ 	.short	(.L_9 - .L_8)
+  	.align		4
+  .L_8:
+          /*0034*/ 	.word	index@(_Z6l2_bw2PfS_)
+          /*0038*/ 	.word	0x00000028
+  
+  
+  	//----- nvinfo : EIATTR_MAX_STACK_SIZE
+  	.align		4
+  .L_9:
+          /*003c*/ 	.byte	0x04, 0x23
+          /*003e*/ 	.short	(.L_11 - .L_10)
+  	.align		4
+  .L_10:
+          /*0040*/ 	.word	index@(_Z6l2_bw2PfS_)
+          /*0044*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_MIN_STACK_SIZE
+  	.align		4
+  .L_11:
+          /*0048*/ 	.byte	0x04, 0x12
+          /*004a*/ 	.short	(.L_13 - .L_12)
+  	.align		4
+  .L_12:
+          /*004c*/ 	.word	index@(_Z6l2_bw2PfS_)
+          /*0050*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_FRAME_SIZE
+  	.align		4
+  .L_13:
+          /*0054*/ 	.byte	0x04, 0x11
+          /*0056*/ 	.short	(.L_15 - .L_14)
+  	.align		4
+  .L_14:
+          /*0058*/ 	.word	index@(_Z6l2_bw2PfS_)
+          /*005c*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_REGCOUNT
+  	.align		4
+  .L_15:
+          /*0060*/ 	.byte	0x04, 0x2f
+          /*0062*/ 	.short	(.L_17 - .L_16)
+  	.align		4
+  .L_16:
+          /*0064*/ 	.word	index@(_Z6l2_bw3PfS_)
+          /*0068*/ 	.word	0x00000040
+  
+  
+  	//----- nvinfo : EIATTR_MAX_STACK_SIZE
+  	.align		4
+  .L_17:
+          /*006c*/ 	.byte	0x04, 0x23
+          /*006e*/ 	.short	(.L_19 - .L_18)
+  	.align		4
+  .L_18:
+          /*0070*/ 	.word	index@(_Z6l2_bw3PfS_)
+          /*0074*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_MIN_STACK_SIZE
+  	.align		4
+  .L_19:
+          /*0078*/ 	.byte	0x04, 0x12
+          /*007a*/ 	.short	(.L_21 - .L_20)
+  	.align		4
+  .L_20:
+          /*007c*/ 	.word	index@(_Z6l2_bw3PfS_)
+          /*0080*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_FRAME_SIZE
+  	.align		4
+  .L_21:
+          /*0084*/ 	.byte	0x04, 0x11
+          /*0086*/ 	.short	(.L_23 - .L_22)
+  	.align		4
+  .L_22:
+          /*0088*/ 	.word	index@(_Z6l2_bw3PfS_)
+          /*008c*/ 	.word	0x00000000
+  .L_23:
+  
+  
+// --------------------- .nv.info._Z6l2_bw3PfS_           --------------------------
+	.section	.nv.info._Z6l2_bw3PfS_,"",@"SHT_CUDA_INFO"
+	.__section_name         0x54 	// offset in .shstrtab
+	.__section_type         1879048192
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x670 	// maybe updated by assembler
+	.__section_size         0x4c 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0xd
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  
+  
+  	//----- nvinfo : EIATTR_CUDA_API_VERSION
+  	.align		4
+          /*0000*/ 	.byte	0x04, 0x37
+          /*0002*/ 	.short	(.L_25 - .L_24)
+  .L_24:
+          /*0004*/ 	.word	0x00000079
+  
+  
+  	//----- nvinfo : EIATTR_SW2861232_WAR
+  	.align		4
+  .L_25:
+          /*0008*/ 	.byte	0x01, 0x35
+  	.zero		2
+  
+  
+  	//----- nvinfo : EIATTR_PARAM_CBANK
+  	.align		4
+          /*000c*/ 	.byte	0x04, 0x0a
+          /*000e*/ 	.short	(.L_27 - .L_26)
+  	.align		4
+  .L_26:
+          /*0010*/ 	.word	index@(.nv.constant0._Z6l2_bw3PfS_)
+          /*0014*/ 	.short	0x0160
+          /*0016*/ 	.short	0x0010
+  
+  
+  	//----- nvinfo : EIATTR_CBANK_PARAM_SIZE
+  	.align		4
+  .L_27:
+          /*0018*/ 	.byte	0x03, 0x19
+          /*001a*/ 	.short	0x0010
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+          /*001c*/ 	.byte	0x04, 0x17
+          /*001e*/ 	.short	(.L_29 - .L_28)
+  .L_28:
+          /*0020*/ 	.word	0x00000000
+          /*0024*/ 	.short	0x0001
+          /*0026*/ 	.short	0x0008
+          /*0028*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+  .L_29:
+          /*002c*/ 	.byte	0x04, 0x17
+          /*002e*/ 	.short	(.L_31 - .L_30)
+  .L_30:
+          /*0030*/ 	.word	0x00000000
+          /*0034*/ 	.short	0x0000
+          /*0036*/ 	.short	0x0000
+          /*0038*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_MAXREG_COUNT
+  	.align		4
+  .L_31:
+          /*003c*/ 	.byte	0x03, 0x1b
+          /*003e*/ 	.short	0x00ff
+  
+  
+  	//----- nvinfo : EIATTR_EXIT_INSTR_OFFSETS
+  	.align		4
+          /*0040*/ 	.byte	0x04, 0x1c
+          /*0042*/ 	.short	(.L_33 - .L_32)
+  
+  
+  	//   ....[0]....
+  .L_32:
+          /*0044*/ 	.word	0x00000cc0
+  
+  
+  	//   ....[1]....
+          /*0048*/ 	.word	0x00000d10
+  .L_33:
+  
+  
+// --------------------- .nv.info._Z6l2_bw2PfS_           --------------------------
+	.section	.nv.info._Z6l2_bw2PfS_,"",@"SHT_CUDA_INFO"
+	.__section_name         0xb4 	// offset in .shstrtab
+	.__section_type         1879048192
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x6bc 	// maybe updated by assembler
+	.__section_size         0x4c 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0xe
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  
+  
+  	//----- nvinfo : EIATTR_CUDA_API_VERSION
+  	.align		4
+          /*0000*/ 	.byte	0x04, 0x37
+          /*0002*/ 	.short	(.L_35 - .L_34)
+  .L_34:
+          /*0004*/ 	.word	0x00000079
+  
+  
+  	//----- nvinfo : EIATTR_SW2861232_WAR
+  	.align		4
+  .L_35:
+          /*0008*/ 	.byte	0x01, 0x35
+  	.zero		2
+  
+  
+  	//----- nvinfo : EIATTR_PARAM_CBANK
+  	.align		4
+          /*000c*/ 	.byte	0x04, 0x0a
+          /*000e*/ 	.short	(.L_37 - .L_36)
+  	.align		4
+  .L_36:
+          /*0010*/ 	.word	index@(.nv.constant0._Z6l2_bw2PfS_)
+          /*0014*/ 	.short	0x0160
+          /*0016*/ 	.short	0x0010
+  
+  
+  	//----- nvinfo : EIATTR_CBANK_PARAM_SIZE
+  	.align		4
+  .L_37:
+          /*0018*/ 	.byte	0x03, 0x19
+          /*001a*/ 	.short	0x0010
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+          /*001c*/ 	.byte	0x04, 0x17
+          /*001e*/ 	.short	(.L_39 - .L_38)
+  .L_38:
+          /*0020*/ 	.word	0x00000000
+          /*0024*/ 	.short	0x0001
+          /*0026*/ 	.short	0x0008
+          /*0028*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+  .L_39:
+          /*002c*/ 	.byte	0x04, 0x17
+          /*002e*/ 	.short	(.L_41 - .L_40)
+  .L_40:
+          /*0030*/ 	.word	0x00000000
+          /*0034*/ 	.short	0x0000
+          /*0036*/ 	.short	0x0000
+          /*0038*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_MAXREG_COUNT
+  	.align		4
+  .L_41:
+          /*003c*/ 	.byte	0x03, 0x1b
+          /*003e*/ 	.short	0x00ff
+  
+  
+  	//----- nvinfo : EIATTR_EXIT_INSTR_OFFSETS
+  	.align		4
+          /*0040*/ 	.byte	0x04, 0x1c
+          /*0042*/ 	.short	(.L_43 - .L_42)
+  
+  
+  	//   ....[0]....
+  .L_42:
+          /*0044*/ 	.word	0x000007f0
+  
+  
+  	//   ....[1]....
+          /*0048*/ 	.word	0x00000830
+  .L_43:
+  
+  
+// --------------------- .nv.info._Z5l2_bwPfS_            --------------------------
+	.section	.nv.info._Z5l2_bwPfS_,"",@"SHT_CUDA_INFO"
+	.__section_name         0x113 	// offset in .shstrtab
+	.__section_type         1879048192
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x708 	// maybe updated by assembler
+	.__section_size         0x4c 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0xf
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  
+  
+  	//----- nvinfo : EIATTR_CUDA_API_VERSION
+  	.align		4
+          /*0000*/ 	.byte	0x04, 0x37
+          /*0002*/ 	.short	(.L_45 - .L_44)
+  .L_44:
+          /*0004*/ 	.word	0x00000079
+  
+  
+  	//----- nvinfo : EIATTR_SW2861232_WAR
+  	.align		4
+  .L_45:
+          /*0008*/ 	.byte	0x01, 0x35
+  	.zero		2
+  
+  
+  	//----- nvinfo : EIATTR_PARAM_CBANK
+  	.align		4
+          /*000c*/ 	.byte	0x04, 0x0a
+          /*000e*/ 	.short	(.L_47 - .L_46)
+  	.align		4
+  .L_46:
+          /*0010*/ 	.word	index@(.nv.constant0._Z5l2_bwPfS_)
+          /*0014*/ 	.short	0x0160
+          /*0016*/ 	.short	0x0010
+  
+  
+  	//----- nvinfo : EIATTR_CBANK_PARAM_SIZE
+  	.align		4
+  .L_47:
+          /*0018*/ 	.byte	0x03, 0x19
+          /*001a*/ 	.short	0x0010
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+          /*001c*/ 	.byte	0x04, 0x17
+          /*001e*/ 	.short	(.L_49 - .L_48)
+  .L_48:
+          /*0020*/ 	.word	0x00000000
+          /*0024*/ 	.short	0x0001
+          /*0026*/ 	.short	0x0008
+          /*0028*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+  .L_49:
+          /*002c*/ 	.byte	0x04, 0x17
+          /*002e*/ 	.short	(.L_51 - .L_50)
+  .L_50:
+          /*0030*/ 	.word	0x00000000
+          /*0034*/ 	.short	0x0000
+          /*0036*/ 	.short	0x0000
+          /*0038*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_MAXREG_COUNT
+  	.align		4
+  .L_51:
+          /*003c*/ 	.byte	0x03, 0x1b
+          /*003e*/ 	.short	0x00ff
+  
+  
+  	//----- nvinfo : EIATTR_EXIT_INSTR_OFFSETS
+  	.align		4
+          /*0040*/ 	.byte	0x04, 0x1c
+          /*0042*/ 	.short	(.L_53 - .L_52)
+  
+  
+  	//   ....[0]....
+  .L_52:
+          /*0044*/ 	.word	0x00000e50
+  
+  
+  	//   ....[1]....
+          /*0048*/ 	.word	0x00000e90
+  .L_53:
+  
+  
+// --------------------- .rel.debug_frame                 --------------------------
+	.section  ".rel.debug_frame", 0, SHT_REL
+	// all relocation sections will be dynamically generated by assembler 
+	// but most of the section header will be kept as is.
+	.__section_name         0x169 	// offset in .shstrtab
+	.__section_type         SHT_REL
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x758 	// maybe updated by assembler
+	.__section_size         0x30 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x4
+	.__section_entsize      16
+	.align                8 	// equivalent to set sh_addralign
+    // Relocation[0] : _Z5l2_bwPfS_, Container({'r_offset': 292, 'r_info': 42949672962, 'r_info_sym': 10, 'r_info_type': 2})
+    // Relocation[1] : _Z6l2_bw2PfS_, Container({'r_offset': 180, 'r_info': 38654705666, 'r_info_sym': 9, 'r_info_type': 2})
+    // Relocation[2] : _Z6l2_bw3PfS_, Container({'r_offset': 68, 'r_info': 34359738370, 'r_info_sym': 8, 'r_info_type': 2})
+
+// --------------------- .nv.constant0._Z6l2_bw3PfS_      --------------------------
+	.section	.nv.constant0._Z6l2_bw3PfS_,"a",@progbits
+	.__section_name         0x84 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x2
+	.__section_addr         0x0
+	.__section_offset       0x788 	// maybe updated by assembler
+	.__section_size         0x170 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0xd
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  .nv.constant0._Z6l2_bw3PfS_:
+  	.zero		368
+  
+  
+// --------------------- .nv.constant0._Z6l2_bw2PfS_      --------------------------
+	.section	.nv.constant0._Z6l2_bw2PfS_,"a",@progbits
+	.__section_name         0xe4 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x2
+	.__section_addr         0x0
+	.__section_offset       0x8f8 	// maybe updated by assembler
+	.__section_size         0x170 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0xe
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  .nv.constant0._Z6l2_bw2PfS_:
+  	.zero		368
+  
+  
+// --------------------- .nv.constant0._Z5l2_bwPfS_       --------------------------
+	.section	.nv.constant0._Z5l2_bwPfS_,"a",@progbits
+	.__section_name         0x141 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x2
+	.__section_addr         0x0
+	.__section_offset       0xa68 	// maybe updated by assembler
+	.__section_size         0x170 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0xf
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  .nv.constant0._Z5l2_bwPfS_:
+  	.zero		368
+  
+  
+// --------------------- .text._Z6l2_bw3PfS_              --------------------------
+	.section	.text._Z6l2_bw3PfS_,"ax",@progbits
+	.__section_name         0x40 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x6
+	.__section_addr         0x0
+	.__section_offset       0xc00 	// maybe updated by assembler
+	.__section_size         0xe00 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x40000008
+	.__section_entsize      0
+	.align                128 	// equivalent to set sh_addralign
+  	.sectioninfo	@"SHI_REGISTERS=64"
+  	.align	128
+          .global         _Z6l2_bw3PfS_
+          .type           _Z6l2_bw3PfS_,@function
+          .size           _Z6l2_bw3PfS_,(.L_x_6 - _Z6l2_bw3PfS_)
+          .other          _Z6l2_bw3PfS_,@"STO_CUDA_ENTRY STV_DEFAULT"
+  _Z6l2_bw3PfS_:
+  .text._Z6l2_bw3PfS_:
+      [B------:R-:W-:Y:S02]         /*0000*/                   IMAD.MOV.U32 R1, RZ, RZ, c[0x0][0x28] ;
+      [B------:R-:W0:-:S01]         /*0010*/                   S2R R16, SR_TID.X ;
+      [B------:R-:W-:-:S01]         /*0020*/                   IMAD.MOV.U32 R52, RZ, RZ, RZ ;
+      [B------:R-:W-:-:S01]         /*0030*/                   ULDC.64 UR4, c[0x0][0x118] ;
+      [B------:R-:W-:-:S01]         /*0040*/                   IMAD.MOV.U32 R58, RZ, RZ, RZ ;
+      [B------:R-:W-:-:S01]         /*0050*/                   ULDC.64 UR6, c[0x0][0x168] ;
+      [B0-----:R-:W-:-:S02]         /*0060*/                   IADD3 R0, R16.reuse, 0x1e0, RZ ;
+      [B------:R-:W-:-:S02]         /*0070*/                   IADD3 R2, R16.reuse, 0x1c0, RZ ;
+      [B------:R-:W-:-:S02]         /*0080*/                   IADD3 R3, R16.reuse, 0x1a0, RZ ;
+      [B------:R-:W-:Y:S02]         /*0090*/                   IADD3 R4, R16, 0x180, RZ ;
+      [B------:R-:W-:-:S02]         /*00a0*/                   IADD3 R5, R16.reuse, 0x160, RZ ;
+      [B------:R-:W-:-:S02]         /*00b0*/                   IADD3 R6, R16.reuse, 0x140, RZ ;
+      [B------:R-:W-:-:S02]         /*00c0*/                   IADD3 R7, R16.reuse, 0x120, RZ ;
+      [B------:R-:W-:-:S02]         /*00d0*/                   IADD3 R8, R16.reuse, 0x100, RZ ;
+      [B------:R-:W-:-:S02]         /*00e0*/                   IADD3 R9, R16.reuse, 0xe0, RZ ;
+      [B------:R-:W-:Y:S02]         /*00f0*/                   IADD3 R10, R16, 0xc0, RZ ;
+      [B------:R-:W-:-:S02]         /*0100*/                   IADD3 R11, R16.reuse, 0xa0, RZ ;
+      [B------:R-:W-:-:S02]         /*0110*/                   IADD3 R12, R16.reuse, 0x80, RZ ;
+      [B------:R-:W-:-:S02]         /*0120*/                   IADD3 R13, R16.reuse, 0x60, RZ ;
+      [B------:R-:W-:-:S02]         /*0130*/                   IADD3 R15, R16.reuse, 0x40, RZ ;
+      [B------:R-:W-:-:S02]         /*0140*/                   LOP3.LUT R14, R16.reuse, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:Y:S02]         /*0150*/                   IADD3 R16, R16, 0x20, RZ ;
+      [B------:R-:W-:-:S02]         /*0160*/                   LOP3.LUT R0, R0, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0170*/                   LOP3.LUT R2, R2, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0180*/                   LOP3.LUT R3, R3, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*0190*/                   LOP3.LUT R4, R4, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*01a0*/                   IMAD.WIDE.U32 R18, R2, 0x4, RZ ;
+      [B------:R-:W-:-:S02]         /*01b0*/                   LOP3.LUT R5, R5, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*01c0*/                   LOP3.LUT R6, R6, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*01d0*/                   IMAD.WIDE.U32 R20, R3, 0x4, RZ ;
+      [B------:R-:W-:Y:S02]         /*01e0*/                   LOP3.LUT R7, R7, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*01f0*/                   LOP3.LUT R8, R8, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*0200*/                   IMAD.WIDE.U32 R22, R4, 0x4, RZ ;
+      [B------:R-:W-:-:S02]         /*0210*/                   LOP3.LUT R9, R9, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*0220*/                   LOP3.LUT R10, R10, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*0230*/                   IMAD.WIDE.U32 R24, R5, 0x4, RZ ;
+      [B------:R-:W-:-:S02]         /*0240*/                   LOP3.LUT R11, R11, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*0250*/                   LOP3.LUT R12, R12, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*0260*/                   IMAD.WIDE.U32 R26, R6, 0x4, RZ ;
+      [B------:R-:W-:Y:S02]         /*0270*/                   LOP3.LUT R13, R13, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*0280*/                   LOP3.LUT R42, R15, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*0290*/                   IMAD.WIDE.U32 R14, R14, 0x4, RZ ;
+      [B------:R-:W-:-:S02]         /*02a0*/                   LOP3.LUT R44, R16, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*02b0*/                   LOP3.LUT R4, R18, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*02c0*/                   IMAD.WIDE.U32 R16, R0, 0x4, RZ ;
+      [B------:R-:W-:-:S02]         /*02d0*/                   LOP3.LUT R2, R14, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*02e0*/                   LOP3.LUT R5, R20, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*02f0*/                   IMAD.WIDE.U32 R28, R7, 0x4, RZ ;
+      [B------:R-:W-:Y:S02]         /*0300*/                   LOP3.LUT R3, R16, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*0310*/                   LOP3.LUT R6, R22, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*0320*/                   IMAD.WIDE.U32 R30, R8, 0x4, RZ ;
+      [B------:R-:W-:-:S02]         /*0330*/                   LOP3.LUT R7, R24, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*0340*/                   LOP3.LUT R8, R26, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*0350*/                   IMAD.WIDE.U32 R32, R9, 0x4, RZ ;
+      [B------:R-:W-:Y:S03]         /*0360*/                   LOP3.LUT R9, R28, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*0370*/                   IMAD.WIDE.U32 R34, R10, 0x4, RZ ;
+      [B------:R-:W-:Y:S03]         /*0380*/                   LOP3.LUT R10, R30, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*0390*/                   IMAD.WIDE.U32 R36, R11, 0x4, RZ ;
+      [B------:R-:W-:Y:S03]         /*03a0*/                   LOP3.LUT R11, R32, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*03b0*/                   IMAD.WIDE.U32 R38, R12, 0x4, RZ ;
+      [B------:R-:W-:Y:S03]         /*03c0*/                   LOP3.LUT R12, R34, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*03d0*/                   IMAD.WIDE.U32 R40, R13, 0x4, RZ ;
+      [B------:R-:W-:-:S02]         /*03e0*/                   LOP3.LUT R13, R36, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*03f0*/                   LOP3.LUT R54, R38, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*0400*/                   IMAD.WIDE.U32 R42, R42, 0x4, RZ ;
+      [B------:R-:W-:Y:S03]         /*0410*/                   LOP3.LUT R55, R40, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S01]         /*0420*/                   IMAD.WIDE.U32 R44, R44, 0x4, RZ ;
+      [B------:R-:W-:Y:S04]         /*0430*/                   LOP3.LUT R56, R42, 0x800, RZ, 0xfc, !PT ;
+      [B------:R-:W-:Y:S02]         /*0440*/                   LOP3.LUT R0, R44, 0x800, RZ, 0xfc, !PT ;
+  .L_x_0:
+      [B------:R-:W-:Y:S04]         /*0450*/                   IADD3 R46, P0, R14, UR6, RZ ;
+      [B------:R-:W-:Y:S05]         /*0460*/                   IADD3.X R47, R15, UR7, RZ, P0, !PT ;
+      [B------:R0:W2:-:S01]         /*0470*/                   LDG.E.STRONG.GPU R53, desc[UR4][R46.64] ;
+      [B------:R-:W-:Y:S04]         /*0480*/                   IADD3 R48, P0, R44, UR6, RZ ;
+      [B------:R-:W-:-:S02]         /*0490*/                   IADD3.X R49, R45, UR7, RZ, P0, !PT ;
+      [B------:R-:W-:Y:S03]         /*04a0*/                   IADD3 R60, P0, R42, UR6, RZ ;
+      [B------:R1:W3:-:S01]         /*04b0*/                   LDG.E.STRONG.GPU R57, desc[UR4][R48.64] ;
+      [B------:R-:W-:Y:S05]         /*04c0*/                   IADD3.X R61, R43, UR7, RZ, P0, !PT ;
+      [B------:R4:W5:-:S01]         /*04d0*/                   LDG.E.STRONG.GPU R60, desc[UR4][R60.64] ;
+      [B------:R-:W-:Y:S04]         /*04e0*/                   IADD3 R50, P0, R40, UR6, RZ ;
+      [B------:R-:W-:-:S02]         /*04f0*/                   IADD3.X R51, R41, UR7, RZ, P0, !PT ;
+      [B0-----:R-:W-:Y:S03]         /*0500*/                   IADD3 R46, P0, R38, UR6, RZ ;
+      [B------:R0:W5:-:S01]         /*0510*/                   LDG.E.STRONG.GPU R59, desc[UR4][R50.64] ;
+      [B------:R-:W-:-:S02]         /*0520*/                   IADD3.X R47, R39, UR7, RZ, P0, !PT ;
+      [B-1----:R-:W-:Y:S03]         /*0530*/                   IADD3 R48, P0, R36, UR6, RZ ;
+      [B------:R1:W5:-:S01]         /*0540*/                   LDG.E.STRONG.GPU R46, desc[UR4][R46.64] ;
+      [B------:R-:W-:-:S02]         /*0550*/                   IADD3.X R49, R37, UR7, RZ, P0, !PT ;
+      [B0-----:R-:W-:Y:S03]         /*0560*/                   IADD3 R50, P0, R34, UR6, RZ ;
+      [B------:R2:W5:-:S01]         /*0570*/                   LDG.E.STRONG.GPU R48, desc[UR4][R48.64] ;
+      [B------:R-:W-:Y:S05]         /*0580*/                   IADD3.X R51, R35, UR7, RZ, P0, !PT ;
+      [B----4-:R0:W4:-:S01]         /*0590*/                   LDG.E.STRONG.GPU R61, desc[UR4][R50.64] ;
+      [B--2---:R-:W-:-:S01]         /*05a0*/                   FADD R49, R53, R52 ;
+      [B------:R-:W-:Y:S04]         /*05b0*/                   IADD3 R52, P0, R32, UR6, RZ ;
+      [B------:R-:W-:Y:S05]         /*05c0*/                   IADD3.X R53, R33, UR7, RZ, P0, !PT ;
+      [B-1----:R1:W2:-:S01]         /*05d0*/                   LDG.E.STRONG.GPU R47, desc[UR4][R52.64] ;
+      [B0-----:R-:W-:-:S01]         /*05e0*/                   IADD3 R50, P0, R30, UR6, RZ ;
+      [B---3--:R-:W-:Y:S03]         /*05f0*/                   FADD R57, R49, R57 ;
+      [B------:R-:W-:Y:S05]         /*0600*/                   IADD3.X R51, R31, UR7, RZ, P0, !PT ;
+      [B------:R0:W3:-:S01]         /*0610*/                   LDG.E.STRONG.GPU R49, desc[UR4][R50.64] ;
+      [B-1----:R-:W-:-:S01]         /*0620*/                   IADD3 R52, P0, R28, UR6, RZ ;
+      [B-----5:R-:W-:Y:S03]         /*0630*/                   FADD R60, R57, R60 ;
+      [B------:R-:W-:Y:S05]         /*0640*/                   IADD3.X R53, R29, UR7, RZ, P0, !PT ;
+      [B------:R1:W5:-:S01]         /*0650*/                   LDG.E.STRONG.GPU R57, desc[UR4][R52.64] ;
+      [B0-----:R-:W-:-:S01]         /*0660*/                   IADD3 R50, P0, R26, UR6, RZ ;
+      [B------:R-:W-:Y:S03]         /*0670*/                   FADD R60, R60, R59 ;
+      [B------:R-:W-:-:S01]         /*0680*/                   IADD3.X R51, R27, UR7, RZ, P0, !PT ;
+      [B------:R-:W-:-:S01]         /*0690*/                   FADD R60, R60, R46 ;
+      [B-1----:R-:W-:Y:S03]         /*06a0*/                   IADD3 R52, P0, R24, UR6, RZ ;
+      [B------:R0:W5:-:S01]         /*06b0*/                   LDG.E.STRONG.GPU R59, desc[UR4][R50.64] ;
+      [B------:R-:W-:-:S01]         /*06c0*/                   FADD R60, R60, R48 ;
+      [B------:R-:W-:Y:S05]         /*06d0*/                   IADD3.X R53, R25, UR7, RZ, P0, !PT ;
+      [B------:R4:W5:-:S01]         /*06e0*/                   LDG.E.STRONG.GPU R46, desc[UR4][R52.64] ;
+      [B0-----:R-:W-:Y:S04]         /*06f0*/                   IADD3 R50, P0, R22, UR6, RZ ;
+      [B------:R-:W-:-:S01]         /*0700*/                   IADD3.X R51, R23, UR7, RZ, P0, !PT ;
+      [B----4-:R-:W-:-:S01]         /*0710*/                   FADD R52, R60, R61 ;
+      [B------:R-:W-:Y:S03]         /*0720*/                   IADD3 R60, P0, R20, UR6, RZ ;
+      [B------:R0:W4:-:S01]         /*0730*/                   LDG.E.STRONG.GPU R48, desc[UR4][R50.64] ;
+      [B------:R-:W-:Y:S05]         /*0740*/                   IADD3.X R61, R21, UR7, RZ, P0, !PT ;
+      [B------:R-:W4:-:S01]         /*0750*/                   LDG.E.STRONG.GPU R60, desc[UR4][R60.64] ;
+      [B--2---:R-:W-:-:S01]         /*0760*/                   FADD R47, R52, R47 ;
+      [B------:R-:W-:Y:S04]         /*0770*/                   IADD3 R52, P0, R18, UR6, RZ ;
+      [B------:R-:W-:-:S02]         /*0780*/                   IADD3.X R53, R19, UR7, RZ, P0, !PT ;
+      [B0-----:R-:W-:Y:S03]         /*0790*/                   IADD3 R50, P0, R16, UR6, RZ ;
+      [B------:R0:W2:-:S01]         /*07a0*/                   LDG.E.STRONG.GPU R52, desc[UR4][R52.64] ;
+      [B------:R-:W-:-:S01]         /*07b0*/                   IADD3.X R51, R17, UR7, RZ, P0, !PT ;
+      [B---3--:R-:W-:Y:S04]         /*07c0*/                   FADD R49, R47, R49 ;
+      [B------:R1:W3:-:S01]         /*07d0*/                   LDG.E.STRONG.GPU R47, desc[UR4][R50.64] ;
+      [B-----5:R-:W-:-:S01]         /*07e0*/                   FADD R57, R49, R57 ;
+      [B-1----:R-:W-:Y:S04]         /*07f0*/                   IADD3 R50, P0, R2, UR6, RZ ;
+      [B------:R-:W-:Y:S05]         /*0800*/                   IADD3.X R51, R15, UR7, RZ, P0, !PT ;
+      [B------:R1:W5:-:S01]         /*0810*/                   LDG.E.STRONG.GPU R49, desc[UR4][R50.64] ;
+      [B------:R-:W-:-:S01]         /*0820*/                   FADD R57, R57, R59 ;
+      [B-1----:R-:W-:Y:S04]         /*0830*/                   IADD3 R50, P0, R0, UR6, RZ ;
+      [B------:R-:W-:Y:S05]         /*0840*/                   IADD3.X R51, R45, UR7, RZ, P0, !PT ;
+      [B0-----:R0:W5:-:S01]         /*0850*/                   LDG.E.STRONG.GPU R53, desc[UR4][R50.64] ;
+      [B------:R-:W-:-:S01]         /*0860*/                   FADD R57, R57, R46 ;
+      [B0-----:R-:W-:Y:S04]         /*0870*/                   IADD3 R50, P0, R56, UR6, RZ ;
+      [B------:R-:W-:-:S01]         /*0880*/                   IADD3.X R51, R43, UR7, RZ, P0, !PT ;
+      [B----4-:R-:W-:Y:S04]         /*0890*/                   FADD R57, R57, R48 ;
+      [B------:R0:W4:-:S01]         /*08a0*/                   LDG.E.STRONG.GPU R46, desc[UR4][R50.64] ;
+      [B------:R-:W-:-:S01]         /*08b0*/                   FADD R59, R57, R60 ;
+      [B0-----:R-:W-:Y:S04]         /*08c0*/                   IADD3 R50, P0, R55, UR6, RZ ;
+      [B------:R-:W-:-:S02]         /*08d0*/                   IADD3.X R51, R41, UR7, RZ, P0, !PT ;
+      [B------:R-:W-:Y:S03]         /*08e0*/                   IADD3 R60, P0, R54, UR6, RZ ;
+      [B------:R0:W4:-:S01]         /*08f0*/                   LDG.E.STRONG.GPU R48, desc[UR4][R50.64] ;
+      [B------:R-:W-:Y:S05]         /*0900*/                   IADD3.X R61, R39, UR7, RZ, P0, !PT ;
+      [B------:R1:W4:-:S02]         /*0910*/                   LDG.E.STRONG.GPU R57, desc[UR4][R60.64] ;
+      [B-1----:R-:W-:Y:S04]         /*0920*/                   IADD3 R60, P0, R13, UR6, RZ ;
+      [B------:R-:W-:-:S02]         /*0930*/                   IADD3.X R61, R37, UR7, RZ, P0, !PT ;
+      [B0-----:R-:W-:Y:S04]         /*0940*/                   IADD3 R50, P0, R12, UR6, RZ ;
+      [B------:R-:W-:-:S01]         /*0950*/                   IADD3.X R51, R35, UR7, RZ, P0, !PT ;
+      [B--2---:R-:W-:-:S02]         /*0960*/                   FADD R59, R59, R52 ;
+      [B------:R0:W2:-:S02]         /*0970*/                   LDG.E.STRONG.GPU R52, desc[UR4][R60.64] ;
+      [B---3--:R-:W-:-:S02]         /*0980*/                   FADD R59, R59, R47 ;
+      [B------:R1:W3:-:S02]         /*0990*/                   LDG.E.STRONG.GPU R47, desc[UR4][R50.64] ;
+      [B-1----:R-:W-:Y:S04]         /*09a0*/                   IADD3 R50, P0, R11, UR6, RZ ;
+      [B------:R-:W-:-:S01]         /*09b0*/                   IADD3.X R51, R33, UR7, RZ, P0, !PT ;
+      [B-----5:R-:W-:-:S01]         /*09c0*/                   FADD R59, R59, R49 ;
+      [B0-----:R-:W-:Y:S03]         /*09d0*/                   IADD3 R60, P0, R10, UR6, RZ ;
+      [B------:R0:W5:-:S01]         /*09e0*/                   LDG.E.STRONG.GPU R49, desc[UR4][R50.64] ;
+      [B------:R-:W-:-:S01]         /*09f0*/                   IADD3.X R61, R31, UR7, RZ, P0, !PT ;
+      [B------:R-:W-:Y:S04]         /*0a00*/                   FADD R59, R59, R53 ;
+      [B------:R1:W5:-:S02]         /*0a10*/                   LDG.E.STRONG.GPU R53, desc[UR4][R60.64] ;
+      [B-1----:R-:W-:Y:S04]         /*0a20*/                   IADD3 R60, P0, R9, UR6, RZ ;
+      [B------:R-:W-:-:S02]         /*0a30*/                   IADD3.X R61, R29, UR7, RZ, P0, !PT ;
+      [B0-----:R-:W-:-:S01]         /*0a40*/                   IADD3 R50, P0, R8, UR6, RZ ;
+      [B----4-:R-:W-:-:S02]         /*0a50*/                   FADD R59, R59, R46 ;
+      [B------:R0:W4:-:S01]         /*0a60*/                   LDG.E.STRONG.GPU R46, desc[UR4][R60.64] ;
+      [B------:R-:W-:-:S01]         /*0a70*/                   IADD3.X R51, R27, UR7, RZ, P0, !PT ;
+      [B------:R-:W-:Y:S04]         /*0a80*/                   FADD R59, R59, R48 ;
+      [B------:R1:W4:-:S01]         /*0a90*/                   LDG.E.STRONG.GPU R48, desc[UR4][R50.64] ;
+      [B------:R-:W-:-:S01]         /*0aa0*/                   FADD R59, R59, R57 ;
+      [B-1----:R-:W-:Y:S04]         /*0ab0*/                   IADD3 R50, P0, R7, UR6, RZ ;
+      [B------:R-:W-:-:S02]         /*0ac0*/                   IADD3.X R51, R25, UR7, RZ, P0, !PT ;
+      [B0-----:R-:W-:Y:S03]         /*0ad0*/                   IADD3 R60, P0, R6, UR6, RZ ;
+      [B------:R0:W4:-:S01]         /*0ae0*/                   LDG.E.STRONG.GPU R57, desc[UR4][R50.64] ;
+      [B------:R-:W-:-:S01]         /*0af0*/                   IADD3.X R61, R23, UR7, RZ, P0, !PT ;
+      [B--2---:R-:W-:Y:S04]         /*0b00*/                   FADD R59, R59, R52 ;
+      [B------:R1:W2:-:S01]         /*0b10*/                   LDG.E.STRONG.GPU R52, desc[UR4][R60.64] ;
+      [B---3--:R-:W-:-:S01]         /*0b20*/                   FADD R59, R59, R47 ;
+      [B-1----:R-:W-:Y:S04]         /*0b30*/                   IADD3 R60, P0, R5, UR6, RZ ;
+      [B------:R-:W-:-:S02]         /*0b40*/                   IADD3.X R61, R21, UR7, RZ, P0, !PT ;
+      [B0-----:R-:W-:Y:S03]         /*0b50*/                   IADD3 R50, P0, R4, UR6, RZ ;
+      [B------:R-:W3:-:S01]         /*0b60*/                   LDG.E.STRONG.GPU R47, desc[UR4][R60.64] ;
+      [B------:R-:W-:-:S01]         /*0b70*/                   IADD3.X R51, R19, UR7, RZ, P0, !PT ;
+      [B-----5:R-:W-:Y:S04]         /*0b80*/                   FADD R59, R59, R49 ;
+      [B------:R0:W5:-:S02]         /*0b90*/                   LDG.E.STRONG.GPU R49, desc[UR4][R50.64] ;
+      [B0-----:R-:W-:Y:S04]         /*0ba0*/                   IADD3 R50, P0, R3, UR6, RZ ;
+      [B------:R-:W-:-:S01]         /*0bb0*/                   IADD3.X R51, R17, UR7, RZ, P0, !PT ;
+      [B------:R-:W-:Y:S04]         /*0bc0*/                   FADD R59, R59, R53 ;
+      [B------:R-:W5:-:S01]         /*0bd0*/                   LDG.E.STRONG.GPU R53, desc[UR4][R50.64] ;
+      [B------:R-:W-:-:S01]         /*0be0*/                   IADD3 R58, R58, 0x400, RZ ;
+      [B------:R-:W-:Y:S03]         /*0bf0*/                   UIADD3 UR6, UP0, UR6, 0x1000, URZ ;
+      [B------:R-:W-:-:S01]         /*0c00*/                   ISETP.GE.U32.AND P0, PT, R58, 0x70800, PT ;
+      [B------:R-:W-:-:S01]         /*0c10*/                   UIADD3.X UR7, URZ, UR7, URZ, UP0, !UPT ;
+      [B----4-:R-:W-:Y:S04]         /*0c20*/                   FADD R59, R59, R46 ;
+      [B------:R-:W-:Y:S04]         /*0c30*/                   FADD R48, R59, R48 ;
+      [B------:R-:W-:Y:S04]         /*0c40*/                   FADD R57, R48, R57 ;
+      [B--2---:R-:W-:Y:S04]         /*0c50*/                   FADD R52, R57, R52 ;
+      [B---3--:R-:W-:Y:S04]         /*0c60*/                   FADD R52, R52, R47 ;
+      [B-----5:R-:W-:Y:S04]         /*0c70*/                   FADD R52, R52, R49 ;
+      [B------:R-:W-:-:S01]         /*0c80*/                   FADD R52, R52, R53 ;
+      [B------:R-:W-:-:S05]         /*0c90*/              @!P0 BRA `(.L_x_0) ;
+      [B------:R-:W0:-:S02]         /*0ca0*/                   S2UR UR6, SR_CTAID.X ;
+      [B0-----:R-:W-:Y:S13]         /*0cb0*/                   ISETP.NE.AND P0, PT, RZ, UR6, PT ;
+      [B------:R-:W-:-:S05]         /*0cc0*/               @P0 EXIT ;
+      [B------:R-:W0:-:S01]         /*0cd0*/                   S2R R3, SR_TID.X ;
+      [B------:R-:W-:Y:S04]         /*0ce0*/                   IMAD.MOV.U32 R2, RZ, RZ, 0x4 ;
+      [B0-----:R-:W-:Y:S05]         /*0cf0*/                   IMAD.WIDE.U32 R2, R3, R2, c[0x0][0x160] ;
+      [B------:R-:W-:-:S01]         /*0d00*/                   STG.E desc[UR4][R2.64], R52 ;
+      [B------:R-:W-:-:S05]         /*0d10*/                   EXIT ;
+  .L_x_1:
+      [B------:R-:W-:Y:S00]         /*0d20*/                   BRA `(.L_x_1);
+      [B------:R-:W-:Y:S00]         /*0d30*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0d40*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0d50*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0d60*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0d70*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0d80*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0d90*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0da0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0db0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0dc0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0dd0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0de0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0df0*/                   NOP;
+  .L_x_6:
+  
+  
+
+// --------------------- .text._Z6l2_bw2PfS_              --------------------------
+	.section	.text._Z6l2_bw2PfS_,"ax",@progbits
+	.__section_name         0xa0 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x6
+	.__section_addr         0x0
+	.__section_offset       0x1a00 	// maybe updated by assembler
+	.__section_size         0x900 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x28000009
+	.__section_entsize      0
+	.align                128 	// equivalent to set sh_addralign
+  	.sectioninfo	@"SHI_REGISTERS=40"
+  	.align	128
+          .global         _Z6l2_bw2PfS_
+          .type           _Z6l2_bw2PfS_,@function
+          .size           _Z6l2_bw2PfS_,(.L_x_7 - _Z6l2_bw2PfS_)
+          .other          _Z6l2_bw2PfS_,@"STO_CUDA_ENTRY STV_DEFAULT"
+  _Z6l2_bw2PfS_:
+  .text._Z6l2_bw2PfS_:
+      [B------:R-:W-:Y:S02]         /*0000*/                   MOV R1, c[0x0][0x28] ;
+      [B------:R-:W0:-:S01]         /*0010*/                   S2UR UR5, SR_CTAID.X ;
+      [B------:R-:W1:-:S01]         /*0020*/                   S2R R3, SR_TID.X ;
+      [B------:R-:W-:-:S02]         /*0030*/                   MOV R25, RZ ;
+      [B------:R-:W-:-:S01]         /*0040*/                   MOV R2, RZ ;
+      [B0-----:R-:W-:-:S01]         /*0050*/                   USHF.L.U32 UR4, UR5, 0x9, URZ ;
+      [B-1----:R-:W-:-:S02]         /*0060*/                   IADD3 R4, R3.reuse, 0x40, RZ ;
+      [B------:R-:W-:-:S02]         /*0070*/                   IADD3 R5, R3.reuse, 0x60, RZ ;
+      [B------:R-:W-:Y:S02]         /*0080*/                   IADD3 R6, R3, 0x80, RZ ;
+      [B------:R-:W-:-:S02]         /*0090*/                   IADD3 R7, R3.reuse, 0xa0, RZ ;
+      [B------:R-:W-:-:S02]         /*00a0*/                   IADD3 R8, R3.reuse, 0xc0, RZ ;
+      [B------:R-:W-:-:S02]         /*00b0*/                   IADD3 R9, R3.reuse, 0xe0, RZ ;
+      [B------:R-:W-:-:S02]         /*00c0*/                   IADD3 R10, R3.reuse, 0x100, RZ ;
+      [B------:R-:W-:-:S02]         /*00d0*/                   IADD3 R11, R3.reuse, 0x120, RZ ;
+      [B------:R-:W-:Y:S02]         /*00e0*/                   IADD3 R12, R3, 0x140, RZ ;
+      [B------:R-:W-:-:S02]         /*00f0*/                   IADD3 R13, R3.reuse, 0x160, RZ ;
+      [B------:R-:W-:-:S02]         /*0100*/                   IADD3 R14, R3.reuse, 0x180, RZ ;
+      [B------:R-:W-:-:S02]         /*0110*/                   IADD3 R15, R3.reuse, 0x1a0, RZ ;
+      [B------:R-:W-:-:S02]         /*0120*/                   IADD3 R16, R3.reuse, 0x1c0, RZ ;
+      [B------:R-:W-:-:S02]         /*0130*/                   IADD3 R17, R3, 0x1e0, RZ ;
+      [B------:R-:W-:Y:S02]         /*0140*/                   LOP3.LUT R4, R4, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0150*/                   LOP3.LUT R5, R5, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0160*/                   LOP3.LUT R6, R6, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0170*/                   LOP3.LUT R7, R7, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0180*/                   LOP3.LUT R8, R8, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0190*/                   LOP3.LUT R9, R9, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:Y:S02]         /*01a0*/                   LOP3.LUT R10, R10, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*01b0*/                   LOP3.LUT R11, R11, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*01c0*/                   LOP3.LUT R12, R12, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*01d0*/                   LOP3.LUT R13, R13, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*01e0*/                   LOP3.LUT R14, R14, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*01f0*/                   LOP3.LUT R15, R15, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:Y:S02]         /*0200*/                   LOP3.LUT R16, R16, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0210*/                   LOP3.LUT R17, R17, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:Y:S05]         /*0220*/                   MOV R26, UR4 ;
+  .L_x_2:
+      [B------:R-:W-:-:S01]         /*0230*/                   IMAD.WIDE.U32 R18, R26, -0x6e5d4c3b, RZ ;
+      [B------:R-:W-:-:S01]         /*0240*/                   LOP3.LUT R21, R3.reuse, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*0250*/                   ULDC.64 UR6, c[0x0][0x118] ;
+      [B------:R-:W-:-:S02]         /*0260*/                   IADD3 R0, R3, 0x20, RZ ;
+      [B------:R-:W-:-:S02]         /*0270*/                   SHF.R.U32.HI R24, RZ, 0x12, R19 ;
+      [B------:R-:W-:-:S02]         /*0280*/                   IADD3 R19, R21, R26, RZ ;
+      [B------:R-:W-:Y:S02]         /*0290*/                   LOP3.LUT R23, R0, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S01]         /*02a0*/                   MOV R0, 0x4 ;
+      [B------:R-:W-:-:S02]         /*02b0*/                   IMAD R19, R24, -0x70800, R19 ;
+      [B------:R-:W-:-:S02]         /*02c0*/                   IMAD.IADD R23, R23, 0x1, R26 ;
+      [B------:R-:W-:Y:S04]         /*02d0*/                   IMAD.WIDE.U32 R20, R19, R0, c[0x0][0x168] ;
+      [B------:R-:W-:-:S01]         /*02e0*/                   IMAD R19, R24, -0x70800, R23 ;
+      [B------:R0:W2:-:S03]         /*02f0*/                   LDG.E.STRONG.GPU R34, desc[UR6][R20.64] ;
+      [B------:R-:W-:Y:S05]         /*0300*/                   IMAD.WIDE.U32 R18, R19, R0, c[0x0][0x168] ;
+      [B------:R1:W3:-:S01]         /*0310*/                   LDG.E.STRONG.GPU R35, desc[UR6][R18.64] ;
+      [B------:R-:W-:-:S01]         /*0320*/                   IADD3 R23, R4, R26.reuse, RZ ;
+      [B------:R-:W-:-:S01]         /*0330*/                   IMAD.IADD R37, R8, 0x1, R26 ;
+      [B------:R-:W-:-:S02]         /*0340*/                   IADD3 R27, R5, R26.reuse, RZ ;
+      [B------:R-:W-:-:S01]         /*0350*/                   IADD3 R29, R6, R26.reuse, RZ ;
+      [B------:R-:W-:-:S01]         /*0360*/                   IMAD R23, R24.reuse, -0x70800, R23 ;
+      [B------:R-:W-:-:S01]         /*0370*/                   IADD3 R31, R7, R26, RZ ;
+      [B------:R-:W-:-:S02]         /*0380*/                   IMAD R27, R24.reuse, -0x70800, R27 ;
+      [B------:R-:W-:Y:S02]         /*0390*/                   IMAD R29, R24, -0x70800, R29 ;
+      [B------:R-:W-:Y:S04]         /*03a0*/                   IMAD.WIDE.U32 R32, R23, R0, c[0x0][0x168] ;
+      [B------:R-:W-:-:S02]         /*03b0*/                   IMAD R31, R24.reuse, -0x70800, R31 ;
+      [B------:R-:W-:-:S02]         /*03c0*/                   IMAD.WIDE.U32 R22, R27, R0.reuse, c[0x0][0x168] ;
+      [B------:R2:W4:-:S02]         /*03d0*/                   LDG.E.STRONG.GPU R27, desc[UR6][R32.64] ;
+      [B-1----:R-:W-:-:S02]         /*03e0*/                   IMAD.WIDE.U32 R18, R29, R0.reuse, c[0x0][0x168] ;
+      [B------:R1:W5:-:S02]         /*03f0*/                   LDG.E.STRONG.GPU R28, desc[UR6][R22.64] ;
+      [B0-----:R-:W-:-:S01]         /*0400*/                   IMAD.WIDE.U32 R20, R31, R0, c[0x0][0x168] ;
+      [B------:R-:W-:-:S01]         /*0410*/                   IADD3 R31, R9, R26, RZ ;
+      [B------:R0:W4:-:S02]         /*0420*/                   LDG.E.STRONG.GPU R29, desc[UR6][R18.64] ;
+      [B------:R-:W-:Y:S02]         /*0430*/                   IMAD R37, R24, -0x70800, R37 ;
+      [B------:R1:W4:-:S01]         /*0440*/                   LDG.E.STRONG.GPU R30, desc[UR6][R20.64] ;
+      [B0-----:R-:W-:-:S01]         /*0450*/                   IADD3 R19, R10, R26, RZ ;
+      [B------:R-:W-:Y:S04]         /*0460*/                   IMAD.WIDE.U32 R36, R37, R0, c[0x0][0x168] ;
+      [B-1----:R-:W-:Y:S04]         /*0470*/                   IMAD R23, R24, -0x70800, R19 ;
+      [B------:R-:W-:-:S01]         /*0480*/                   IMAD.WIDE.U32 R22, R23, R0, c[0x0][0x168] ;
+      [B--2---:R-:W-:Y:S03]         /*0490*/                   FADD R32, R34, R25 ;
+      [B------:R-:W-:-:S01]         /*04a0*/                   IMAD R25, R24, -0x70800, R31 ;
+      [B------:R-:W-:-:S01]         /*04b0*/                   IADD3 R34, R11, R26, RZ ;
+      [B------:R0:W2:-:S02]         /*04c0*/                   LDG.E.STRONG.GPU R31, desc[UR6][R36.64] ;
+      [B------:R-:W-:-:S01]         /*04d0*/                   IMAD.WIDE.U32 R18, R25, R0, c[0x0][0x168] ;
+      [B------:R-:W-:-:S01]         /*04e0*/                   IADD3 R25, R12, R26, RZ ;
+      [B---3--:R-:W-:-:S02]         /*04f0*/                   FADD R32, R35, R32 ;
+      [B------:R-:W-:-:S01]         /*0500*/                   IMAD.IADD R35, R13, 0x1, R26 ;
+      [B------:R1:W3:-:S01]         /*0510*/                   LDG.E.STRONG.GPU R33, desc[UR6][R18.64] ;
+      [B------:R-:W-:Y:S02]         /*0520*/                   IMAD R21, R24, -0x70800, R34 ;
+      [B------:R-:W-:-:S01]         /*0530*/                   IMAD R25, R24, -0x70800, R25 ;
+      [B------:R0:W3:-:S01]         /*0540*/                   LDG.E.STRONG.GPU R34, desc[UR6][R22.64] ;
+      [B------:R-:W-:Y:S04]         /*0550*/                   IMAD.WIDE.U32 R20, R21, R0, c[0x0][0x168] ;
+      [B-1----:R-:W-:-:S02]         /*0560*/                   IMAD R19, R24, -0x70800, R35 ;
+      [B0-----:R-:W-:-:S01]         /*0570*/                   IMAD.WIDE.U32 R36, R25, R0, c[0x0][0x168] ;
+      [B------:R0:W3:-:S01]         /*0580*/                   LDG.E.STRONG.GPU R35, desc[UR6][R20.64] ;
+      [B------:R-:W-:-:S02]         /*0590*/                   IADD3 R23, R14, R26, RZ ;
+      [B------:R-:W-:-:S02]         /*05a0*/                   IMAD.WIDE.U32 R18, R19, R0, c[0x0][0x168] ;
+      [B------:R1:W3:-:S02]         /*05b0*/                   LDG.E.STRONG.GPU R36, desc[UR6][R36.64] ;
+      [B------:R-:W-:-:S01]         /*05c0*/                   IMAD R25, R24, -0x70800, R23 ;
+      [B------:R-:W-:Y:S05]         /*05d0*/                   IADD3 R23, R15, R26, RZ ;
+      [B------:R-:W-:-:S01]         /*05e0*/                   IMAD R23, R24, -0x70800, R23 ;
+      [B-1----:R1:W3:-:S03]         /*05f0*/                   LDG.E.STRONG.GPU R37, desc[UR6][R18.64] ;
+      [B0-----:R-:W-:Y:S06]         /*0600*/                   IMAD.WIDE.U32 R20, R23, R0, c[0x0][0x168] ;
+      [B------:R-:W3:-:S01]         /*0610*/                   LDG.E.STRONG.GPU R20, desc[UR6][R20.64] ;
+      [B-1----:R-:W-:-:S01]         /*0620*/                   IMAD.WIDE.U32 R18, R25, R0, c[0x0][0x168] ;
+      [B------:R-:W-:Y:S05]         /*0630*/                   IADD3 R25, R16, R26, RZ ;
+      [B------:R-:W-:-:S01]         /*0640*/                   IMAD R23, R24, -0x70800, R25 ;
+      [B------:R-:W-:-:S01]         /*0650*/                   IADD3 R25, R17, R26, RZ ;
+      [B------:R-:W3:-:S02]         /*0660*/                   LDG.E.STRONG.GPU R18, desc[UR6][R18.64] ;
+      [B------:R-:W-:Y:S04]         /*0670*/                   IMAD.WIDE.U32 R22, R23, R0, c[0x0][0x168] ;
+      [B------:R-:W-:-:S02]         /*0680*/                   IMAD R25, R24, -0x70800, R25 ;
+      [B------:R-:W3:-:S02]         /*0690*/                   LDG.E.STRONG.GPU R22, desc[UR6][R22.64] ;
+      [B------:R-:W-:Y:S06]         /*06a0*/                   IMAD.WIDE.U32 R24, R25, R0, c[0x0][0x168] ;
+      [B------:R-:W3:-:S01]         /*06b0*/                   LDG.E.STRONG.GPU R25, desc[UR6][R24.64] ;
+      [B----4-:R-:W-:Y:S04]         /*06c0*/                   FADD R27, R27, R32 ;
+      [B-----5:R-:W-:Y:S04]         /*06d0*/                   FADD R28, R28, R27 ;
+      [B------:R-:W-:Y:S04]         /*06e0*/                   FADD R29, R29, R28 ;
+      [B------:R-:W-:-:S01]         /*06f0*/                   FADD R30, R30, R29 ;
+      [B------:R-:W-:Y:S04]         /*0700*/                   IADD3 R2, R2, 0x200, RZ ;
+      [B------:R-:W-:-:S02]         /*0710*/                   ISETP.GE.U32.AND P0, PT, R2, 0x70800, PT ;
+      [B------:R-:W-:-:S01]         /*0720*/                   IADD3 R26, R26, 0x200, RZ ;
+      [B--2---:R-:W-:Y:S04]         /*0730*/                   FADD R30, R31, R30 ;
+      [B---3--:R-:W-:Y:S04]         /*0740*/                   FADD R33, R33, R30 ;
+      [B------:R-:W-:Y:S04]         /*0750*/                   FADD R34, R34, R33 ;
+      [B------:R-:W-:Y:S04]         /*0760*/                   FADD R35, R35, R34 ;
+      [B------:R-:W-:Y:S04]         /*0770*/                   FADD R36, R36, R35 ;
+      [B------:R-:W-:Y:S04]         /*0780*/                   FADD R37, R37, R36 ;
+      [B------:R-:W-:Y:S04]         /*0790*/                   FADD R37, R18, R37 ;
+      [B------:R-:W-:Y:S04]         /*07a0*/                   FADD R37, R20, R37 ;
+      [B------:R-:W-:Y:S04]         /*07b0*/                   FADD R22, R22, R37 ;
+      [B------:R-:W-:-:S01]         /*07c0*/                   FADD R25, R25, R22 ;
+      [B------:R-:W-:-:S05]         /*07d0*/              @!P0 BRA `(.L_x_2) ;
+      [B------:R-:W-:Y:S13]         /*07e0*/                   ISETP.NE.AND P0, PT, RZ, UR5, PT ;
+      [B------:R-:W-:-:S05]         /*07f0*/               @P0 EXIT ;
+      [B------:R-:W-:-:S01]         /*0800*/                   IMAD.WIDE.U32 R2, R3, R0, c[0x0][0x160] ;
+      [B------:R-:W-:Y:S04]         /*0810*/                   ULDC.64 UR4, c[0x0][0x118] ;
+      [B------:R-:W-:-:S01]         /*0820*/                   STG.E desc[UR4][R2.64], R25 ;
+      [B------:R-:W-:-:S05]         /*0830*/                   EXIT ;
+  .L_x_3:
+      [B------:R-:W-:Y:S00]         /*0840*/                   BRA `(.L_x_3);
+      [B------:R-:W-:Y:S00]         /*0850*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0860*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0870*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0880*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0890*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*08a0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*08b0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*08c0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*08d0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*08e0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*08f0*/                   NOP;
+  .L_x_7:
+  
+  
+
+// --------------------- .text._Z5l2_bwPfS_               --------------------------
+	.section	.text._Z5l2_bwPfS_,"ax",@progbits
+	.__section_name         0x100 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x6
+	.__section_addr         0x0
+	.__section_offset       0x2300 	// maybe updated by assembler
+	.__section_size         0xf80 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x3000000a
+	.__section_entsize      0
+	.align                128 	// equivalent to set sh_addralign
+  	.sectioninfo	@"SHI_REGISTERS=48"
+  	.align	128
+          .global         _Z5l2_bwPfS_
+          .type           _Z5l2_bwPfS_,@function
+          .size           _Z5l2_bwPfS_,(.L_x_8 - _Z5l2_bwPfS_)
+          .other          _Z5l2_bwPfS_,@"STO_CUDA_ENTRY STV_DEFAULT"
+  _Z5l2_bwPfS_:
+  .text._Z5l2_bwPfS_:
+      [B------:R-:W-:Y:S02]         /*0000*/                   MOV R1, c[0x0][0x28] ;
+      [B------:R-:W0:-:S01]         /*0010*/                   S2R R17, SR_TID.X ;
+      [B------:R-:W1:-:S01]         /*0020*/                   S2UR UR6, SR_CTAID.X ;
+      [B------:R-:W-:-:S02]         /*0030*/                   MOV R2, RZ ;
+      [B------:R-:W-:-:S02]         /*0040*/                   MOV R43, RZ ;
+      [B0-----:R-:W-:-:S01]         /*0050*/                   IADD3 R4, R17.reuse, 0x20, RZ ;
+      [B-1----:R-:W-:-:S01]         /*0060*/                   USHF.L.U32 UR4, UR6, 0x9, URZ ;
+      [B------:R-:W-:-:S02]         /*0070*/                   IADD3 R5, R17.reuse, 0x40, RZ ;
+      [B------:R-:W-:-:S01]         /*0080*/                   IADD3 R6, R17.reuse, 0x60, RZ ;
+      [B------:R-:W-:-:S01]         /*0090*/                   UIADD3 UR5, UR4, 0x200, URZ ;
+      [B------:R-:W-:Y:S02]         /*00a0*/                   IADD3 R7, R17, 0x80, RZ ;
+      [B------:R-:W-:-:S02]         /*00b0*/                   IADD3 R8, R17.reuse, 0xa0, RZ ;
+      [B------:R-:W-:-:S02]         /*00c0*/                   IADD3 R9, R17.reuse, 0xc0, RZ ;
+      [B------:R-:W-:-:S02]         /*00d0*/                   IADD3 R10, R17.reuse, 0xe0, RZ ;
+      [B------:R-:W-:-:S02]         /*00e0*/                   IADD3 R11, R17.reuse, 0x100, RZ ;
+      [B------:R-:W-:-:S02]         /*00f0*/                   IADD3 R12, R17.reuse, 0x120, RZ ;
+      [B------:R-:W-:Y:S02]         /*0100*/                   IADD3 R13, R17, 0x140, RZ ;
+      [B------:R-:W-:-:S02]         /*0110*/                   IADD3 R14, R17.reuse, 0x160, RZ ;
+      [B------:R-:W-:-:S02]         /*0120*/                   IADD3 R15, R17.reuse, 0x180, RZ ;
+      [B------:R-:W-:-:S02]         /*0130*/                   IADD3 R16, R17.reuse, 0x1a0, RZ ;
+      [B------:R-:W-:-:S02]         /*0140*/                   IADD3 R18, R17.reuse, 0x1c0, RZ ;
+      [B------:R-:W-:-:S02]         /*0150*/                   LOP3.LUT R3, R17.reuse, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:Y:S02]         /*0160*/                   IADD3 R17, R17, 0x1e0, RZ ;
+      [B------:R-:W-:-:S02]         /*0170*/                   LOP3.LUT R4, R4, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0180*/                   LOP3.LUT R5, R5, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0190*/                   LOP3.LUT R6, R6, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*01a0*/                   LOP3.LUT R7, R7, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*01b0*/                   LOP3.LUT R8, R8, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:Y:S02]         /*01c0*/                   LOP3.LUT R9, R9, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*01d0*/                   LOP3.LUT R10, R10, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*01e0*/                   LOP3.LUT R11, R11, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*01f0*/                   LOP3.LUT R12, R12, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0200*/                   LOP3.LUT R13, R13, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0210*/                   LOP3.LUT R14, R14, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:Y:S02]         /*0220*/                   LOP3.LUT R15, R15, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0230*/                   LOP3.LUT R16, R16, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0240*/                   LOP3.LUT R17, R17, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0250*/                   LOP3.LUT R18, R18, 0x1ff, RZ, 0xc0, !PT ;
+      [B------:R-:W-:-:S02]         /*0260*/                   LOP3.LUT R19, R3, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*0270*/                   LOP3.LUT R20, R17, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:Y:S02]         /*0280*/                   LOP3.LUT R21, R18, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*0290*/                   LOP3.LUT R28, R16, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*02a0*/                   LOP3.LUT R29, R15, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*02b0*/                   LOP3.LUT R30, R14, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*02c0*/                   LOP3.LUT R31, R13, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*02d0*/                   LOP3.LUT R32, R12, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:Y:S02]         /*02e0*/                   LOP3.LUT R33, R11, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*02f0*/                   LOP3.LUT R34, R10, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*0300*/                   LOP3.LUT R35, R9, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*0310*/                   LOP3.LUT R36, R8, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*0320*/                   LOP3.LUT R37, R7, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*0330*/                   LOP3.LUT R38, R6, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:Y:S02]         /*0340*/                   LOP3.LUT R39, R5, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*0350*/                   LOP3.LUT R40, R4, 0x200, RZ, 0xfc, !PT ;
+      [B------:R-:W-:-:S02]         /*0360*/                   MOV R41, UR4 ;
+      [B------:R-:W-:-:S01]         /*0370*/                   MOV R42, UR5 ;
+      [B------:R-:W-:Y:S02]         /*0380*/                   ULDC.64 UR4, c[0x0][0x118] ;
+  .L_x_4:
+      [B------:R-:W-:-:S01]         /*0390*/                   IMAD.WIDE.U32 R22, R41, -0x6e5d4c3b, RZ ;
+      [B------:R-:W-:-:S02]         /*03a0*/                   IADD3 R25, R3, R41, RZ ;
+      [B------:R-:W-:-:S02]         /*03b0*/                   MOV R0, 0x4 ;
+      [B------:R-:W-:Y:S02]         /*03c0*/                   SHF.R.U32.HI R22, RZ, 0x12, R23 ;
+      [B------:R-:W-:Y:S03]         /*03d0*/                   IADD3 R23, R4, R41, RZ ;
+      [B------:R-:W-:-:S02]         /*03e0*/                   IMAD R25, R22.reuse, -0x70800, R25 ;
+      [B------:R-:W-:-:S02]         /*03f0*/                   IMAD R23, R22, -0x70800, R23 ;
+      [B------:R-:W-:Y:S06]         /*0400*/                   IMAD.WIDE.U32 R44, R25, R0, c[0x0][0x168] ;
+      [B------:R-:W2:-:S01]         /*0410*/                   LDG.E.STRONG.GPU R45, desc[UR4][R44.64] ;
+      [B------:R-:W-:-:S01]         /*0420*/                   IMAD.WIDE.U32 R26, R23, R0, c[0x0][0x168] ;
+      [B------:R-:W-:Y:S05]         /*0430*/                   IADD3 R23, R5, R41, RZ ;
+      [B------:R0:W3:-:S01]         /*0440*/                   LDG.E.STRONG.GPU R26, desc[UR4][R26.64] ;
+      [B------:R-:W-:Y:S04]         /*0450*/                   IMAD R23, R22, -0x70800, R23 ;
+      [B------:R-:W-:Y:S06]         /*0460*/                   IMAD.WIDE.U32 R24, R23, R0, c[0x0][0x168] ;
+      [B------:R1:W4:-:S02]         /*0470*/                   LDG.E.STRONG.GPU R24, desc[UR4][R24.64] ;
+      [B-1----:R-:W-:Y:S05]         /*0480*/                   IADD3 R25, R7, R41, RZ ;
+      [B0-----:R-:W-:-:S01]         /*0490*/                   IMAD R27, R22, -0x70800, R25 ;
+      [B------:R-:W-:Y:S05]         /*04a0*/                   IADD3 R25, R8, R41, RZ ;
+      [B------:R-:W-:-:S01]         /*04b0*/                   IMAD R25, R22, -0x70800, R25 ;
+      [B--2---:R-:W-:-:S01]         /*04c0*/                   FADD R23, R45, R2 ;
+      [B------:R-:W-:Y:S05]         /*04d0*/                   IADD3 R2, R6, R41, RZ ;
+      [B------:R-:W-:-:S01]         /*04e0*/                   IMAD R2, R22, -0x70800, R2 ;
+      [B---3--:R-:W-:Y:S03]         /*04f0*/                   FADD R23, R23, R26 ;
+      [B------:R-:W-:Y:S04]         /*0500*/                   IMAD.WIDE.U32 R44, R2, R0, c[0x0][0x168] ;
+      [B------:R-:W-:-:S02]         /*0510*/                   IMAD.WIDE.U32 R26, R27, R0.reuse, c[0x0][0x168] ;
+      [B------:R0:W2:-:S04]         /*0520*/                   LDG.E.STRONG.GPU R44, desc[UR4][R44.64] ;
+      [B------:R1:W3:-:S01]         /*0530*/                   LDG.E.STRONG.GPU R26, desc[UR4][R26.64] ;
+      [B----4-:R-:W-:-:S01]         /*0540*/                   FADD R23, R23, R24 ;
+      [B------:R-:W-:Y:S06]         /*0550*/                   IMAD.WIDE.U32 R24, R25, R0, c[0x0][0x168] ;
+      [B------:R4:W5:-:S01]         /*0560*/                   LDG.E.STRONG.GPU R24, desc[UR4][R24.64] ;
+      [B------:R-:W-:Y:S05]         /*0570*/                   IADD3 R2, R9, R41, RZ ;
+      [B0-----:R-:W-:-:S01]         /*0580*/                   IMAD R45, R22, -0x70800, R2 ;
+      [B------:R-:W-:Y:S05]         /*0590*/                   IADD3 R2, R10, R41, RZ ;
+      [B-1----:R-:W-:-:S01]         /*05a0*/                   IMAD R27, R22, -0x70800, R2 ;
+      [B----4-:R-:W-:Y:S05]         /*05b0*/                   IADD3 R25, R11, R41, RZ ;
+      [B------:R-:W-:-:S01]         /*05c0*/                   IMAD R25, R22, -0x70800, R25 ;
+      [B--2---:R-:W-:-:S01]         /*05d0*/                   FADD R23, R23, R44 ;
+      [B------:R-:W-:Y:S03]         /*05e0*/                   IMAD.WIDE.U32 R44, R45, R0, c[0x0][0x168] ;
+      [B---3--:R-:W-:-:S01]         /*05f0*/                   FADD R23, R23, R26 ;
+      [B------:R-:W-:-:S02]         /*0600*/                   IMAD.WIDE.U32 R26, R27, R0.reuse, c[0x0][0x168] ;
+      [B------:R0:W2:-:S04]         /*0610*/                   LDG.E.STRONG.GPU R44, desc[UR4][R44.64] ;
+      [B------:R1:W3:-:S01]         /*0620*/                   LDG.E.STRONG.GPU R26, desc[UR4][R26.64] ;
+      [B-----5:R-:W-:-:S01]         /*0630*/                   FADD R23, R23, R24 ;
+      [B------:R-:W-:Y:S06]         /*0640*/                   IMAD.WIDE.U32 R24, R25, R0, c[0x0][0x168] ;
+      [B------:R4:W5:-:S01]         /*0650*/                   LDG.E.STRONG.GPU R24, desc[UR4][R24.64] ;
+      [B------:R-:W-:Y:S05]         /*0660*/                   IADD3 R2, R12, R41, RZ ;
+      [B0-----:R-:W-:-:S01]         /*0670*/                   IMAD R45, R22, -0x70800, R2 ;
+      [B------:R-:W-:Y:S05]         /*0680*/                   IADD3 R2, R13, R41, RZ ;
+      [B-1----:R-:W-:-:S01]         /*0690*/                   IMAD R27, R22, -0x70800, R2 ;
+      [B----4-:R-:W-:Y:S05]         /*06a0*/                   IADD3 R25, R14, R41, RZ ;
+      [B------:R-:W-:-:S01]         /*06b0*/                   IMAD R25, R22, -0x70800, R25 ;
+      [B--2---:R-:W-:-:S01]         /*06c0*/                   FADD R23, R23, R44 ;
+      [B------:R-:W-:Y:S03]         /*06d0*/                   IMAD.WIDE.U32 R44, R45, R0, c[0x0][0x168] ;
+      [B---3--:R-:W-:-:S01]         /*06e0*/                   FADD R23, R23, R26 ;
+      [B------:R-:W-:-:S02]         /*06f0*/                   IMAD.WIDE.U32 R26, R27, R0.reuse, c[0x0][0x168] ;
+      [B------:R0:W2:-:S04]         /*0700*/                   LDG.E.STRONG.GPU R44, desc[UR4][R44.64] ;
+      [B------:R1:W3:-:S01]         /*0710*/                   LDG.E.STRONG.GPU R26, desc[UR4][R26.64] ;
+      [B-----5:R-:W-:-:S01]         /*0720*/                   FADD R23, R23, R24 ;
+      [B------:R-:W-:Y:S06]         /*0730*/                   IMAD.WIDE.U32 R24, R25, R0, c[0x0][0x168] ;
+      [B------:R4:W5:-:S01]         /*0740*/                   LDG.E.STRONG.GPU R24, desc[UR4][R24.64] ;
+      [B------:R-:W-:Y:S05]         /*0750*/                   IADD3 R2, R15, R41, RZ ;
+      [B0-----:R-:W-:-:S01]         /*0760*/                   IMAD R45, R22, -0x70800, R2 ;
+      [B------:R-:W-:Y:S05]         /*0770*/                   IADD3 R2, R16, R41, RZ ;
+      [B-1----:R-:W-:-:S01]         /*0780*/                   IMAD R27, R22, -0x70800, R2 ;
+      [B----4-:R-:W-:Y:S05]         /*0790*/                   IADD3 R25, R18, R41, RZ ;
+      [B------:R-:W-:-:S01]         /*07a0*/                   IMAD R25, R22, -0x70800, R25 ;
+      [B--2---:R-:W-:-:S01]         /*07b0*/                   FADD R23, R23, R44 ;
+      [B------:R-:W-:Y:S03]         /*07c0*/                   IMAD.WIDE.U32 R44, R45, R0, c[0x0][0x168] ;
+      [B---3--:R-:W-:-:S01]         /*07d0*/                   FADD R23, R23, R26 ;
+      [B------:R-:W-:-:S01]         /*07e0*/                   IMAD.WIDE.U32 R26, R27, R0.reuse, c[0x0][0x168] ;
+      [B------:R5:W2:-:S05]         /*07f0*/                   LDG.E.STRONG.GPU R2, desc[UR4][R44.64] ;
+      [B------:R-:W3:-:S01]         /*0800*/                   LDG.E.STRONG.GPU R26, desc[UR4][R26.64] ;
+      [B-----5:R-:W-:-:S01]         /*0810*/                   FADD R45, R23, R24 ;
+      [B------:R-:W-:-:S01]         /*0820*/                   IMAD.WIDE.U32 R24, R25, R0, c[0x0][0x168] ;
+      [B------:R-:W-:Y:S05]         /*0830*/                   IADD3 R23, R17, R41, RZ ;
+      [B------:R-:W-:-:S01]         /*0840*/                   IMAD R23, R22, -0x70800, R23 ;
+      [B------:R0:W4:-:S03]         /*0850*/                   LDG.E.STRONG.GPU R24, desc[UR4][R24.64] ;
+      [B------:R-:W-:Y:S06]         /*0860*/                   IMAD.WIDE.U32 R22, R23, R0, c[0x0][0x168] ;
+      [B------:R1:W5:-:S01]         /*0870*/                   LDG.E.STRONG.GPU R22, desc[UR4][R22.64] ;
+      [B0-----:R-:W-:-:S02]         /*0880*/                   IADD3 R25, R40, R41.reuse, RZ ;
+      [B-1----:R-:W-:-:S01]         /*0890*/                   IADD3 R23, R39, R41, RZ ;
+      [B--2---:R-:W-:Y:S04]         /*08a0*/                   FADD R45, R45, R2 ;
+      [B---3--:R-:W-:-:S01]         /*08b0*/                   FADD R45, R45, R26 ;
+      [B------:R-:W-:Y:S05]         /*08c0*/                   IMAD.WIDE.U32 R26, R42, -0x6e5d4c3b, RZ ;
+      [B------:R-:W-:-:S02]         /*08d0*/                   SHF.R.U32.HI R2, RZ, 0x12, R27 ;
+      [B------:R-:W-:Y:S03]         /*08e0*/                   IADD3 R27, R19, R41, RZ ;
+      [B------:R-:W-:-:S02]         /*08f0*/                   IMAD R25, R2.reuse, -0x70800, R25 ;
+      [B------:R-:W-:-:S01]         /*0900*/                   IMAD R27, R2, -0x70800, R27 ;
+      [B----4-:R-:W-:Y:S03]         /*0910*/                   FADD R45, R45, R24 ;
+      [B------:R-:W-:Y:S04]         /*0920*/                   IMAD.WIDE.U32 R26, R27, R0, c[0x0][0x168] ;
+      [B------:R-:W-:-:S02]         /*0930*/                   IMAD.WIDE.U32 R24, R25, R0.reuse, c[0x0][0x168] ;
+      [B------:R0:W2:-:S02]         /*0940*/                   LDG.E.STRONG.GPU R26, desc[UR4][R26.64] ;
+      [B------:R-:W-:-:S02]         /*0950*/                   IMAD R23, R2, -0x70800, R23 ;
+      [B------:R1:W3:-:S01]         /*0960*/                   LDG.E.STRONG.GPU R24, desc[UR4][R24.64] ;
+      [B-----5:R-:W-:-:S01]         /*0970*/                   FADD R45, R45, R22 ;
+      [B------:R-:W-:Y:S06]         /*0980*/                   IMAD.WIDE.U32 R22, R23, R0, c[0x0][0x168] ;
+      [B------:R4:W5:-:S01]         /*0990*/                   LDG.E.STRONG.GPU R22, desc[UR4][R22.64] ;
+      [B------:R-:W-:Y:S05]         /*09a0*/                   IADD3 R44, R38, R41, RZ ;
+      [B0-----:R-:W-:-:S01]         /*09b0*/                   IMAD R27, R2, -0x70800, R44 ;
+      [B------:R-:W-:Y:S05]         /*09c0*/                   IADD3 R44, R37, R41, RZ ;
+      [B-1----:R-:W-:-:S01]         /*09d0*/                   IMAD R25, R2, -0x70800, R44 ;
+      [B----4-:R-:W-:Y:S05]         /*09e0*/                   IADD3 R23, R36, R41, RZ ;
+      [B------:R-:W-:-:S01]         /*09f0*/                   IMAD R23, R2, -0x70800, R23 ;
+      [B--2---:R-:W-:-:S01]         /*0a00*/                   FADD R45, R45, R26 ;
+      [B------:R-:W-:Y:S03]         /*0a10*/                   IMAD.WIDE.U32 R26, R27, R0, c[0x0][0x168] ;
+      [B---3--:R-:W-:-:S01]         /*0a20*/                   FADD R45, R45, R24 ;
+      [B------:R-:W-:-:S02]         /*0a30*/                   IMAD.WIDE.U32 R24, R25, R0.reuse, c[0x0][0x168] ;
+      [B------:R0:W2:-:S04]         /*0a40*/                   LDG.E.STRONG.GPU R26, desc[UR4][R26.64] ;
+      [B------:R1:W3:-:S01]         /*0a50*/                   LDG.E.STRONG.GPU R24, desc[UR4][R24.64] ;
+      [B-----5:R-:W-:-:S01]         /*0a60*/                   FADD R45, R45, R22 ;
+      [B------:R-:W-:Y:S06]         /*0a70*/                   IMAD.WIDE.U32 R22, R23, R0, c[0x0][0x168] ;
+      [B------:R4:W5:-:S01]         /*0a80*/                   LDG.E.STRONG.GPU R22, desc[UR4][R22.64] ;
+      [B------:R-:W-:Y:S05]         /*0a90*/                   IADD3 R44, R35, R41, RZ ;
+      [B0-----:R-:W-:-:S01]         /*0aa0*/                   IMAD R27, R2, -0x70800, R44 ;
+      [B------:R-:W-:Y:S05]         /*0ab0*/                   IADD3 R44, R34, R41, RZ ;
+      [B-1----:R-:W-:-:S01]         /*0ac0*/                   IMAD R25, R2, -0x70800, R44 ;
+      [B----4-:R-:W-:Y:S05]         /*0ad0*/                   IADD3 R23, R33, R41, RZ ;
+      [B------:R-:W-:-:S01]         /*0ae0*/                   IMAD R23, R2, -0x70800, R23 ;
+      [B--2---:R-:W-:-:S01]         /*0af0*/                   FADD R45, R45, R26 ;
+      [B------:R-:W-:Y:S03]         /*0b00*/                   IMAD.WIDE.U32 R26, R27, R0, c[0x0][0x168] ;
+      [B---3--:R-:W-:-:S01]         /*0b10*/                   FADD R45, R45, R24 ;
+      [B------:R-:W-:-:S02]         /*0b20*/                   IMAD.WIDE.U32 R24, R25, R0.reuse, c[0x0][0x168] ;
+      [B------:R0:W2:-:S04]         /*0b30*/                   LDG.E.STRONG.GPU R26, desc[UR4][R26.64] ;
+      [B------:R-:W3:-:S01]         /*0b40*/                   LDG.E.STRONG.GPU R24, desc[UR4][R24.64] ;
+      [B-----5:R-:W-:-:S01]         /*0b50*/                   FADD R45, R45, R22 ;
+      [B------:R-:W-:Y:S06]         /*0b60*/                   IMAD.WIDE.U32 R22, R23, R0, c[0x0][0x168] ;
+      [B------:R1:W4:-:S01]         /*0b70*/                   LDG.E.STRONG.GPU R22, desc[UR4][R22.64] ;
+      [B------:R-:W-:Y:S05]         /*0b80*/                   IADD3 R44, R32, R41, RZ ;
+      [B0-----:R-:W-:-:S01]         /*0b90*/                   IMAD R27, R2, -0x70800, R44 ;
+      [B-1----:R-:W-:Y:S05]         /*0ba0*/                   IADD3 R23, R30, R41, RZ ;
+      [B------:R-:W-:-:S01]         /*0bb0*/                   IMAD R23, R2, -0x70800, R23 ;
+      [B--2---:R-:W-:-:S01]         /*0bc0*/                   FADD R45, R45, R26 ;
+      [B------:R-:W-:Y:S03]         /*0bd0*/                   IADD3 R26, R31, R41, RZ ;
+      [B---3--:R-:W-:-:S01]         /*0be0*/                   FADD R45, R45, R24 ;
+      [B------:R-:W-:Y:S04]         /*0bf0*/                   IMAD.WIDE.U32 R24, R27, R0, c[0x0][0x168] ;
+      [B------:R-:W-:-:S02]         /*0c00*/                   IMAD R27, R2, -0x70800, R26 ;
+      [B------:R0:W2:-:S02]         /*0c10*/                   LDG.E.STRONG.GPU R24, desc[UR4][R24.64] ;
+      [B------:R-:W-:-:S01]         /*0c20*/                   IMAD.WIDE.U32 R26, R27, R0, c[0x0][0x168] ;
+      [B----4-:R-:W-:Y:S03]         /*0c30*/                   FADD R45, R45, R22 ;
+      [B------:R-:W-:-:S02]         /*0c40*/                   IMAD.WIDE.U32 R22, R23, R0, c[0x0][0x168] ;
+      [B------:R1:W3:-:S04]         /*0c50*/                   LDG.E.STRONG.GPU R26, desc[UR4][R26.64] ;
+      [B------:R-:W4:-:S01]         /*0c60*/                   LDG.E.STRONG.GPU R22, desc[UR4][R22.64] ;
+      [B------:R-:W-:-:S02]         /*0c70*/                   IADD3 R44, R29, R41.reuse, RZ ;
+      [B0-----:R-:W-:Y:S03]         /*0c80*/                   IADD3 R25, R28, R41, RZ ;
+      [B------:R-:W-:-:S02]         /*0c90*/                   IMAD R44, R2.reuse, -0x70800, R44 ;
+      [B-1----:R-:W-:-:S01]         /*0ca0*/                   IMAD R27, R2, -0x70800, R25 ;
+      [B--2---:R-:W-:-:S01]         /*0cb0*/                   FADD R45, R45, R24 ;
+      [B------:R-:W-:-:S02]         /*0cc0*/                   IADD3 R24, R21, R41.reuse, RZ ;
+      [B------:R-:W-:Y:S03]         /*0cd0*/                   IADD3 R41, R20, R41, RZ ;
+      [B------:R-:W-:-:S01]         /*0ce0*/                   IMAD R25, R2.reuse, -0x70800, R24 ;
+      [B---3--:R-:W-:-:S01]         /*0cf0*/                   FADD R45, R45, R26 ;
+      [B------:R-:W-:Y:S03]         /*0d00*/                   IMAD R41, R2, -0x70800, R41 ;
+      [B----4-:R-:W-:-:S01]         /*0d10*/                   FADD R2, R45, R22 ;
+      [B------:R-:W-:Y:S04]         /*0d20*/                   IMAD.WIDE.U32 R44, R44, R0, c[0x0][0x168] ;
+      [B------:R-:W-:-:S02]         /*0d30*/                   IMAD.WIDE.U32 R26, R27, R0.reuse, c[0x0][0x168] ;
+      [B------:R0:W2:-:S02]         /*0d40*/                   LDG.E.STRONG.GPU R45, desc[UR4][R44.64] ;
+      [B------:R-:W-:-:S02]         /*0d50*/                   IMAD.WIDE.U32 R24, R25, R0.reuse, c[0x0][0x168] ;
+      [B------:R-:W3:-:S02]         /*0d60*/                   LDG.E.STRONG.GPU R26, desc[UR4][R26.64] ;
+      [B------:R-:W-:-:S02]         /*0d70*/                   IMAD.WIDE.U32 R22, R41, R0, c[0x0][0x168] ;
+      [B------:R-:W4:-:S04]         /*0d80*/                   LDG.E.STRONG.GPU R24, desc[UR4][R24.64] ;
+      [B------:R-:W5:-:S01]         /*0d90*/                   LDG.E.STRONG.GPU R23, desc[UR4][R22.64] ;
+      [B------:R-:W-:Y:S02]         /*0da0*/                   IADD3 R43, R43, 0x400, RZ ;
+      [B0-----:R-:W-:-:S02]         /*0db0*/                   IADD3 R44, R42, 0x400, RZ ;
+      [B------:R-:W-:-:S01]         /*0dc0*/                   ISETP.GE.U32.AND P0, PT, R43, 0x70800, PT ;
+      [B--2---:R-:W-:Y:S04]         /*0dd0*/                   FADD R41, R2, R45 ;
+      [B---3--:R-:W-:Y:S04]         /*0de0*/                   FADD R41, R41, R26 ;
+      [B----4-:R-:W-:-:S01]         /*0df0*/                   FADD R2, R41, R24 ;
+      [B------:R-:W-:-:S02]         /*0e00*/                   IADD3 R41, R42, 0x200, RZ ;
+      [B------:R-:W-:-:S01]         /*0e10*/                   MOV R42, R44 ;
+      [B-----5:R-:W-:-:S01]         /*0e20*/                   FADD R2, R2, R23 ;
+      [B------:R-:W-:-:S05]         /*0e30*/              @!P0 BRA `(.L_x_4) ;
+      [B------:R-:W-:Y:S13]         /*0e40*/                   ISETP.NE.AND P0, PT, RZ, UR6, PT ;
+      [B------:R-:W-:-:S05]         /*0e50*/               @P0 EXIT ;
+      [B------:R-:W0:-:S02]         /*0e60*/                   S2R R5, SR_TID.X ;
+      [B0-----:R-:W-:Y:S05]         /*0e70*/                   IMAD.WIDE.U32 R4, R5, R0, c[0x0][0x160] ;
+      [B------:R-:W-:-:S01]         /*0e80*/                   STG.E desc[UR4][R4.64], R2 ;
+      [B------:R-:W-:-:S05]         /*0e90*/                   EXIT ;
+  .L_x_5:
+      [B------:R-:W-:Y:S00]         /*0ea0*/                   BRA `(.L_x_5);
+      [B------:R-:W-:Y:S00]         /*0eb0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0ec0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0ed0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0ee0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0ef0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0f00*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0f10*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0f20*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0f30*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0f40*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0f50*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0f60*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0f70*/                   NOP;
+  .L_x_8:
+
+  //-------------------------------------------------
+  //---------------- END of sections ----------------
+  //-------------------------------------------------
+
+
+// Program segment PT_PHDR, 5 
+  .__segment  "PT_PHDR", 5 
+  .__segment_offset  0x3680   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0xa8   		// file size, maybe updated by assembler 
+  .__segment_memsz   0xa8   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+
+// Program segment PT_LOAD, 5 
+  .__segment  "PT_LOAD", 5 
+  .__segment_offset  0x788   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0x2af8   		// file size, maybe updated by assembler 
+  .__segment_memsz   0x2af8   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+  .__segment_startsection    ".nv.constant0._Z6l2_bw3PfS_"  		// first section in this segment 
+  .__segment_endsection      ".text._Z5l2_bwPfS_"  		// last  section in this segment 
+
+// Program segment PT_LOAD, 5 
+  .__segment  "PT_LOAD", 5 
+  .__segment_offset  0x3680   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0xa8   		// file size, maybe updated by assembler 
+  .__segment_memsz   0xa8   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+  .__segment_startsection    "@PROGRAM_HEADER"  		// first section in this segment 
+  .__segment_endsection      "@PROGRAM_HEADER"  		// last  section in this segment 
+
+
+  //-------------------------------------------------
+  //---------------- END of segments ----------------
+  //-------------------------------------------------
+
+

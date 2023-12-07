@@ -27,20 +27,20 @@ public:
         checkCudaErrors(cudaMemcpy(m_Ptr, p, m_Bytes, cudaMemcpyHostToDevice));
     }
     CuPtr(HostPtr<T>& hp){
-        m_Size = hp.getSize();
+        m_Size = hp.GetSize();
         m_Bytes = m_Size * sizeof(T);
         checkCudaErrors(cudaMalloc(&m_Ptr, m_Bytes));
-        checkCudaErrors(cudaMemcpy(m_Ptr, hp, m_Bytes, cudaMemcpyHostToDevice));
+        checkCudaErrors(cudaMemcpy(m_Ptr, hp.GetPtr(), m_Bytes, cudaMemcpyHostToDevice));
     }
     void Reset(HostPtr<T>& hp){
         if(m_Size > 0){
             checkCudaErrors(cudaFree(m_Ptr));
             m_Ptr = 0;
         }
-        m_Size = hp.getSize();
+        m_Size = hp.GetSize();
         m_Bytes = m_Size * sizeof(T);
         checkCudaErrors(cudaMalloc(&m_Ptr, m_Bytes));
-        checkCudaErrors(cudaMemcpy(m_Ptr, hp, m_Bytes, cudaMemcpyHostToDevice));
+        checkCudaErrors(cudaMemcpy(m_Ptr, hp.GetPtr(), m_Bytes, cudaMemcpyHostToDevice));
     }
     void SetZeros(){
         if(m_Size > 0){

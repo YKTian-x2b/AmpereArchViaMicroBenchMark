@@ -1,0 +1,646 @@
+typedef char __nv_bool;
+# 2797 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/driver_types.h"
+struct CUstream_st;
+# 533 "/usr/include/c++/11/bits/cpp_type_traits.h" 3
+struct _ZSt24__is_memcmp_ordered_withISt4byteS0_Lb1EE;
+# 80 "/usr/include/c++/11/bits/stl_pair.h" 3
+struct _ZSt21piecewise_construct_t;
+# 167 "/usr/include/c++/11/limits" 3
+enum _ZSt17float_round_style {
+# 169 "/usr/include/c++/11/limits" 3
+_ZSt19round_indeterminate = (-1),
+# 170 "/usr/include/c++/11/limits" 3
+_ZSt17round_toward_zero,
+# 171 "/usr/include/c++/11/limits" 3
+_ZSt16round_to_nearest,
+# 172 "/usr/include/c++/11/limits" 3
+_ZSt21round_toward_infinity,
+# 173 "/usr/include/c++/11/limits" 3
+_ZSt25round_toward_neg_infinity};
+# 182 "/usr/include/c++/11/limits" 3
+enum _ZSt18float_denorm_style {
+# 185 "/usr/include/c++/11/limits" 3
+_ZSt20denorm_indeterminate = (-1),
+# 187 "/usr/include/c++/11/limits" 3
+_ZSt13denorm_absent,
+# 189 "/usr/include/c++/11/limits" 3
+_ZSt14denorm_present};
+# 202 "/usr/include/c++/11/limits" 3
+struct _ZSt21__numeric_limits_base;
+# 384 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIbE;
+# 453 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIcE;
+# 520 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIaE;
+# 590 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIhE;
+# 663 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIwE;
+# 797 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIDsE;
+# 858 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIDiE;
+# 920 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIsE;
+# 987 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsItE;
+# 1060 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIiE;
+# 1127 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIjE;
+# 1199 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIlE;
+# 1266 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsImE;
+# 1339 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIxE;
+# 1409 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIyE;
+# 1635 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsInE;
+# 1635 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIoE;
+# 1668 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIfE;
+# 1743 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIdE;
+# 1818 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIeE;
+# 352 "/usr/include/c++/11/utility" 3
+struct _ZSt10in_place_t;
+# 209 "/usr/lib/gcc/x86_64-linux-gnu/11/include/stddef.h" 3
+typedef unsigned long size_t;
+#include "crt/device_runtime.h"
+# 42 "/usr/include/x86_64-linux-gnu/bits/types.h" 3
+typedef unsigned __uint32_t;
+# 26 "/usr/include/x86_64-linux-gnu/bits/stdint-uintn.h" 3
+typedef __uint32_t uint32_t;
+# 280 "/usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h" 3
+typedef unsigned long _ZSt6size_t;
+# 533 "/usr/include/c++/11/bits/cpp_type_traits.h" 3
+struct _ZSt24__is_memcmp_ordered_withISt4byteS0_Lb1EE {};
+# 80 "/usr/include/c++/11/bits/stl_pair.h" 3
+struct _ZSt21piecewise_construct_t {};
+# 202 "/usr/include/c++/11/limits" 3
+struct _ZSt21__numeric_limits_base {};
+# 384 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIbE {};
+# 453 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIcE {};
+# 520 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIaE {};
+# 590 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIhE {};
+# 663 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIwE {};
+# 797 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIDsE {};
+# 858 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIDiE {};
+# 920 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIsE {};
+# 987 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsItE {};
+# 1060 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIiE {};
+# 1127 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIjE {};
+# 1199 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIlE {};
+# 1266 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsImE {};
+# 1339 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIxE {};
+# 1409 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIyE {};
+# 1635 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsInE {};
+# 1635 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIoE {};
+# 1668 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIfE {};
+# 1743 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIdE {};
+# 1818 "/usr/include/c++/11/limits" 3
+struct _ZSt14numeric_limitsIeE {};
+# 352 "/usr/include/c++/11/utility" 3
+struct _ZSt10in_place_t {};
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+# 109 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) __inline__ enum cudaError __cudaCDP2Malloc(void **, size_t);
+# 256 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(extern  __no_sc__) enum cudaError __cudaCDP2Free(void *);
+# 463 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN49_INTERNAL_746e455d_22_l1Cache_latency_YHs_cu_main8cudaFreeEPv(void *);
+# 468 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN49_INTERNAL_746e455d_22_l1Cache_latency_YHs_cu_main10cudaMallocEPPvm(void **, size_t);
+#if !defined(__CUDABE__)
+# 153 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/crt/common_functions.h"
+ __device_builtin__ ___device__(extern  __no_sc__) int printf(const char *__restrict__, ...);
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+# 3634 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/crt/device_functions.h"
+___device__(extern  __no_sc__) unsigned __cudaPushCallConfiguration(struct dim3, struct dim3, size_t, struct CUstream_st *);
+# 730 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN49_INTERNAL_746e455d_22_l1Cache_latency_YHs_cu_main10cudaMallocIPvEE9cudaErrorPPT_m(void ***, size_t);
+# 730 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN49_INTERNAL_746e455d_22_l1Cache_latency_YHs_cu_main10cudaMallocIjEE9cudaErrorPPT_m(uint32_t **, size_t);
+# 11 "l1Cache_latency_YHs.cu"
+__launch_bounds__(4,1) __global__ __var_used__ extern void _Z17l1_latency_kernelILi50EEvPPvS1_Pj(void **, void **, uint32_t *);
+#include "common_functions.h"
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+# 109 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) __inline__ enum cudaError __cudaCDP2Malloc(
+# 109 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+void **p, 
+# 109 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+size_t s){
+# 110 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+{
+# 111 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+return cudaErrorUnknown;
+# 112 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+}}
+# 463 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN49_INTERNAL_746e455d_22_l1Cache_latency_YHs_cu_main8cudaFreeEPv(
+# 463 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+void *devPtr){
+# 464 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+{
+# 465 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+return __cudaCDP2Free(devPtr);
+# 466 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+}}
+# 468 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN49_INTERNAL_746e455d_22_l1Cache_latency_YHs_cu_main10cudaMallocEPPvm(
+# 468 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+void **devPtr, 
+# 468 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+size_t size){
+# 469 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+{  void **__T0;
+ size_t __T1;
+# 470 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+return ((__T0 = devPtr) , (void)(__T1 = size)) , (__cudaCDP2Malloc(__T0, __T1));
+# 471 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_device_runtime_api.h"
+}}
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+#if !defined(__CUDABE__)
+#endif
+# 730 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN49_INTERNAL_746e455d_22_l1Cache_latency_YHs_cu_main10cudaMallocIPvEE9cudaErrorPPT_m(
+# 731 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+void ***devPtr, 
+# 732 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+size_t size){
+# 734 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+{  void **__T2;
+ size_t __T3;
+# 735 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+return ((__T2 = ((void **)((void *)devPtr))) , (void)(__T3 = size)) , (_ZN49_INTERNAL_746e455d_22_l1Cache_latency_YHs_cu_main10cudaMallocEPPvm(__T2, __T3));
+# 736 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+}}
+# 730 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+___device__(static  __no_sc__) __inline__ enum cudaError _ZN49_INTERNAL_746e455d_22_l1Cache_latency_YHs_cu_main10cudaMallocIjEE9cudaErrorPPT_m(
+# 731 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+uint32_t **devPtr, 
+# 732 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+size_t size){
+# 734 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+{  void **__T4;
+ size_t __T5;
+# 735 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+return ((__T4 = ((void **)((void *)devPtr))) , (void)(__T5 = size)) , (_ZN49_INTERNAL_746e455d_22_l1Cache_latency_YHs_cu_main10cudaMallocEPPvm(__T4, __T5));
+# 736 "/usr/local/cuda-12.1/bin/../targets/x86_64-linux/include/cuda_runtime.h"
+}}
+# 11 "l1Cache_latency_YHs.cu"
+__launch_bounds__(4,1) __global__ __var_used__ void _Z17l1_latency_kernelILi50EEvPPvS1_Pj(
+# 11 "l1Cache_latency_YHs.cu"
+void **ptr, 
+# 11 "l1Cache_latency_YHs.cu"
+void **ret, 
+# 11 "l1Cache_latency_YHs.cu"
+uint32_t *clk){
+# 11 "l1Cache_latency_YHs.cu"
+{
+# 12 "l1Cache_latency_YHs.cu"
+ void **__cuda_local_var_35269_12_non_const_ldg_ptr;
+# 22 "l1Cache_latency_YHs.cu"
+ uint32_t __cuda_local_var_35279_14_non_const_start;
+# 23 "l1Cache_latency_YHs.cu"
+ uint32_t __cuda_local_var_35280_14_non_const_stop;
+# 12 "l1Cache_latency_YHs.cu"
+__cuda_local_var_35269_12_non_const_ldg_ptr = (ptr + (threadIdx.x));
+# 15 "l1Cache_latency_YHs.cu"
+{
+# 15 "l1Cache_latency_YHs.cu"
+ int i;
+# 15 "l1Cache_latency_YHs.cu"
+i = 0;
+# 15 "l1Cache_latency_YHs.cu"
+for (; (i < 50); ++i)
+# 15 "l1Cache_latency_YHs.cu"
+{
+# 16 "l1Cache_latency_YHs.cu"
+__asm volatile("ld.global.nc.b64 %0, [%0];\n" : "+l" (__cuda_local_var_35269_12_non_const_ldg_ptr) : : "memory");
+# 20 "l1Cache_latency_YHs.cu"
+} }
+# 25 "l1Cache_latency_YHs.cu"
+__asm volatile("bar.sync 0;\nmov.u32 %0, %%clock;\n" : "=r" (__cuda_local_var_35279_14_non_const_start) : : "memory");
+# 31 "l1Cache_latency_YHs.cu"
+{
+# 31 "l1Cache_latency_YHs.cu"
+ int i;
+# 31 "l1Cache_latency_YHs.cu"
+i = 0;
+# 31 "l1Cache_latency_YHs.cu"
+for (; (i < 50); ++i)
+# 31 "l1Cache_latency_YHs.cu"
+{
+# 36 "l1Cache_latency_YHs.cu"
+__asm volatile("ld.global.nc.b64 %0, [%0];\n" : "+l" (__cuda_local_var_35269_12_non_const_ldg_ptr) : : "memory");
+# 40 "l1Cache_latency_YHs.cu"
+} }
+# 42 "l1Cache_latency_YHs.cu"
+__asm volatile("bar.sync 0;\nmov.u32 %0, %%clock;\n" : "=r" (__cuda_local_var_35280_14_non_const_stop) : : "memory");
+# 48 "l1Cache_latency_YHs.cu"
+(clk[(threadIdx.x)]) = (__cuda_local_var_35280_14_non_const_stop - __cuda_local_var_35279_14_non_const_start);
+# 51 "l1Cache_latency_YHs.cu"
+if (__cuda_local_var_35269_12_non_const_ldg_ptr == ((void **)0LL))
+# 51 "l1Cache_latency_YHs.cu"
+{
+# 52 "l1Cache_latency_YHs.cu"
+(*ret) = ((void *)__cuda_local_var_35269_12_non_const_ldg_ptr);
+# 53 "l1Cache_latency_YHs.cu"
+} 
+# 54 "l1Cache_latency_YHs.cu"
+}}

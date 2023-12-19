@@ -1,0 +1,1 @@
+stride: 256, global memory load latency: 1 cycles

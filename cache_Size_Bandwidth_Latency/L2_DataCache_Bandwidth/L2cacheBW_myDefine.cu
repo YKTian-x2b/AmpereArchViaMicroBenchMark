@@ -22,7 +22,7 @@ __device__ __forceinline__
 float ldg_cg(const void *ptr) {
     float ret;
     asm volatile (
-        "ld.global.cg.b32 %0, [%1];"
+        "ld.global.cg.f32 %0, [%1];"
         : "=f"(ret)
         : "l"(ptr)
     );

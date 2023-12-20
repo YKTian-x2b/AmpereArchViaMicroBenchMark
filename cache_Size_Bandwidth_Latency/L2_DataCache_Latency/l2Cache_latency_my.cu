@@ -10,8 +10,7 @@
 #define BLK_SIZE 32
 #define WARM_UP 100
 #define UNROLL 10
-#define ARR_SIZE 1024 * 256
-#define STRIDE 16
+#define STRIDE 32
 
 __device__ __forceinline__
 uint32_t ldg_cg(const void *ptr){
@@ -28,10 +27,12 @@ uint32_t ldg_cg(const void *ptr){
 __global__ void l2Cache_latency_test_kernel(uint32_t *startClk, uint32_t *stopClk, uint32_t *out, uint32_t* arr){
     int tid = threadIdx.x;
     uint32_t offset = tid;
+    const uint32_t *ldg_ptr = arr + tid;
     uint32_t start, stop;
 
     // pupulate L2 TLB
-    offset = ldg_cg(arr+offset);
+    offset = ldg_cg(ldg_ptr);
+    ldg_ptr += offset;
 
     asm volatile (
         "bar.sync 0;\n"
@@ -41,11 +42,12 @@ __global__ void l2Cache_latency_test_kernel(uint32_t *startClk, uint32_t *stopCl
 
     #pragma unroll
     for(int i = 0; i < UNROLL; i++){
-        offset = ldg_cg(arr+offset);
+        offset = ldg_cg(ldg_ptr);
+        ldg_ptr += offset;
     }
 
     asm volatile (
-        "bar.sync 0;\n"
+        // "bar.sync 0;\n"
         "mov.u32 %0, %%clock;\n"
         : "=r"(stop) : : "memory"
     );
@@ -59,10 +61,12 @@ __global__ void l2Cache_latency_test_kernel(uint32_t *startClk, uint32_t *stopCl
 }
 
 int main(){
+    const uint32_t ARR_SIZE = (UNROLL+2)*STRIDE;
     HostPtr<uint32_t> arr_h(ARR_SIZE);
     uint32_t *arr_ptr = arr_h.GetPtr();
     for(int i = 0; i < ARR_SIZE; i++){
-        arr_ptr[i] = (i + STRIDE) % ARR_SIZE;
+        // arr_ptr[i] = (i + STRIDE) % ARR_SIZE;
+        arr_ptr[i] = STRIDE;
     }
     CuPtr<uint32_t> arr_d(arr_h);
 

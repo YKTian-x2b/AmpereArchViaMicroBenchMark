@@ -4,13 +4,13 @@
 
 ### 1.1 Storage hierarchy
 
-|               | Size                    | Bandwidth                       | BW理论上限            | Latency    |
-| ------------- | ----------------------- | ------------------------------- | --------------------- | ---------- |
-| L0_I-Cache    | 待补充                  | -                               | -                     | -          |
-| L1_D-Cache    | 128/120/112/96/64/28 KB | 65.3 B per cycle per SM（存疑） | 64 B per cycle per SM | 33 cycles  |
-| L2_D-Cache    | 3 MB                    | 1276.2 GB/s                     | -                     | 219 cycles |
-| Shared Memory | 100/64/32/16/8/0 KB     | 194.2 GB/s per SM               | 217.6 GB/s per SM     | 23 cycles  |
-| Global Memory | 6 GB                    | 327.2 GB/s                      | 336 GB/s              | 待补充     |
+|               | Size                    | Bandwidth                       | BW理论上限            | Latency     |
+| ------------- | ----------------------- | ------------------------------- | --------------------- | ----------- |
+| L0_I-Cache    | 待补充                  | -                               | -                     | -           |
+| L1_D-Cache    | 128/120/112/96/64/28 KB | 65.3 B per cycle per SM（存疑） | 64 B per cycle per SM | 33 cycles   |
+| L2_D-Cache    | 3 MB                    | 1276.2 GB/s                     | -                     | 219 cycles  |
+| Shared Memory | 100/64/32/16/8/0 KB     | 194.2 GB/s per SM               | 217.6 GB/s per SM     | 23 cycles   |
+| Global Memory | 6 GB                    | 327.2 GB/s                      | 336 GB/s              | ~515 cycles |
 
 ### 1.2 Register Bank
 
@@ -90,19 +90,24 @@ cuasm --asm2bin save/regBankTest.sm_86_my.cuasm -o regBankTest.sm_86.cubin
 
 # 
 rm -rf !(regBankTest.cu) && mkdir res
+
+# 锁频
+nvidia-smi --query -d CLOCK
+# 但是warning Setting applications clocks is not supported for GPU 00000000:01:00.0.
+nvidia-smi -ac 7000,1702
 ~~~
 
 
 
 ## 4.参考
 
-> 知乎 cloudcore 大佬
+> 知乎 cloudcore ！！！
 
 - https://zhuanlan.zhihu.com/p/348234642
 - https://github.com/cloudcores/CuAssembler
 - CuAssembler 和 RegBank相关MB
 
-> 知乎 李少侠 大佬
+> 知乎 李少侠 
 
 - https://zhuanlan.zhihu.com/p/441146275
 - https://github.com/Yinghan-Li/YHs_Sample

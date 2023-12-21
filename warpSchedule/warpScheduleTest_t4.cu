@@ -123,7 +123,7 @@ void doTest()
 
     float4 v = make_float4(1.0f, 1.0f, 1.0f, 1.0f);
 
-    printf("### WarmUping...\n");
+    printf("### Warming Up...\n");
     da.SetZeros();
     d_startClk.SetZeros();
     d_stopClk.SetZeros();

@@ -19,7 +19,7 @@
 
 ### 1.3 Warp Schedule
 
-- scheduler_Idx = warp_Idx % 4; 测试不到 
+- scheduler_Idx = warp_Idx % 4; 测试成功
 
 
 

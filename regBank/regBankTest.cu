@@ -69,7 +69,7 @@ float regbank_test_run_drv(const int2 c, const int NIter, const float4 v, float*
         cuInit(0);
 
         // Create module from binary file
-        cuModuleLoad(&cuModule, "regBankTest.sm_86.cubin");
+        cuModuleLoad(&cuModule, "midRes/regBankTest.sm_86.cubin");
 
         // Get function handle from module _Z19regbank_test_kernel4int2i6float4Pf
         cuModuleGetFunction(&kernel, cuModule, "_Z19regbank_test_kernel4int2i6float4Pf");
@@ -113,8 +113,8 @@ void dotest()
     for(int i=0; i<N_WARMUP; i++)
     {
         da.SetZeros();
-        float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); // in ms
-        // float elapsedTime = regbank_test_run(c, NIter, v, da.GetPtr(), event_start, event_stop);
+        // float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); // in ms
+        float elapsedTime = regbank_test_run(c, NIter, v, da.GetPtr(), event_start, event_stop);
         printf("  Warmup %2d: %10.3f ms\n", i, elapsedTime);
     }
     
@@ -122,8 +122,8 @@ void dotest()
     for(int i=0; i<N_TEST; i++)
     {
         da.SetZeros();
-        float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); // in ms
-        // float elapsedTime = regbank_test_run(c, NIter, v, da.GetPtr(), event_start, event_stop);
+        // float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); // in ms
+        float elapsedTime = regbank_test_run(c, NIter, v, da.GetPtr(), event_start, event_stop);
         printf("  Test %2d: %10.3f ms\n", i, elapsedTime);
     }
 
@@ -146,3 +146,18 @@ int main()
     dotest();
     return 0;
 }
+
+
+// nvcc -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I/opt/kaiProjects/GEMM_kai/Utils -L /usr/local/cuda/lib64 -l cuda -o res/regBankTest regBankTest.cu
+
+
+
+// nvcc --keep --keep-dir midRes -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I/opt/kaiProjects/GEMM_kai/Utils -L /usr/local/cuda/lib64 -l cuda -o res/regBankTest regBankTest.cu
+
+// cuasm --bin2asm midRes/regBankTest.sm_86.cubin -o midRes/regBankTest.sm_86.cuasm
+
+// cp midRes/regBankTest.sm_86.cuasm res/regBankTest.template.sm_86.cuasm && cp midRes/regBankTest.sm_86.cuasm res/regBankTest.origin.sm_86.cuasm
+
+// @CUASM_INSERT_MARKER_POS.
+
+// python3 test_regBank.py

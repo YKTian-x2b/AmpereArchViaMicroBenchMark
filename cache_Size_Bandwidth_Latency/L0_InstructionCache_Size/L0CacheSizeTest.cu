@@ -136,7 +136,3 @@ int main(){
 // @CUASM_INSERT_MARKER_POS.WORK_1
 
 // python3 save/test_L0_Cache.py
-
-
-// 
-// rm -rf !(save)

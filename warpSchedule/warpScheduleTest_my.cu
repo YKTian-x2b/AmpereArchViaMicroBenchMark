@@ -9,10 +9,10 @@ using namespace std;
 
 #define GRD_SIZE 1
 // [512, 512+32, 512+64, 512+96, 512+128]
-#define BLK_SIZE (512+32)
+#define BLK_SIZE (512+64)
 #define N_UNROLL 10
 
-__global__ void L0CacheSize_test_kernel(const float4 v, unsigned *startClk, unsigned *stopClk, float *out)
+__global__ void warpSchedule_test_kernel(const float4 v, unsigned *startClk, unsigned *stopClk, float *out)
 {
     int tid = threadIdx.x;
     int bid = blockIdx.x;
@@ -47,7 +47,7 @@ __global__ void L0CacheSize_test_kernel(const float4 v, unsigned *startClk, unsi
     }  
 }
 
-float L0CacheSize_test_run(const float4 v, unsigned *startClk, unsigned *stopClk, float *out)
+float warpSchedule_test_run(const float4 v, unsigned *startClk, unsigned *stopClk, float *out)
 {
     cudaEvent_t event_start, event_stop;
     checkCudaErrors(cudaEventCreate(&event_start));
@@ -55,7 +55,7 @@ float L0CacheSize_test_run(const float4 v, unsigned *startClk, unsigned *stopClk
     float elapsedTime;
     checkCudaErrors(cudaEventRecord(event_start, 0));
 
-    L0CacheSize_test_kernel<<<GRD_SIZE, BLK_SIZE>>>(v, startClk, stopClk, out);
+    warpSchedule_test_kernel<<<GRD_SIZE, BLK_SIZE>>>(v, startClk, stopClk, out);
 
     checkCudaErrors(cudaEventRecord(event_stop, 0));
     checkCudaErrors(cudaEventSynchronize(event_stop));
@@ -65,7 +65,7 @@ float L0CacheSize_test_run(const float4 v, unsigned *startClk, unsigned *stopClk
     return elapsedTime;
 }
 
-float L0CacheSize_test_run_drv(const float4 v, unsigned *startClk, unsigned *stopClk, float *out)
+float warpSchedule_test_run_drv(const float4 v, unsigned *startClk, unsigned *stopClk, float *out)
 {
     static CUmodule cuModule;
     static CUfunction kernel;
@@ -79,10 +79,8 @@ float L0CacheSize_test_run_drv(const float4 v, unsigned *startClk, unsigned *sto
         cuModuleLoad(&cuModule, "midRes2/warpScheduleTest_my.sm_86.cubin");
 
         // Get function handle from module
-        cuModuleGetFunction(&kernel, cuModule, "_Z23L0CacheSize_test_kernel6float4PjS0_Pfii");
+        cuModuleGetFunction(&kernel, cuModule, "_Z24warpSchedule_test_kernel6float4PjS0_Pf");
 
-        // printf("cuModule = %#llx\n", (unsigned long long)cuModule);
-        // printf("cuFunction = %#llx\n", (unsigned long long)kernel);
         isInitialized = true;
     }
 
@@ -119,18 +117,16 @@ void doTest()
     d_startClk.SetZeros();
     d_stopClk.SetZeros();
 
-    int warpAIdx = 0;
-    int warpBIdx = 4;
-    L0CacheSize_test_run_drv(v, d_startClk.GetPtr(), d_stopClk.GetPtr(), d_out.GetPtr());
-    // L0CacheSize_test_run(v, d_startClk.GetPtr(), d_stopClk.GetPtr(), d_out.GetPtr());
+    warpSchedule_test_run_drv(v, d_startClk.GetPtr(), d_stopClk.GetPtr(), d_out.GetPtr());
+    // warpSchedule_test_run(v, d_startClk.GetPtr(), d_stopClk.GetPtr(), d_out.GetPtr());
     
     printf("### Runing...\n");
     d_out.SetZeros();
     d_startClk.SetZeros();
     d_stopClk.SetZeros();
 
-    float elapsedAll = L0CacheSize_test_run_drv(v, d_startClk.GetPtr(), d_stopClk.GetPtr(), d_out.GetPtr());
-    // float elapsedAll = L0CacheSize_test_run(v, d_startClk.GetPtr(), d_stopClk.GetPtr(), d_out.GetPtr());
+    float elapsedAll = warpSchedule_test_run_drv(v, d_startClk.GetPtr(), d_stopClk.GetPtr(), d_out.GetPtr());
+    // float elapsedAll = warpSchedule_test_run(v, d_startClk.GetPtr(), d_stopClk.GetPtr(), d_out.GetPtr());
     
     printf("\n### Result checking...\n");
     HostPtr<float> h_out;
@@ -141,7 +137,7 @@ void doTest()
     d_stopClk.ToHostPtr(h_stopClk);
     for(int i = 0; i < eleSize; i++){
         unsigned elapsed = h_stopClk(i)-h_startClk(i);
-        printf("index[%2d],  res: %8.3f, warpIdx: %d,  startClk: %10u,  elapsed %10uclks\n", i, ha(i), i%4, h_startClk(i), elapsed);
+        printf("index[%2d],  res: %8.3f, warpIdx: %d,  startClk: %10u,  elapsed %10uclks\n", i, h_out(i), i%4, h_startClk(i), elapsed);
     }
     printf("elapsed_all: %10fms\n", elapsedAll);
 }

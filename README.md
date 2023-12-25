@@ -1,12 +1,13 @@
 # MicroBenchmark For Ampere
 
-## 1. 现有结果
+## 1. 3060现有结果
 
 ### 1.1 Storage hierarchy
 
 |               | Size                    | Bandwidth                       | BW理论上限            | Latency     |
 | ------------- | ----------------------- | ------------------------------- | --------------------- | ----------- |
-| L0_I-Cache    | 待补充                  | -                               | -                     | -           |
+| L0_I-Cache    | 16KB                    | -                               | -                     | -           |
+| L1_I-Cache    | 32KB                    | -                               | -                     | -           |
 | L1_D-Cache    | 128/120/112/96/64/28 KB | 65.3 B per cycle per SM（存疑） | 64 B per cycle per SM | 33 cycles   |
 | L2_D-Cache    | 3 MB                    | 1276.2 GB/s                     | -                     | 219 cycles  |
 | Shared Memory | 100/64/32/16/8/0 KB     | 194.2 GB/s per SM               | 217.6 GB/s per SM     | 23 cycles   |
@@ -14,8 +15,8 @@
 
 ### 1.2 Register Bank
 
-- 2 way Bank
-- 
+- 2 Bank
+- Reuse
 
 ### 1.3 Warp Schedule
 

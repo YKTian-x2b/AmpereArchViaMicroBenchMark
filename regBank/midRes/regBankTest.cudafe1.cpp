@@ -71541,10 +71541,6 @@ cuInit(0);
 cuModuleLoad(&cuModule, "midRes/regBankTest.sm_86.cubin"); 
 # 75
 cuModuleGetFunction(&kernel, cuModule, "_Z19regbank_test_kernel4int2i6float4Pf"); 
-# 77
-printf("cuModule = %#llx\n", (unsigned long long)cuModule); 
-# 78
-printf("cuFunction = %#llx\n", (unsigned long long)kernel); 
 # 79
 isInitialized = true; 
 # 80
@@ -71593,8 +71589,8 @@ for (int i = 0; i < 3; i++)
 { 
 # 115
 da.SetZeros(); 
-# 117
-float elapsedTime = regbank_test_run(c, NIter, v, da.GetPtr(), event_start, event_stop); 
+# 116
+float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); 
 # 118
 printf("  Warmup %2d: %10.3f ms\n", i, elapsedTime); 
 # 119
@@ -71607,8 +71603,8 @@ for (int i = 0; i < 5; i++)
 { 
 # 124
 da.SetZeros(); 
-# 126
-float elapsedTime = regbank_test_run(c, NIter, v, da.GetPtr(), event_start, event_stop); 
+# 125
+float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); 
 # 127
 printf("  Test %2d: %10.3f ms\n", i, elapsedTime); 
 # 128

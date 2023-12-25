@@ -74,8 +74,8 @@ float regbank_test_run_drv(const int2 c, const int NIter, const float4 v, float*
         // Get function handle from module _Z19regbank_test_kernel4int2i6float4Pf
         cuModuleGetFunction(&kernel, cuModule, "_Z19regbank_test_kernel4int2i6float4Pf");
 
-        printf("cuModule = %#llx\n", (unsigned long long)cuModule);
-        printf("cuFunction = %#llx\n", (unsigned long long)kernel);
+        // printf("cuModule = %#llx\n", (unsigned long long)cuModule);
+        // printf("cuFunction = %#llx\n", (unsigned long long)kernel);
         isInitialized = true;
     }
 
@@ -113,8 +113,8 @@ void dotest()
     for(int i=0; i<N_WARMUP; i++)
     {
         da.SetZeros();
-        // float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); // in ms
-        float elapsedTime = regbank_test_run(c, NIter, v, da.GetPtr(), event_start, event_stop);
+        float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); // in ms
+        // float elapsedTime = regbank_test_run(c, NIter, v, da.GetPtr(), event_start, event_stop);
         printf("  Warmup %2d: %10.3f ms\n", i, elapsedTime);
     }
     
@@ -122,8 +122,8 @@ void dotest()
     for(int i=0; i<N_TEST; i++)
     {
         da.SetZeros();
-        // float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); // in ms
-        float elapsedTime = regbank_test_run(c, NIter, v, da.GetPtr(), event_start, event_stop);
+        float elapsedTime = regbank_test_run_drv(c, NIter, v, da.GetPtr(), event_start, event_stop); // in ms
+        // float elapsedTime = regbank_test_run(c, NIter, v, da.GetPtr(), event_start, event_stop);
         printf("  Test %2d: %10.3f ms\n", i, elapsedTime);
     }
 

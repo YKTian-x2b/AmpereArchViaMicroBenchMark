@@ -1,5 +1,11 @@
-
 ## warpScheduleTest_my
+
+### 结论
+
+- scheduler_Idx = warp_Idx % 4;
+
+### 思路
+
 - 如果FFMA要隔4个clock才能二次发射。用TLP塞满FFMA port就需要4个warp
 - 先给每个scheduler分配4个warp 4\*32\*4=512个线程，作为baseline
 - 然后每次递增1个warp，观察硬件不足的情况下，CPI的变化情况。
@@ -20,8 +26,12 @@
 ~~~
 
 
+
 ## warpScheduleTest_t4
-- 此外，Turing T4描述的 只启动两个warp的想法，我做不出来效果
+
+### 结论
+
+- Turing T4描述的 只启动两个活跃warp算浮点性能 的想法，我做不出来效果。
 
 
 

@@ -1,0 +1,146 @@
+### Runing...
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   88641984,  elapsed       9579clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   88641986,  elapsed        119clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   88641990,  elapsed        119clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   88641988,  elapsed        119clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   88641978,  elapsed       8796clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   88641980,  elapsed        118clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   88641984,  elapsed        118clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   88641982,  elapsed        118clks
+elapsed_all:   0.008192ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   88688045,  elapsed       9514clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   88688047,  elapsed        133clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   88688049,  elapsed        119clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   88688051,  elapsed        119clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   88688039,  elapsed        149clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   88688041,  elapsed       8791clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   88688043,  elapsed        118clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   88688045,  elapsed        118clks
+elapsed_all:   0.009216ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   88730865,  elapsed       9510clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   88730861,  elapsed        119clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   88730863,  elapsed        133clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   88730867,  elapsed        119clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   88730859,  elapsed        137clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   88730855,  elapsed        118clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   88730857,  elapsed       9091clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   88730861,  elapsed        118clks
+elapsed_all:   0.009216ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   88773686,  elapsed       9540clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   88773690,  elapsed        119clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   88773688,  elapsed        119clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   88773692,  elapsed        141clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   88773680,  elapsed        142clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   88773684,  elapsed        118clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   88773682,  elapsed        118clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   88773686,  elapsed       8759clks
+elapsed_all:   0.008192ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   88816909,  elapsed        133clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   88816911,  elapsed       9542clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   88816913,  elapsed        119clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   88816915,  elapsed        119clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   88816903,  elapsed       8772clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   88816905,  elapsed        141clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   88816907,  elapsed        118clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   88816909,  elapsed        118clks
+elapsed_all:   0.008192ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   88859550,  elapsed        119clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   88859546,  elapsed       9589clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   88859548,  elapsed        119clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   88859552,  elapsed        119clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   88859544,  elapsed        118clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   88859540,  elapsed       8805clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   88859542,  elapsed        118clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   88859546,  elapsed        118clks
+elapsed_all:   0.008192ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   88902010,  elapsed        119clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   88902004,  elapsed       9542clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   88902006,  elapsed        133clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   88902008,  elapsed        119clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   88902004,  elapsed        118clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   88901998,  elapsed        149clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   88902000,  elapsed       8791clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   88902002,  elapsed        118clks
+elapsed_all:   0.008192ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   88944532,  elapsed        119clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   88944534,  elapsed       9447clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   88944528,  elapsed        119clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   88944530,  elapsed        141clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   88944526,  elapsed        118clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   88944528,  elapsed        145clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   88944522,  elapsed        118clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   88944524,  elapsed       8999clks
+elapsed_all:   0.008288ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   88986812,  elapsed        141clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   88986808,  elapsed        119clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   88986814,  elapsed       9552clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   88986810,  elapsed        119clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   88986806,  elapsed       8778clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   88986802,  elapsed        118clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   88986808,  elapsed        137clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   88986804,  elapsed        118clks
+elapsed_all:   0.008192ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   89029229,  elapsed        119clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   89029233,  elapsed        141clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   89029231,  elapsed       9556clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   89029235,  elapsed        119clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   89029223,  elapsed        118clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   89029227,  elapsed       8765clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   89029225,  elapsed        141clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   89029229,  elapsed        118clks
+elapsed_all:   0.008192ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   89072288,  elapsed        119clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   89072290,  elapsed        119clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   89072284,  elapsed       9595clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   89072286,  elapsed        119clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   89072282,  elapsed        118clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   89072284,  elapsed        118clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   89072278,  elapsed       8839clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   89072280,  elapsed        118clks
+elapsed_all:   0.009216ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   89114841,  elapsed        119clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   89114847,  elapsed        119clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   89114843,  elapsed       9519clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   89114845,  elapsed        133clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   89114835,  elapsed        118clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   89114841,  elapsed        118clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   89114837,  elapsed        149clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   89114839,  elapsed       8779clks
+elapsed_all:   0.008192ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   89170678,  elapsed        133clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   89170682,  elapsed        119clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   89170684,  elapsed        119clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   89170680,  elapsed       9170clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   89170672,  elapsed       8846clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   89170676,  elapsed        118clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   89170678,  elapsed        118clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   89170674,  elapsed        137clks
+elapsed_all:   0.008192ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   89212923,  elapsed        119clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   89212925,  elapsed        141clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   89212927,  elapsed        119clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   89212929,  elapsed       9391clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   89212917,  elapsed        118clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   89212919,  elapsed       8822clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   89212921,  elapsed        118clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   89212923,  elapsed        136clks
+elapsed_all:   0.008192ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   89256293,  elapsed        119clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   89256289,  elapsed        119clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   89256295,  elapsed        142clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   89256291,  elapsed       9400clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   89256287,  elapsed        118clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   89256283,  elapsed        118clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   89256289,  elapsed       8784clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   89256285,  elapsed        141clks
+elapsed_all:   0.008192ms
+index[ 0],  res:    1.000,  warpIdx: 0,  startClk:   89299777,  elapsed        119clks
+index[ 1],  res:    1.000,  warpIdx: 1,  startClk:   89299781,  elapsed        119clks
+index[ 2],  res:    1.000,  warpIdx: 2,  startClk:   89299783,  elapsed        119clks
+index[ 3],  res:    1.000,  warpIdx: 3,  startClk:   89299779,  elapsed       9435clks
+index[ 4],  res:    1.000,  warpIdx: 0,  startClk:   89299771,  elapsed        118clks
+index[ 5],  res:    1.000,  warpIdx: 1,  startClk:   89299775,  elapsed        118clks
+index[ 6],  res:    1.000,  warpIdx: 2,  startClk:   89299777,  elapsed        118clks
+index[ 7],  res:    1.000,  warpIdx: 3,  startClk:   89299773,  elapsed       8848clks
+elapsed_all:   0.009216ms
+

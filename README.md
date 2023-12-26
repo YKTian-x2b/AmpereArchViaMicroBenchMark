@@ -1,58 +1,93 @@
 # MicroBenchmark For Ampere
-
-## 1. 3060现有结果
-
-### 1.1 Storage hierarchy
-
+## 3060测试结果
+### Memory hierarchy
 |               | Size                    | Bandwidth                       | BW理论上限            | Latency     |
 | ------------- | ----------------------- | ------------------------------- | --------------------- | ----------- |
 | L0_I-Cache    | 16KB                    | -                               | -                     | -           |
 | L1_I-Cache    | 32KB                    | -                               | -                     | -           |
-| L1_D-Cache    | 128/120/112/96/64/28 KB | 65.3 B per cycle per SM（存疑） | 64 B per cycle per SM | 33 cycles   |
+| L1_D-Cache    | 128/120/112/96/64/28 KB | 63.6 B per cycle per SM | 64 B per cycle per SM | 33 cycles   |
 | L2_D-Cache    | 3 MB                    | 1276.2 GB/s                     | -                     | 219 cycles  |
 | Shared Memory | 100/64/32/16/8/0 KB     | 194.2 GB/s per SM               | 217.6 GB/s per SM     | 23 cycles   |
 | Global Memory | 6 GB                    | 327.2 GB/s                      | 336 GB/s              | ~515 cycles |
 
-### 1.2 Register Bank
-
-- 2 Bank
+### Register Bank
+- 2_Bank
 - Reuse
 
-### 1.3 Warp Schedule
-
-- scheduler_Idx = warp_Idx % 4; 测试成功
-
+### Warp Schedule
+- scheduler_Idx = warp_Idx % 4;
 
 
-## 2. 一些结论
 
-### 2.1 论文Ampere Mem
 
+## 3090测试结果
+### Memory hierarchy
+|               | Size                    | Bandwidth                       | BW理论上限            | Latency     |
+| ------------- | ----------------------- | ------------------------------- | --------------------- | ----------- |
+| L0_I-Cache    | KB                    | -                               | -                     | -           |
+| L1_I-Cache    | KB                    | -                               | -                     | -           |
+| L1_D-Cache    | KB | B per cycle per SM | 64 B per cycle per SM | cycles   |
+| L2_D-Cache    | MB                    | GB/s                     | -                     | cycles  |
+| Shared Memory | KB     | GB/s per SM               | GB/s per SM     | cycles   |
+| Global Memory | GB                    | GB/s                      | GB/s              | cycles |
+
+### Register Bank
+- 2_Bank
+- Reuse
+
+### Warp Schedule
+- scheduler_Idx = warp_Idx % 4;
+
+
+
+
+## 2. 运行和指令
+### 如何运行
+- 首先需要一个CuAssembler: https://github.com/cloudcores/CuAssembler
+~~~python
+# 将Utils/test_Common.py文件头部的CuAssembler位置（如下） 替换为您安装的位置
+sys.path.append('/opt/kaiProjects/cuda_libs/CuAssembler-master/CuAsm')
+~~~
+- 然后从各个文件夹的README里获取具体的执行指令
+### 公用的指令
+~~~bash
+# cuda驱动编译
+nvcc -L /usr/local/cuda/lib64 -l cuda -o res/test test.cu
+
+
+###### CuAssembler的使用 ###### 
+# 核心思路是：把源cuda代码先按官方流程编译成cubin，然后用CuAssembler反汇编成能看能改的cuasm，改成想要的效果之后再把cuasm会变成cubin，最后用驱动api执行cubin。
+# cuda->cubin
+nvcc --keep --keep-dir midRes -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I../Utils -L /usr/local/cuda/lib64 -l cuda -o res/regBankTest regBankTest.cu 
+# cubin->cuasm
+cuasm --bin2asm midRes/regBankTest.sm_86.cubin -o midRes/regBankTest.sm_86.cuasm
+## 手动修改regBankTest.sm_86.cuasm 或者 
+python3 test_regBank.py
+# cuasm->cubin
+cuasm --asm2bin midRes/regBankTest.sm_86.cuasm -o midRes/regBankTest.sm_86.cubin
+# 运行
+res/regBankTest
+##############################  
+
+
+# 
+nvidia-smi --query -d CLOCK
+# 锁频 但是warning Setting applications clocks is not supported for GPU 00000000:01:00.0.
+nvidia-smi -ac 7000,1702
+~~~
+
+
+
+## 3. 一些参考结论
+### 3.1 论文Ampere Mem
 - A100的latency：
   - Global Mem: 290 Cycles (HBM2 for A100)
   - L2 cache: 200 Cycles
   - L1 cache: 33 Cycles
   - SMem(ld/st): 23/19 Cycles
-
-
-
-### 2.2 知乎YHs
-
+### 3.2 知乎YHs
 - GDDR 内存延迟一般 450\~550 cycle，HBM 内存 350\~400 cycle，smem 约 20\~30 cycle
-
-
-
-### 2.3 Turingas 代码结果
-
-- 全局内存的latency分:
-  - TLB未命中 & L2cache未命中 & L1cache未命中
-  - TLB命中 & L2cache未命中 & L1cache未命中
-  - TLB命中 & L2cache命中 & L1未cache命中
-  - TLB命中 & L2cache命中 & L1cache命中
-- TLB也分L1 TLB和L2 TLB 很复杂。。。
-
-
-
+### 3.3 Turingas 代码结果
 - SASS Level Memory Latency Result：
   - Global    Memory    Latency     =  882 cycle
   - Global    TLB       Latency     =  515 cycle
@@ -62,41 +97,6 @@
   - Constant  Memory    Latency     =  658 cycle
   - Constant  L2-Cache  Latency     =   59 cycle
   - Constant  L1-Cache  Latency     =    4 cycle
-
-
-
-## 3. 编译指令
-
-~~~bash
-# cuda驱动函数 编译
-nvcc -L /usr/local/cuda/lib64 -l cuda -o res/test test.cu
-
-
-###### CuAssembler ###### 
-nvcc --keep -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I/opt/kaiProjects/GEMM_kai/Utils -L /usr/local/cuda/lib64 -l cuda -o res/regBankTest regBankTest.cu 
-#
-nvcc --dryrun -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I/opt/kaiProjects/GEMM_kai/Utils -L /usr/local/cuda/lib64 -l cuda -o res/regBankTest regBankTest.cu 2>&1 | tee regBankTest_dryrun.sh
-#
-cuasm --bin2asm regBankTest.sm_86.cubin -o regBankTest.sm_86.cuasm
-
-## mod regBankTest.sm_86.cuasm
-
-mv -f regBankTest.sm_86.cubin regBankTest.old.sm_86.cubin && cuasm --asm2bin regBankTest.sm_86.cuasm -o regBankTest.sm_86.cubin
-# 将cubin汇编为二进制
-bash regBankTest_dryrun_drv.sh
-# test_regBank.py
-cuasm --asm2bin save/regBankTest.sm_86_my.cuasm -o regBankTest.sm_86.cubin
-############ 
-
-
-# 
-rm -rf !(regBankTest.cu) && mkdir res
-
-# 锁频
-nvidia-smi --query -d CLOCK
-# 但是warning Setting applications clocks is not supported for GPU 00000000:01:00.0.
-nvidia-smi -ac 7000,1702
-~~~
 
 
 
@@ -112,7 +112,6 @@ nvidia-smi -ac 7000,1702
 
 - https://zhuanlan.zhihu.com/p/441146275
 - https://github.com/Yinghan-Li/YHs_Sample
-
 - 所有Mem相关MB
 
 > 一些经典论文/白皮书/博客

@@ -1,32 +1,36 @@
 
-================= 7,9,X =================
-FFMA R6, R7, R9, R10;
-elapsedTime_avg:      1.159ms
-FFMA R6, R7, R9, R11;
-elapsedTime_avg:      1.736ms
-FFMA R6, R7, R9, R12;
-elapsedTime_avg:      1.159ms
-FFMA R6, R7, R9, R13;
-elapsedTime_avg:      1.737ms
-FFMA R6, R7, R9, R14;
-elapsedTime_avg:      1.159ms
-FFMA R6, R7, R9, R15;
-elapsedTime_avg:      1.737ms
-FFMA R6, R7, R9, R16;
-elapsedTime_avg:      1.159ms
+================= R7, R9, RX =================
+FFMA R6, R7, R9, R10:
+elapsedTime_avg:      1.162ms
+FFMA R6, R7, R9, R11:
+elapsedTime_avg:      1.739ms
+FFMA R6, R7, R9, R12:
+elapsedTime_avg:      1.166ms
+FFMA R6, R7, R9, R13:
+elapsedTime_avg:      1.740ms
+FFMA R6, R7, R9, R14:
+elapsedTime_avg:      1.170ms
+FFMA R6, R7, R9, R15:
+elapsedTime_avg:      1.739ms
+FFMA R6, R7, R9, R16:
+elapsedTime_avg:      1.173ms
 
-================= 8,9,X =================
-FFMA R6, R8, R9, R10;
-elapsedTime_avg:      1.159ms
-FFMA R6, R8, R9, R11;
-elapsedTime_avg:      1.159ms
-FFMA R6, R8, R9, R12;
-elapsedTime_avg:      1.159ms
-FFMA R6, R8, R9, R13;
-elapsedTime_avg:      1.159ms
-FFMA R6, R8, R9, R14;
-elapsedTime_avg:      1.159ms
-FFMA R6, R8, R9, R15;
-elapsedTime_avg:      1.159ms
-FFMA R6, R8, R9, R16;
-elapsedTime_avg:      1.159ms
+================= R8, R9, RX =================
+FFMA R6, R8, R9, R10:
+elapsedTime_avg:      1.166ms
+FFMA R6, R8, R9, R11:
+elapsedTime_avg:      1.169ms
+FFMA R6, R8, R9, R12:
+elapsedTime_avg:      1.166ms
+FFMA R6, R8, R9, R13:
+elapsedTime_avg:      1.166ms
+FFMA R6, R8, R9, R14:
+elapsedTime_avg:      1.174ms
+FFMA R6, R8, R9, R15:
+elapsedTime_avg:      1.174ms
+FFMA R6, R8, R9, R16:
+elapsedTime_avg:      1.169ms
+
+================= R8, R9,imm =================
+FFMA R6, R8, R9, 1:
+elapsedTime_avg:      0.592ms

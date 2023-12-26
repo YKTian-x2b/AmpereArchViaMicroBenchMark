@@ -35,7 +35,6 @@ def run_exe():
         exit(e.returncode)
 
 
-# for ampere this is no BankConflict
 def test_BankConflict(seq_num, regIdx, regnum, FFMA_seqs):
     cat = CuAsmTemplate(projectPath + 'regBank/res/regBankTest_2Bank.template.sm_86.cuasm')
     
@@ -43,7 +42,10 @@ def test_BankConflict(seq_num, regIdx, regnum, FFMA_seqs):
     for r in range(7,17):
         s_init += f'[B------:R-:W-:-:S01]  MOV R{r:d}, 0x3f800000 ; \n'
 
-    s_work1  = f'      [B------:R-:W-:Y:S04]  FFMA R6, R{seq_num:d}, R9, R{regIdx:d}; \n'
+    if regIdx == -1 :
+        s_work1  = f'      [B------:R-:W-:-:S01]  FFMA R6, R{seq_num:d}, R9, 1; \n'
+    else:
+        s_work1  = f'      [B------:R-:W-:-:S01]  FFMA R6, R{seq_num:d}, R9, R{regIdx:d}; \n'
     s_work1 = s_work1 * FFMA_seqs
 
     cat.setMarker('INIT', s_init)
@@ -65,11 +67,18 @@ def doTest_BankConflict():
         regnum = 32
         FFMA_seqs = 4096
         for seq_num in [7, 8]:
-            fout.write(f'\n================= {seq_num:1d},9,X =================\n')
+            fout.write(f'\n================= R{seq_num:1d}, R9, RX =================\n')
             for regIdx in range(10,17):
-                fout.write(f'FFMA R6, R{seq_num:d}, R9, R{regIdx:02d};\n')
+                fout.write(f'FFMA R6, R{seq_num:d}, R9, R{regIdx:02d}:\n')
                 res = test_BankConflict(seq_num, regIdx, regnum, FFMA_seqs)
                 fout.write(res+'\n')
+        
+        seq_num = 8
+        regIdx = -1
+        res = test_BankConflict(seq_num, regIdx, regnum, FFMA_seqs)
+        fout.write(f'\n================= R8, R9,imm =================\n')
+        fout.write(f'FFMA R6, R8, R9, 1:\n')
+        fout.write(res+'\n')
         
         
 

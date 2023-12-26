@@ -1,3 +1,4 @@
+# Global Memory Bandwidth
 // Global Mem的理论访存峰值吞吐 = mem frequency * DDR_factor * 总线宽度 
 // GDDR和DDR的区别在于 图形内存的有效带宽是DDR的4倍。 DDR就是双倍数据速率。
 // 这里nvidia-smi 查出来的 mem freq 就是已经乘4了
@@ -48,3 +49,17 @@ In the case of L2 miss and L2 TLB hit, global memory load latency is: 543.264000
 In the case of L2 miss and L2 TLB hit, global memory load latency is: 563.110000 cycles
 (base) yujixuan@yujixuan:GlobalMem_Bandwidth_Latency$ res/globalMem_latency_None
 In the case of L2 miss and L2 TLB hit, global memory load latency is: 528.614000 cycles
+
+
+
+
+# Global Memory Latency
+- 全局内存的访问涉及到 L1TLB L1Cache L2TLB L2Cache。
+- TuringT4的TLB部分，我的理解：
+  - L1Cache的TLB是VIPT的，因为可以并行，所以TLB miss对性能影响不大。在测latency的时候，我直接忽略了它的影响。
+  - L2Cache的TLB是PIPT的，TLB miss的性能损失很明显。
+- 基于此，全局内存的latency分:
+  - L2TLB mis & L2cache mis  & L1cache mis 
+  - L2TLB hit & L2cache mis  & L1cache mis
+  - L2TLB hit & L2cache hit  & L1cache mis
+  - L2TLB --- & L2cache ---  & L1cache hit

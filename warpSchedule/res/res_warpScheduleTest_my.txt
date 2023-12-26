@@ -1,69 +1,111 @@
-### Warming Up...
+
+BLK_SIZE: 512
 ### Runing...
+index[ 0],    res:   1.00,  warpIdx: 0,  elapsed:    25078clks,    CPI: 6.13
+index[ 1],    res:   1.00,  warpIdx: 1,  elapsed:    25078clks,    CPI: 6.13
+index[ 2],    res:   1.00,  warpIdx: 2,  elapsed:    25078clks,    CPI: 6.13
+index[ 3],    res:   1.00,  warpIdx: 3,  elapsed:    25078clks,    CPI: 6.13
+index[ 4],    res:   1.00,  warpIdx: 0,  elapsed:    25043clks,    CPI: 6.12
+index[ 5],    res:   1.00,  warpIdx: 1,  elapsed:    25043clks,    CPI: 6.12
+index[ 6],    res:   1.00,  warpIdx: 2,  elapsed:    25043clks,    CPI: 6.12
+index[ 7],    res:   1.00,  warpIdx: 3,  elapsed:    25043clks,    CPI: 6.12
+index[ 8],    res:   1.00,  warpIdx: 0,  elapsed:    25084clks,    CPI: 6.13
+index[ 9],    res:   1.00,  warpIdx: 1,  elapsed:    25084clks,    CPI: 6.13
+index[10],    res:   1.00,  warpIdx: 2,  elapsed:    25084clks,    CPI: 6.13
+index[11],    res:   1.00,  warpIdx: 3,  elapsed:    25084clks,    CPI: 6.13
+index[12],    res:   1.00,  warpIdx: 0,  elapsed:    25051clks,    CPI: 6.12
+index[13],    res:   1.00,  warpIdx: 1,  elapsed:    25051clks,    CPI: 6.12
+index[14],    res:   1.00,  warpIdx: 2,  elapsed:    25051clks,    CPI: 6.12
+index[15],    res:   1.00,  warpIdx: 3,  elapsed:    25051clks,    CPI: 6.12
+elapsed_all:   0.017408ms
 
-### Result checking...
-index[ 0],  res:    1.000, warpIdx: 0,  startClk:  103696810,  elapsed      99127clks
-index[ 1],  res:    1.000, warpIdx: 1,  startClk:  103696812,  elapsed      99127clks
-index[ 2],  res:    1.000, warpIdx: 2,  startClk:  103696806,  elapsed      99127clks
-index[ 3],  res:    1.000, warpIdx: 3,  startClk:  103696808,  elapsed      99127clks
-index[ 4],  res:    1.000, warpIdx: 0,  startClk:  103696838,  elapsed      99097clks
-index[ 5],  res:    1.000, warpIdx: 1,  startClk:  103696840,  elapsed      99097clks
-index[ 6],  res:    1.000, warpIdx: 2,  startClk:  103696834,  elapsed      99097clks
-index[ 7],  res:    1.000, warpIdx: 3,  startClk:  103696836,  elapsed      99097clks
-index[ 8],  res:    1.000, warpIdx: 0,  startClk:  103696794,  elapsed      99139clks
-index[ 9],  res:    1.000, warpIdx: 1,  startClk:  103696796,  elapsed      99139clks
-index[10],  res:    1.000, warpIdx: 2,  startClk:  103696790,  elapsed      99139clks
-index[11],  res:    1.000, warpIdx: 3,  startClk:  103696792,  elapsed      99139clks
-index[12],  res:    1.000, warpIdx: 0,  startClk:  103696824,  elapsed      99107clks
-index[13],  res:    1.000, warpIdx: 1,  startClk:  103696826,  elapsed      99107clks
-index[14],  res:    1.000, warpIdx: 2,  startClk:  103696820,  elapsed      99107clks
-index[15],  res:    1.000, warpIdx: 3,  startClk:  103696822,  elapsed      99107clks
-elapsed_all:   0.061472ms
-
-### Warming Up...
+BLK_SIZE: 544
 ### Runing...
+index[ 0],    res:   1.00,  warpIdx: 0,  elapsed:    30934clks,    CPI: 7.56
+index[ 1],    res:   1.00,  warpIdx: 1,  elapsed:    24807clks,    CPI: 6.06
+index[ 2],    res:   1.00,  warpIdx: 2,  elapsed:    24807clks,    CPI: 6.06
+index[ 3],    res:   1.00,  warpIdx: 3,  elapsed:    24809clks,    CPI: 6.06
+index[ 4],    res:   1.00,  warpIdx: 0,  elapsed:    30962clks,    CPI: 7.56
+index[ 5],    res:   1.00,  warpIdx: 1,  elapsed:    24772clks,    CPI: 6.05
+index[ 6],    res:   1.00,  warpIdx: 2,  elapsed:    24772clks,    CPI: 6.05
+index[ 7],    res:   1.00,  warpIdx: 3,  elapsed:    24774clks,    CPI: 6.05
+index[ 8],    res:   1.00,  warpIdx: 0,  elapsed:    30931clks,    CPI: 7.56
+index[ 9],    res:   1.00,  warpIdx: 1,  elapsed:    24813clks,    CPI: 6.06
+index[10],    res:   1.00,  warpIdx: 2,  elapsed:    24813clks,    CPI: 6.06
+index[11],    res:   1.00,  warpIdx: 3,  elapsed:    24815clks,    CPI: 6.06
+index[12],    res:   1.00,  warpIdx: 0,  elapsed:    30954clks,    CPI: 7.56
+index[13],    res:   1.00,  warpIdx: 1,  elapsed:    24780clks,    CPI: 6.05
+index[14],    res:   1.00,  warpIdx: 2,  elapsed:    24780clks,    CPI: 6.05
+index[15],    res:   1.00,  warpIdx: 3,  elapsed:    24782clks,    CPI: 6.05
+index[16],    res:   1.00,  warpIdx: 0,  elapsed:    28193clks,    CPI: 6.89
+elapsed_all:   0.021504ms
 
-### Result checking...
-index[ 0],  res:    1.000, warpIdx: 0,  startClk:  112391915,  elapsed     123759clks
-index[ 1],  res:    1.000, warpIdx: 1,  startClk:  112391873,  elapsed      99197clks
-index[ 2],  res:    1.000, warpIdx: 2,  startClk:  112391867,  elapsed      99199clks
-index[ 3],  res:    1.000, warpIdx: 3,  startClk:  112391869,  elapsed      99199clks
-index[ 4],  res:    1.000, warpIdx: 0,  startClk:  112391873,  elapsed     123792clks
-index[ 5],  res:    1.000, warpIdx: 1,  startClk:  112391901,  elapsed      99167clks
-index[ 6],  res:    1.000, warpIdx: 2,  startClk:  112391895,  elapsed      99169clks
-index[ 7],  res:    1.000, warpIdx: 3,  startClk:  112391897,  elapsed      99169clks
-index[ 8],  res:    1.000, warpIdx: 0,  startClk:  112391901,  elapsed     123761clks
-index[ 9],  res:    1.000, warpIdx: 1,  startClk:  112391857,  elapsed      99209clks
-index[10],  res:    1.000, warpIdx: 2,  startClk:  112391851,  elapsed      99211clks
-index[11],  res:    1.000, warpIdx: 3,  startClk:  112391853,  elapsed      99211clks
-index[12],  res:    1.000, warpIdx: 0,  startClk:  112391855,  elapsed     123796clks
-index[13],  res:    1.000, warpIdx: 1,  startClk:  112391887,  elapsed      99177clks
-index[14],  res:    1.000, warpIdx: 2,  startClk:  112391881,  elapsed      99179clks
-index[15],  res:    1.000, warpIdx: 3,  startClk:  112391883,  elapsed      99179clks
-index[16],  res:    1.000, warpIdx: 0,  startClk:  112391887,  elapsed     112826clks
-elapsed_all:   0.083904ms
-
-### Warming Up...
+BLK_SIZE: 576
 ### Runing...
+index[ 0],    res:   1.00,  warpIdx: 0,  elapsed:    30932clks,    CPI: 7.56
+index[ 1],    res:   1.00,  warpIdx: 1,  elapsed:    30932clks,    CPI: 7.56
+index[ 2],    res:   1.00,  warpIdx: 2,  elapsed:    24805clks,    CPI: 6.06
+index[ 3],    res:   1.00,  warpIdx: 3,  elapsed:    24809clks,    CPI: 6.06
+index[ 4],    res:   1.00,  warpIdx: 0,  elapsed:    30960clks,    CPI: 7.56
+index[ 5],    res:   1.00,  warpIdx: 1,  elapsed:    30960clks,    CPI: 7.56
+index[ 6],    res:   1.00,  warpIdx: 2,  elapsed:    24770clks,    CPI: 6.05
+index[ 7],    res:   1.00,  warpIdx: 3,  elapsed:    24774clks,    CPI: 6.05
+index[ 8],    res:   1.00,  warpIdx: 0,  elapsed:    30929clks,    CPI: 7.55
+index[ 9],    res:   1.00,  warpIdx: 1,  elapsed:    30929clks,    CPI: 7.55
+index[10],    res:   1.00,  warpIdx: 2,  elapsed:    24811clks,    CPI: 6.06
+index[11],    res:   1.00,  warpIdx: 3,  elapsed:    24815clks,    CPI: 6.06
+index[12],    res:   1.00,  warpIdx: 0,  elapsed:    30952clks,    CPI: 7.56
+index[13],    res:   1.00,  warpIdx: 1,  elapsed:    30952clks,    CPI: 7.56
+index[14],    res:   1.00,  warpIdx: 2,  elapsed:    24778clks,    CPI: 6.05
+index[15],    res:   1.00,  warpIdx: 3,  elapsed:    24782clks,    CPI: 6.05
+index[16],    res:   1.00,  warpIdx: 0,  elapsed:    28191clks,    CPI: 6.89
+index[17],    res:   1.00,  warpIdx: 1,  elapsed:    28191clks,    CPI: 6.89
+elapsed_all:   0.020736ms
 
-### Result checking...
-index[ 0],  res:    1.000, warpIdx: 0,  startClk:  121822196,  elapsed     123751clks
-index[ 1],  res:    1.000, warpIdx: 1,  startClk:  121822198,  elapsed     123750clks
-index[ 2],  res:    1.000, warpIdx: 2,  startClk:  121822148,  elapsed      99194clks
-index[ 3],  res:    1.000, warpIdx: 3,  startClk:  121822150,  elapsed      99194clks
-index[ 4],  res:    1.000, warpIdx: 0,  startClk:  121822154,  elapsed     123784clks
-index[ 5],  res:    1.000, warpIdx: 1,  startClk:  121822156,  elapsed     123783clks
-index[ 6],  res:    1.000, warpIdx: 2,  startClk:  121822176,  elapsed      99164clks
-index[ 7],  res:    1.000, warpIdx: 3,  startClk:  121822178,  elapsed      99164clks
-index[ 8],  res:    1.000, warpIdx: 0,  startClk:  121822182,  elapsed     123753clks
-index[ 9],  res:    1.000, warpIdx: 1,  startClk:  121822184,  elapsed     123752clks
-index[10],  res:    1.000, warpIdx: 2,  startClk:  121822132,  elapsed      99206clks
-index[11],  res:    1.000, warpIdx: 3,  startClk:  121822134,  elapsed      99206clks
-index[12],  res:    1.000, warpIdx: 0,  startClk:  121822136,  elapsed     123788clks
-index[13],  res:    1.000, warpIdx: 1,  startClk:  121822138,  elapsed     123787clks
-index[14],  res:    1.000, warpIdx: 2,  startClk:  121822162,  elapsed      99174clks
-index[15],  res:    1.000, warpIdx: 3,  startClk:  121822164,  elapsed      99174clks
-index[16],  res:    1.000, warpIdx: 0,  startClk:  121822168,  elapsed     112819clks
-index[17],  res:    1.000, warpIdx: 1,  startClk:  121822170,  elapsed     112819clks
-elapsed_all:   0.075936ms
+BLK_SIZE: 608
+### Runing...
+index[ 0],    res:   1.00,  warpIdx: 0,  elapsed:    30930clks,    CPI: 7.55
+index[ 1],    res:   1.00,  warpIdx: 1,  elapsed:    30930clks,    CPI: 7.55
+index[ 2],    res:   1.00,  warpIdx: 2,  elapsed:    30930clks,    CPI: 7.55
+index[ 3],    res:   1.00,  warpIdx: 3,  elapsed:    24809clks,    CPI: 6.06
+index[ 4],    res:   1.00,  warpIdx: 0,  elapsed:    30958clks,    CPI: 7.56
+index[ 5],    res:   1.00,  warpIdx: 1,  elapsed:    30958clks,    CPI: 7.56
+index[ 6],    res:   1.00,  warpIdx: 2,  elapsed:    30958clks,    CPI: 7.56
+index[ 7],    res:   1.00,  warpIdx: 3,  elapsed:    24774clks,    CPI: 6.05
+index[ 8],    res:   1.00,  warpIdx: 0,  elapsed:    30927clks,    CPI: 7.55
+index[ 9],    res:   1.00,  warpIdx: 1,  elapsed:    30927clks,    CPI: 7.55
+index[10],    res:   1.00,  warpIdx: 2,  elapsed:    30927clks,    CPI: 7.55
+index[11],    res:   1.00,  warpIdx: 3,  elapsed:    24815clks,    CPI: 6.06
+index[12],    res:   1.00,  warpIdx: 0,  elapsed:    30950clks,    CPI: 7.56
+index[13],    res:   1.00,  warpIdx: 1,  elapsed:    30950clks,    CPI: 7.56
+index[14],    res:   1.00,  warpIdx: 2,  elapsed:    30950clks,    CPI: 7.56
+index[15],    res:   1.00,  warpIdx: 3,  elapsed:    24782clks,    CPI: 6.05
+index[16],    res:   1.00,  warpIdx: 0,  elapsed:    28189clks,    CPI: 6.89
+index[17],    res:   1.00,  warpIdx: 1,  elapsed:    28189clks,    CPI: 6.89
+index[18],    res:   1.00,  warpIdx: 2,  elapsed:    28189clks,    CPI: 6.89
+elapsed_all:   0.021504ms
+
+BLK_SIZE: 640
+### Runing...
+index[ 0],    res:   1.00,  warpIdx: 0,  elapsed:    30943clks,    CPI: 7.56
+index[ 1],    res:   1.00,  warpIdx: 1,  elapsed:    30943clks,    CPI: 7.56
+index[ 2],    res:   1.00,  warpIdx: 2,  elapsed:    30941clks,    CPI: 7.56
+index[ 3],    res:   1.00,  warpIdx: 3,  elapsed:    30943clks,    CPI: 7.56
+index[ 4],    res:   1.00,  warpIdx: 0,  elapsed:    30971clks,    CPI: 7.56
+index[ 5],    res:   1.00,  warpIdx: 1,  elapsed:    30971clks,    CPI: 7.56
+index[ 6],    res:   1.00,  warpIdx: 2,  elapsed:    30969clks,    CPI: 7.56
+index[ 7],    res:   1.00,  warpIdx: 3,  elapsed:    30971clks,    CPI: 7.56
+index[ 8],    res:   1.00,  warpIdx: 0,  elapsed:    30940clks,    CPI: 7.56
+index[ 9],    res:   1.00,  warpIdx: 1,  elapsed:    30940clks,    CPI: 7.56
+index[10],    res:   1.00,  warpIdx: 2,  elapsed:    30938clks,    CPI: 7.56
+index[11],    res:   1.00,  warpIdx: 3,  elapsed:    30940clks,    CPI: 7.56
+index[12],    res:   1.00,  warpIdx: 0,  elapsed:    30963clks,    CPI: 7.56
+index[13],    res:   1.00,  warpIdx: 1,  elapsed:    30963clks,    CPI: 7.56
+index[14],    res:   1.00,  warpIdx: 2,  elapsed:    30961clks,    CPI: 7.56
+index[15],    res:   1.00,  warpIdx: 3,  elapsed:    30963clks,    CPI: 7.56
+index[16],    res:   1.00,  warpIdx: 0,  elapsed:    28202clks,    CPI: 6.89
+index[17],    res:   1.00,  warpIdx: 1,  elapsed:    28202clks,    CPI: 6.89
+index[18],    res:   1.00,  warpIdx: 2,  elapsed:    28202clks,    CPI: 6.89
+index[19],    res:   1.00,  warpIdx: 3,  elapsed:    28202clks,    CPI: 6.89
+elapsed_all:   0.021504ms
 

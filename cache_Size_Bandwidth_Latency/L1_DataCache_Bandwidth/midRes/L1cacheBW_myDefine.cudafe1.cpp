@@ -71459,7 +71459,7 @@ CUresult cuGetExportTable(const void ** ppExportTable, const CUuuid * pExportTab
 # 18 "L1cacheBW_myDefine.cu"
 void assignData(float *posArray) { 
 # 19
-for (int i = 0; i < (96 * 256); i++) { 
+for (int i = 0; i < ((96 * 256) + 1024); i++) { 
 # 20
 (posArray[i]) = (1); 
 # 21
@@ -71478,7 +71478,7 @@ ldg_ca(const void *ptr) {int volatile ___ = 1;(void)ptr;
 # 26
 float ret; 
 # 27
-__asm__ volatile("ld.global.ca.b32 %0, [%1];" : "=f" (ret) : "l" (ptr)); 
+__asm__ volatile("ld.global.ca.f32 %0, [%1];" : "=f" (ret) : "l" (ptr)); 
 # 32
 return ret; 
 # 33
@@ -71530,61 +71530,65 @@ __asm__ volatile("mov.u32 %0, %%clock;" : "=r" (stop) : : "memory");
 #endif
 # 62 "L1cacheBW_myDefine.cu"
 int main() { 
-# 63
-HostPtr< float>  arr_h(96 * 256); 
 # 64
-assignData(arr_h.GetPtr()); 
+HostPtr< float>  arr_h((96 * 256) + 1024); 
 # 65
-CuPtr< float>  arr_d(arr_h); 
+assignData(arr_h.GetPtr()); 
 # 66
-CuPtr< float>  sink_d(512); 
+CuPtr< float>  arr_d(arr_h); 
 # 67
-CuPtr< unsigned>  startClk_d(512); 
+CuPtr< float>  sink_d(1024); 
 # 68
-CuPtr< unsigned>  stopClk_d(512); 
-# 70
-(__cudaPushCallConfiguration(1, 512)) ? (void)0 : L1DatacacheBW_test_kernel(startClk_d.GetPtr(), stopClk_d.GetPtr(), sink_d.GetPtr(), arr_d.GetPtr()); 
+CuPtr< unsigned>  startClk_d(1024); 
+# 69
+CuPtr< unsigned>  stopClk_d(1024); 
 # 71
+(__cudaPushCallConfiguration(1, 1024)) ? (void)0 : L1DatacacheBW_test_kernel(startClk_d.GetPtr(), stopClk_d.GetPtr(), sink_d.GetPtr(), arr_d.GetPtr()); 
+# 72
 cudaDeviceSynchronize(); 
-# 73
-HostPtr< unsigned>  startClk_h; 
-# 74
-HostPtr< unsigned>  stopClk_h; 
 # 75
-HostPtr< float>  sink_h; 
+(__cudaPushCallConfiguration(1, 1024)) ? (void)0 : L1DatacacheBW_test_kernel(startClk_d.GetPtr(), stopClk_d.GetPtr(), sink_d.GetPtr(), arr_d.GetPtr()); 
 # 76
-startClk_d.ToHostPtr(startClk_h); 
-# 77
-stopClk_d.ToHostPtr(stopClk_h); 
+cudaDeviceSynchronize(); 
 # 78
-sink_d.ToHostPtr(sink_h); 
+HostPtr< unsigned>  startClk_h; 
+# 79
+HostPtr< unsigned>  stopClk_h; 
 # 80
-float clockCycles_avg = ((0.0)); 
+HostPtr< float>  sink_h; 
 # 81
-float sink_total = ((0.0)); 
+startClk_d.ToHostPtr(startClk_h); 
 # 82
-for (int i = 0; i < 512; i++) { 
+stopClk_d.ToHostPtr(stopClk_h); 
 # 83
-clockCycles_avg += (stopClk_h(i) - startClk_h(i)); 
+sink_d.ToHostPtr(sink_h); 
 # 85
-sink_total += sink_h(i); 
+float clockCycles_avg = ((0.0)); 
 # 86
-}  
+float sink_total = ((0.0)); 
 # 87
-clockCycles_avg /= (512); 
-# 89
-(((((std::cout << ("clockCycles_avg: "))) << clockCycles_avg)) << (std::endl)); 
+for (int i = 0; i < 1024; i++) { 
+# 88
+clockCycles_avg += (stopClk_h(i) - startClk_h(i)); 
 # 90
-(((((std::cout << ("sink_total: "))) << sink_total)) << (std::endl)); 
+sink_total += sink_h(i); 
+# 91
+}  
 # 92
-uint32_t BytesAll = (((96 * 256) * sizeof(float)) * (512 / 32)); 
+clockCycles_avg /= (1024); 
 # 94
-float BpCpSM = BytesAll / clockCycles_avg; 
+(((((std::cout << ("clockCycles_avg: "))) << clockCycles_avg)) << (std::endl)); 
 # 95
-(((((((std::cout << ("L1 Data cache Bandwidth is  "))) << BpCpSM)) << (" Bytes per cycle per SM"))) << (std::endl)); 
-# 96
-(((((((std::cout << ("L1 Data cache Bandwidth is  "))) << (BpCpSM * (1.7)))) << (" GBps per SM"))) << (std::endl)); return 0; 
+(((((std::cout << ("sink_total: "))) << sink_total)) << (std::endl)); 
 # 97
+uint32_t BytesAll = (((96 * 256) * sizeof(float)) * (1024 / 32)); 
+# 99
+float BpCpSM = BytesAll / clockCycles_avg; 
+# 100
+(((((((std::cout << ("L1 Data cache Bandwidth is  "))) << BpCpSM)) << (" Bytes per cycle per SM"))) << (std::endl)); 
+# 101
+(((((((std::cout << ("L1 Data cache Bandwidth is  "))) << (BpCpSM * (1.7)))) << (" GBps per SM"))) << (std::endl)); return 0; 
+# 102
 } 
 
 # 1 "L1cacheBW_myDefine.cudafe1.stub.c"

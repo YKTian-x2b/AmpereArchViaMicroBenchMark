@@ -1013,7 +1013,7 @@ const void *ptr){
 # 26 "L1cacheBW_myDefine.cu"
  float __cuda_local_var_70698_11_non_const_ret;
 # 27 "L1cacheBW_myDefine.cu"
-__asm volatile("ld.global.ca.b32 %0, [%1];" : "=f" (__cuda_local_var_70698_11_non_const_ret) : "l" (ptr));
+__asm volatile("ld.global.ca.f32 %0, [%1];" : "=f" (__cuda_local_var_70698_11_non_const_ret) : "l" (ptr));
 # 32 "L1cacheBW_myDefine.cu"
 return __cuda_local_var_70698_11_non_const_ret;
 # 33 "L1cacheBW_myDefine.cu"

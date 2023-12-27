@@ -40,7 +40,7 @@ void smem_latency_kernel(const uint32_t *addr, uint32_t *ret, uint32_t *clk) {
             : "+r"(smem_addr) : : "memory"
         );
     }
-
+ 
     asm volatile (
         "bar.sync 0;\n"
         "mov.u32 %0, %%clock;\n"
@@ -81,7 +81,7 @@ int main() {
 
     uint32_t h_clk[16];
     cudaMemcpy(h_clk, d_clk, 16 * sizeof(uint32_t), cudaMemcpyDeviceToHost);
-    printf("shared memory latency %u cycles\n", h_clk[0] / ROUND);
+    printf("shared memory latency %lf cycles\n", h_clk[0] / ROUND);
 
     cudaFree(d_addr);
     cudaFree(d_ret);

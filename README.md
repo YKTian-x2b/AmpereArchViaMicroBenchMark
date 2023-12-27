@@ -1,4 +1,6 @@
 # MicroBenchmark For Ampere
+> 写在最前面：大部分代码和思路都直接来自知乎 cloudcore 和 李少侠。详见参考。
+
 ## 3060测试结果
 ### Memory hierarchy
 |               | Size                    | Bandwidth                       | BW理论上限            | Latency     |
@@ -120,7 +122,7 @@ nvidia-smi -ac 7000,1702
 - **Dissecting the Volta GPU Architecture through Microbenchmarking**
 - Optimizing Batched Winograd Convolution on GPUs (Turingas)
 - Dissecting the Ampere GPU Architecture through Microbenchmarking
-- Demystifying the NVidia Ampere Architecture
+- Demystifying the NVidia Ampere Architecture through Microbenchmarking and Instruction-level Analysis
 - **Dissecting the GPU memory hierarchy through Microbenchmarking**
 - GA102 Whitepaper
 - Turing Whitepaper

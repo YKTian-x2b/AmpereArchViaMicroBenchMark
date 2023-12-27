@@ -95,5 +95,5 @@ int main() {
 
 // nvcc -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I../../Utils -L /usr/local/cuda/lib64 -l cuda -o res/l1Cache_latency_YHs l1Cache_latency_YHs.cu
 
-// nvcc --keep --keep-dir YHs_midRes -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I../../Utils -L /usr/local/cuda/lib64 -l cuda -o res/l1Cache_latency_YHs l1Cache_latency_YHs.cu
-// cuasm --bin2asm YHs_midRes/l1Cache_latency_YHs.sm_86.cubin YHs_midRes/l1Cache_latency_YHs.sm_86.cuasm
+// nvcc --keep --keep-dir midRes -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I../../Utils -L /usr/local/cuda/lib64 -l cuda -o res/l1Cache_latency_YHs l1Cache_latency_YHs.cu
+// cuasm --bin2asm midRes/l1Cache_latency_YHs.sm_86.cubin midRes/l1Cache_latency_YHs.sm_86.cuasm

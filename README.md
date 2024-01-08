@@ -7,9 +7,9 @@
 | ------------- | ----------------------- | ------------------------------- | --------------------- | ----------- |
 | L0_I-Cache    | 16KB                    | -                               | -                     | -           |
 | L1_I-Cache    | 32KB                    | -                               | -                     | -           |
-| L1_D-Cache    | 128/120/112/96/64/28 KB | 63.6 B per cycle per SM | 64 B per cycle per SM | 33 cycles   |
+| L1_D-Cache    | 128/120/112/96/64/28 KB | 124.7B per cycle per SM         | 128B per cycle per SM | 33 cycles   |
 | L2_D-Cache    | 3 MB                    | 1276.2 GB/s                     | -                     | 219 cycles  |
-| Shared Memory | 100/64/32/16/8/0 KB     | 194.2 GB/s per SM               | 217.6 GB/s per SM     | 23 cycles   |
+| Shared Memory | 100/64/32/16/8/0 KB     | 214.4 GB/s per SM               | 217.6 GB/s per SM     | 23 cycles   |
 | Global Memory | 6 GB                    | 327.2 GB/s                      | 336 GB/s              | ~515 cycles |
 
 ### Register Bank

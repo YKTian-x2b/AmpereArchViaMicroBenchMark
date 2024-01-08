@@ -3,7 +3,7 @@
 - scheduler_Idx = warp_Idx % 4;
 ## 思路
 - 如果FFMA要隔4个clock才能发射第二条，用TLP塞满FFMA port就需要4个warp。
-- 选用背靠背FFMA（Y + S04），能比较清晰的观察到效果。
+- 选用有邻居依赖的背靠背FFMA（Y + S04），能比较清晰的观察到效果。
 - 先给每个scheduler分配4个warp 4\*32\*4=512个线程，作为baseline
 - 然后每轮递增1个warp，观察新增warp对初始warp造成的浮点性能影响
 

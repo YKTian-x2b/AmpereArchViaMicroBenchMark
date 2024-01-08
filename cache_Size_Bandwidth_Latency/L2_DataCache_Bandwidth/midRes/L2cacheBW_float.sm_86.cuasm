@@ -1,0 +1,592 @@
+// --------------------- FileHeader --------------------------
+	// All file header info is kept as is (unless offset/size attributes)
+	// The original header flags is not complete, thus discarded. 
+	// 	.headerflags	@"EF_CUDA_TEXMODE_UNIFIED EF_CUDA_64BIT_ADDRESS EF_CUDA_SM86 EF_CUDA_VIRTUAL_SM(EF_CUDA_SM86)"
+	// 	.elftype	@"ET_EXEC"
+	// 
+	// 
+	.__elf_ident_osabi      51
+	.__elf_ident_abiversion 7
+	.__elf_type             ET_EXEC
+	.__elf_machine          EM_CUDA
+	.__elf_version          121 		// CUDA toolkit version 
+	.__elf_entry            0 		// entry point address 
+	.__elf_phoff            0xb80 		// program header offset, maybe updated by assembler
+	.__elf_shoff            0x900 		// section header offset, maybe updated by assembler
+	.__elf_flags            0x560556 		// Flags, SM_86(0x56), COMPUTE_86(0x56) 
+	.__elf_ehsize           64 		// elf header size 
+	.__elf_phentsize        56 		// program entry size
+	.__elf_phnum            3 		// number of program entries
+	.__elf_shentsize        64 		// section entry size
+	.__elf_shnum            10 		// number of sections, currently no sections can be appended/removed
+	.__elf_shstrndx         1 		// Section name string table index 
+
+
+  //-------------------------------------------------
+  //------------ END of FileHeader ------------------
+  //-------------------------------------------------
+
+
+
+// ---------------------                                  --------------------------
+	// there will always be an empty section at index 0
+	.section  "", 0, SHT_NULL
+	.__section_name         0x0 	// offset in .shstrtab
+	.__section_type         SHT_NULL
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x0 	// maybe updated by assembler
+	.__section_size         0x0 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                0 	// equivalent to set sh_addralign
+
+// --------------------- .shstrtab                        --------------------------
+	.section  ".shstrtab", 0, SHT_STRTAB
+	// all strings in .shstrtab section will be kept as is.
+	.__section_name         0x1 	// offset in .shstrtab
+	.__section_type         SHT_STRTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x40 	// maybe updated by assembler
+	.__section_size         0x118 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                1 	// equivalent to set sh_addralign
+    // .shstrtab[0] = b'\x00' 
+    /*0000*/ .byte 0x00
+
+    // .shstrtab[1] = b'.shstrtab\x00' 
+    /*0001*/ .byte 0x2e, 0x73, 0x68, 0x73, 0x74, 0x72, 0x74, 0x61
+    /*0009*/ .byte 0x62, 0x00
+
+    // .shstrtab[2] = b'.strtab\x00' 
+    /*000b*/ .byte 0x2e, 0x73, 0x74, 0x72, 0x74, 0x61, 0x62, 0x00
+
+    // .shstrtab[3] = b'.symtab\x00' 
+    /*0013*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x00
+
+    // .shstrtab[4] = b'.symtab_shndx\x00' 
+    /*001b*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x5f
+    /*0023*/ .byte 0x73, 0x68, 0x6e, 0x64, 0x78, 0x00
+
+    // .shstrtab[5] = b'.nv.uft.entry\x00' 
+    /*0029*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x75, 0x66, 0x74, 0x2e
+    /*0031*/ .byte 0x65, 0x6e, 0x74, 0x72, 0x79, 0x00
+
+    // .shstrtab[6] = b'.nv.info\x00' 
+    /*0037*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*003f*/ .byte 0x00
+
+    // .shstrtab[7] = b'.text._Z22L2cacheBW_float_kernelPKfPf\x00' 
+    /*0040*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*0048*/ .byte 0x32, 0x32, 0x4c, 0x32, 0x63, 0x61, 0x63, 0x68
+    /*0050*/ .byte 0x65, 0x42, 0x57, 0x5f, 0x66, 0x6c, 0x6f, 0x61
+    /*0058*/ .byte 0x74, 0x5f, 0x6b, 0x65, 0x72, 0x6e, 0x65, 0x6c
+    /*0060*/ .byte 0x50, 0x4b, 0x66, 0x50, 0x66, 0x00
+
+    // .shstrtab[8] = b'.nv.info._Z22L2cacheBW_float_kernelPKfPf\x00' 
+    /*0066*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*006e*/ .byte 0x2e, 0x5f, 0x5a, 0x32, 0x32, 0x4c, 0x32, 0x63
+    /*0076*/ .byte 0x61, 0x63, 0x68, 0x65, 0x42, 0x57, 0x5f, 0x66
+    /*007e*/ .byte 0x6c, 0x6f, 0x61, 0x74, 0x5f, 0x6b, 0x65, 0x72
+    /*0086*/ .byte 0x6e, 0x65, 0x6c, 0x50, 0x4b, 0x66, 0x50, 0x66
+    /*008e*/ .byte 0x00
+
+    // .shstrtab[9] = b'.nv.shared._Z22L2cacheBW_float_kernelPKfPf\x00' 
+    /*008f*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*0097*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x32, 0x32, 0x4c
+    /*009f*/ .byte 0x32, 0x63, 0x61, 0x63, 0x68, 0x65, 0x42, 0x57
+    /*00a7*/ .byte 0x5f, 0x66, 0x6c, 0x6f, 0x61, 0x74, 0x5f, 0x6b
+    /*00af*/ .byte 0x65, 0x72, 0x6e, 0x65, 0x6c, 0x50, 0x4b, 0x66
+    /*00b7*/ .byte 0x50, 0x66, 0x00
+
+    // .shstrtab[10] = b'.nv.constant0._Z22L2cacheBW_float_kernelPKfPf\x00' 
+    /*00ba*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*00c2*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*00ca*/ .byte 0x32, 0x32, 0x4c, 0x32, 0x63, 0x61, 0x63, 0x68
+    /*00d2*/ .byte 0x65, 0x42, 0x57, 0x5f, 0x66, 0x6c, 0x6f, 0x61
+    /*00da*/ .byte 0x74, 0x5f, 0x6b, 0x65, 0x72, 0x6e, 0x65, 0x6c
+    /*00e2*/ .byte 0x50, 0x4b, 0x66, 0x50, 0x66, 0x00
+
+    // .shstrtab[11] = b'.debug_frame\x00' 
+    /*00e8*/ .byte 0x2e, 0x64, 0x65, 0x62, 0x75, 0x67, 0x5f, 0x66
+    /*00f0*/ .byte 0x72, 0x61, 0x6d, 0x65, 0x00
+
+    // .shstrtab[12] = b'.rel.debug_frame\x00' 
+    /*00f5*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x2e, 0x64, 0x65, 0x62
+    /*00fd*/ .byte 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d, 0x65
+    /*0105*/ .byte 0x00
+
+    // .shstrtab[13] = b'.rela.debug_frame\x00' 
+    /*0106*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x61, 0x2e, 0x64, 0x65
+    /*010e*/ .byte 0x62, 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d
+    /*0116*/ .byte 0x65, 0x00
+
+
+// --------------------- .strtab                          --------------------------
+	.section  ".strtab", 0, SHT_STRTAB
+	// all strings in .strtab section will be kept as is.
+	.__section_name         0xb 	// offset in .shstrtab
+	.__section_type         SHT_STRTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x158 	// maybe updated by assembler
+	.__section_size         0x13f 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                1 	// equivalent to set sh_addralign
+    // .strtab[0] = b'\x00' 
+    /*0000*/ .byte 0x00
+
+    // .strtab[1] = b'.shstrtab\x00' 
+    /*0001*/ .byte 0x2e, 0x73, 0x68, 0x73, 0x74, 0x72, 0x74, 0x61
+    /*0009*/ .byte 0x62, 0x00
+
+    // .strtab[2] = b'.strtab\x00' 
+    /*000b*/ .byte 0x2e, 0x73, 0x74, 0x72, 0x74, 0x61, 0x62, 0x00
+
+    // .strtab[3] = b'.symtab\x00' 
+    /*0013*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x00
+
+    // .strtab[4] = b'.symtab_shndx\x00' 
+    /*001b*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x5f
+    /*0023*/ .byte 0x73, 0x68, 0x6e, 0x64, 0x78, 0x00
+
+    // .strtab[5] = b'.nv.uft.entry\x00' 
+    /*0029*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x75, 0x66, 0x74, 0x2e
+    /*0031*/ .byte 0x65, 0x6e, 0x74, 0x72, 0x79, 0x00
+
+    // .strtab[6] = b'.nv.info\x00' 
+    /*0037*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*003f*/ .byte 0x00
+
+    // .strtab[7] = b'_Z22L2cacheBW_float_kernelPKfPf\x00' 
+    /*0040*/ .byte 0x5f, 0x5a, 0x32, 0x32, 0x4c, 0x32, 0x63, 0x61
+    /*0048*/ .byte 0x63, 0x68, 0x65, 0x42, 0x57, 0x5f, 0x66, 0x6c
+    /*0050*/ .byte 0x6f, 0x61, 0x74, 0x5f, 0x6b, 0x65, 0x72, 0x6e
+    /*0058*/ .byte 0x65, 0x6c, 0x50, 0x4b, 0x66, 0x50, 0x66, 0x00
+
+    // .strtab[8] = b'.text._Z22L2cacheBW_float_kernelPKfPf\x00' 
+    /*0060*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*0068*/ .byte 0x32, 0x32, 0x4c, 0x32, 0x63, 0x61, 0x63, 0x68
+    /*0070*/ .byte 0x65, 0x42, 0x57, 0x5f, 0x66, 0x6c, 0x6f, 0x61
+    /*0078*/ .byte 0x74, 0x5f, 0x6b, 0x65, 0x72, 0x6e, 0x65, 0x6c
+    /*0080*/ .byte 0x50, 0x4b, 0x66, 0x50, 0x66, 0x00
+
+    // .strtab[9] = b'.nv.info._Z22L2cacheBW_float_kernelPKfPf\x00' 
+    /*0086*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*008e*/ .byte 0x2e, 0x5f, 0x5a, 0x32, 0x32, 0x4c, 0x32, 0x63
+    /*0096*/ .byte 0x61, 0x63, 0x68, 0x65, 0x42, 0x57, 0x5f, 0x66
+    /*009e*/ .byte 0x6c, 0x6f, 0x61, 0x74, 0x5f, 0x6b, 0x65, 0x72
+    /*00a6*/ .byte 0x6e, 0x65, 0x6c, 0x50, 0x4b, 0x66, 0x50, 0x66
+    /*00ae*/ .byte 0x00
+
+    // .strtab[10] = b'.nv.shared._Z22L2cacheBW_float_kernelPKfPf\x00' 
+    /*00af*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*00b7*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x32, 0x32, 0x4c
+    /*00bf*/ .byte 0x32, 0x63, 0x61, 0x63, 0x68, 0x65, 0x42, 0x57
+    /*00c7*/ .byte 0x5f, 0x66, 0x6c, 0x6f, 0x61, 0x74, 0x5f, 0x6b
+    /*00cf*/ .byte 0x65, 0x72, 0x6e, 0x65, 0x6c, 0x50, 0x4b, 0x66
+    /*00d7*/ .byte 0x50, 0x66, 0x00
+
+    // .strtab[11] = b'.nv.constant0._Z22L2cacheBW_float_kernelPKfPf\x00' 
+    /*00da*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*00e2*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*00ea*/ .byte 0x32, 0x32, 0x4c, 0x32, 0x63, 0x61, 0x63, 0x68
+    /*00f2*/ .byte 0x65, 0x42, 0x57, 0x5f, 0x66, 0x6c, 0x6f, 0x61
+    /*00fa*/ .byte 0x74, 0x5f, 0x6b, 0x65, 0x72, 0x6e, 0x65, 0x6c
+    /*0102*/ .byte 0x50, 0x4b, 0x66, 0x50, 0x66, 0x00
+
+    // .strtab[12] = b'_param\x00' 
+    /*0108*/ .byte 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x00
+
+    // .strtab[13] = b'.debug_frame\x00' 
+    /*010f*/ .byte 0x2e, 0x64, 0x65, 0x62, 0x75, 0x67, 0x5f, 0x66
+    /*0117*/ .byte 0x72, 0x61, 0x6d, 0x65, 0x00
+
+    // .strtab[14] = b'.rel.debug_frame\x00' 
+    /*011c*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x2e, 0x64, 0x65, 0x62
+    /*0124*/ .byte 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d, 0x65
+    /*012c*/ .byte 0x00
+
+    // .strtab[15] = b'.rela.debug_frame\x00' 
+    /*012d*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x61, 0x2e, 0x64, 0x65
+    /*0135*/ .byte 0x62, 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d
+    /*013d*/ .byte 0x65, 0x00
+
+
+// --------------------- .symtab                          --------------------------
+	.section  ".symtab", 0, SHT_SYMTAB
+	// all symbols in .symtab sections will be kept
+	// but the symbol size may be changed accordingly
+	.__section_name         0x13 	// offset in .shstrtab
+	.__section_type         SHT_SYMTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x298 	// maybe updated by assembler
+	.__section_size         0x78 	// maybe updated by assembler
+	.__section_link         2
+	.__section_info         0x4
+	.__section_entsize      24
+	.align                8 	// equivalent to set sh_addralign
+    // Symbol[0] "": Container({'st_name': 0, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_NOTYPE'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 'SHN_UNDEF', 'st_value': 0, 'st_size': 0})
+    /*0000*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0008*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0010*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[1] ".text._Z22L2cacheBW_float_kernelPKfPf": Container({'st_name': 96, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 9, 'st_value': 0, 'st_size': 0})
+    /*0018*/ .byte 0x60, 0x00, 0x00, 0x00, 0x03, 0x00, 0x09, 0x00
+    /*0020*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0028*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[2] ".nv.constant0._Z22L2cacheBW_float_kernelPKfPf": Container({'st_name': 218, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 8, 'st_value': 0, 'st_size': 0})
+    /*0030*/ .byte 0xda, 0x00, 0x00, 0x00, 0x03, 0x00, 0x08, 0x00
+    /*0038*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0040*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[3] ".debug_frame": Container({'st_name': 271, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 4, 'st_value': 0, 'st_size': 0})
+    /*0048*/ .byte 0x0f, 0x01, 0x00, 0x00, 0x03, 0x00, 0x04, 0x00
+    /*0050*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0058*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[4] "_Z22L2cacheBW_float_kernelPKfPf": Container({'st_name': 64, 'st_info': Container({'bind': 'STB_GLOBAL', 'type': 'STT_FUNC'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 9, 'st_value': 0, 'st_size': 896})
+    /*0060*/ .byte 0x40, 0x00, 0x00, 0x00, 0x12, 0x10, 0x09, 0x00
+    /*0068*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0070*/ .byte 0x80, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+
+// --------------------- .debug_frame                     --------------------------
+	.section	.debug_frame,"",@progbits
+	.__section_name         0xe8 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x310 	// maybe updated by assembler
+	.__section_size         0x70 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                1 	// equivalent to set sh_addralign
+  .debug_frame:
+          /*0000*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0x24, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff
+          /*0010*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0x03, 0x00, 0x04, 0x7c, 0xff, 0xff, 0xff, 0xff, 0x0f, 0x0c, 0x81, 0x80
+          /*0020*/ 	.byte	0x80, 0x28, 0x00, 0x08, 0xff, 0x81, 0x80, 0x28, 0x08, 0x81, 0x80, 0x80, 0x28, 0x00, 0x00, 0x00
+          /*0030*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0x34, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*0040*/ 	.byte	0x00, 0x00, 0x00, 0x00
+          /*0044*/ 	.dword	_Z22L2cacheBW_float_kernelPKfPf
+          /*004c*/ 	.byte	0x80, 0x03, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x04, 0xa8, 0x00
+          /*005c*/ 	.byte	0x00, 0x00, 0x0c, 0x81, 0x80, 0x80, 0x28, 0x00, 0x04, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*006c*/ 	.byte	0x00, 0x00, 0x00, 0x00
+  
+  
+// --------------------- .nv.info                         --------------------------
+	.section	.nv.info,"",@"SHT_CUDA_INFO"
+	.__section_name         0x37 	// offset in .shstrtab
+	.__section_type         1879048192
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x380 	// maybe updated by assembler
+	.__section_size         0x30 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  
+  
+  	//----- nvinfo : EIATTR_REGCOUNT
+  	.align		4
+          /*0000*/ 	.byte	0x04, 0x2f
+          /*0002*/ 	.short	(.L_1 - .L_0)
+  	.align		4
+  .L_0:
+          /*0004*/ 	.word	index@(_Z22L2cacheBW_float_kernelPKfPf)
+          /*0008*/ 	.word	0x00000024
+  
+  
+  	//----- nvinfo : EIATTR_MAX_STACK_SIZE
+  	.align		4
+  .L_1:
+          /*000c*/ 	.byte	0x04, 0x23
+          /*000e*/ 	.short	(.L_3 - .L_2)
+  	.align		4
+  .L_2:
+          /*0010*/ 	.word	index@(_Z22L2cacheBW_float_kernelPKfPf)
+          /*0014*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_MIN_STACK_SIZE
+  	.align		4
+  .L_3:
+          /*0018*/ 	.byte	0x04, 0x12
+          /*001a*/ 	.short	(.L_5 - .L_4)
+  	.align		4
+  .L_4:
+          /*001c*/ 	.word	index@(_Z22L2cacheBW_float_kernelPKfPf)
+          /*0020*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_FRAME_SIZE
+  	.align		4
+  .L_5:
+          /*0024*/ 	.byte	0x04, 0x11
+          /*0026*/ 	.short	(.L_7 - .L_6)
+  	.align		4
+  .L_6:
+          /*0028*/ 	.word	index@(_Z22L2cacheBW_float_kernelPKfPf)
+          /*002c*/ 	.word	0x00000000
+  .L_7:
+  
+  
+// --------------------- .nv.info._Z22L2cacheBW_float_kernelPKfPf --------------------------
+	.section	.nv.info._Z22L2cacheBW_float_kernelPKfPf,"",@"SHT_CUDA_INFO"
+	.__section_name         0x66 	// offset in .shstrtab
+	.__section_type         1879048192
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x3b0 	// maybe updated by assembler
+	.__section_size         0x4c 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x9
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  
+  
+  	//----- nvinfo : EIATTR_CUDA_API_VERSION
+  	.align		4
+          /*0000*/ 	.byte	0x04, 0x37
+          /*0002*/ 	.short	(.L_9 - .L_8)
+  .L_8:
+          /*0004*/ 	.word	0x00000079
+  
+  
+  	//----- nvinfo : EIATTR_SW2861232_WAR
+  	.align		4
+  .L_9:
+          /*0008*/ 	.byte	0x01, 0x35
+  	.zero		2
+  
+  
+  	//----- nvinfo : EIATTR_PARAM_CBANK
+  	.align		4
+          /*000c*/ 	.byte	0x04, 0x0a
+          /*000e*/ 	.short	(.L_11 - .L_10)
+  	.align		4
+  .L_10:
+          /*0010*/ 	.word	index@(.nv.constant0._Z22L2cacheBW_float_kernelPKfPf)
+          /*0014*/ 	.short	0x0160
+          /*0016*/ 	.short	0x0010
+  
+  
+  	//----- nvinfo : EIATTR_CBANK_PARAM_SIZE
+  	.align		4
+  .L_11:
+          /*0018*/ 	.byte	0x03, 0x19
+          /*001a*/ 	.short	0x0010
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+          /*001c*/ 	.byte	0x04, 0x17
+          /*001e*/ 	.short	(.L_13 - .L_12)
+  .L_12:
+          /*0020*/ 	.word	0x00000000
+          /*0024*/ 	.short	0x0001
+          /*0026*/ 	.short	0x0008
+          /*0028*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+  .L_13:
+          /*002c*/ 	.byte	0x04, 0x17
+          /*002e*/ 	.short	(.L_15 - .L_14)
+  .L_14:
+          /*0030*/ 	.word	0x00000000
+          /*0034*/ 	.short	0x0000
+          /*0036*/ 	.short	0x0000
+          /*0038*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_MAXREG_COUNT
+  	.align		4
+  .L_15:
+          /*003c*/ 	.byte	0x03, 0x1b
+          /*003e*/ 	.short	0x00ff
+  
+  
+  	//----- nvinfo : EIATTR_EXIT_INSTR_OFFSETS
+  	.align		4
+          /*0040*/ 	.byte	0x04, 0x1c
+          /*0042*/ 	.short	(.L_17 - .L_16)
+  
+  
+  	//   ....[0]....
+  .L_16:
+          /*0044*/ 	.word	0x000002a0
+  
+  
+  	//   ....[1]....
+          /*0048*/ 	.word	0x000002e0
+  .L_17:
+  
+  
+// --------------------- .rel.debug_frame                 --------------------------
+	.section  ".rel.debug_frame", 0, SHT_REL
+	// all relocation sections will be dynamically generated by assembler 
+	// but most of the section header will be kept as is.
+	.__section_name         0xf5 	// offset in .shstrtab
+	.__section_type         SHT_REL
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x400 	// maybe updated by assembler
+	.__section_size         0x10 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x4
+	.__section_entsize      16
+	.align                8 	// equivalent to set sh_addralign
+    // Relocation[0] : _Z22L2cacheBW_float_kernelPKfPf, Container({'r_offset': 68, 'r_info': 17179869186, 'r_info_sym': 4, 'r_info_type': 2})
+
+// --------------------- .nv.constant0._Z22L2cacheBW_float_kernelPKfPf --------------------------
+	.section	.nv.constant0._Z22L2cacheBW_float_kernelPKfPf,"a",@progbits
+	.__section_name         0xba 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x2
+	.__section_addr         0x0
+	.__section_offset       0x410 	// maybe updated by assembler
+	.__section_size         0x170 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x9
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  .nv.constant0._Z22L2cacheBW_float_kernelPKfPf:
+  	.zero		368
+  
+  
+// --------------------- .text._Z22L2cacheBW_float_kernelPKfPf --------------------------
+	.section	.text._Z22L2cacheBW_float_kernelPKfPf,"ax",@progbits
+	.__section_name         0x40 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x6
+	.__section_addr         0x0
+	.__section_offset       0x580 	// maybe updated by assembler
+	.__section_size         0x380 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x24000004
+	.__section_entsize      0
+	.align                128 	// equivalent to set sh_addralign
+  	.sectioninfo	@"SHI_REGISTERS=36"
+  	.align	128
+          .global         _Z22L2cacheBW_float_kernelPKfPf
+          .type           _Z22L2cacheBW_float_kernelPKfPf,@function
+          .size           _Z22L2cacheBW_float_kernelPKfPf,(.L_x_1 - _Z22L2cacheBW_float_kernelPKfPf)
+          .other          _Z22L2cacheBW_float_kernelPKfPf,@"STO_CUDA_ENTRY STV_DEFAULT"
+  _Z22L2cacheBW_float_kernelPKfPf:
+  .text._Z22L2cacheBW_float_kernelPKfPf:
+      [B------:R-:W-:Y:S02]         /*0000*/                   MOV R1, c[0x0][0x28] ;
+      [B------:R-:W0:-:S01]         /*0010*/                   S2R R0, SR_CTAID.X ;
+      [B------:R-:W-:Y:S03]         /*0020*/                   ULDC.64 UR4, c[0x0][0x118] ;
+      [B------:R-:W0:-:S02]         /*0030*/                   S2R R3, SR_TID.X ;
+      [B0-----:R-:W-:Y:S04]         /*0040*/                   LEA R0, R0, R3, 0xd ;
+      [B------:R-:W-:Y:S04]         /*0050*/                   SHF.L.U32 R0, R0, 0x2, RZ ;
+      [B------:R-:W-:Y:S04]         /*0060*/                   LOP3.LUT R0, R0, 0x1ffffc, RZ, 0xc0, !PT ;
+      [B------:R-:W-:Y:S04]         /*0070*/                   IADD3 R2, P0, R0, c[0x0][0x160], RZ ;
+      [B------:R-:W-:Y:S05]         /*0080*/                   IADD3.X R3, RZ, c[0x0][0x164], RZ, P0, !PT ;
+      [B------:R-:W2:-:S04]         /*0090*/                   LDG.E.STRONG.GPU R0, desc[UR4][R2.64] ;
+      [B------:R-:W3:-:S04]         /*00a0*/                   LDG.E.STRONG.GPU R5, desc[UR4][R2.64+0x800] ;
+      [B------:R-:W4:-:S04]         /*00b0*/                   LDG.E.STRONG.GPU R7, desc[UR4][R2.64+0x1000] ;
+      [B------:R-:W5:-:S04]         /*00c0*/                   LDG.E.STRONG.GPU R9, desc[UR4][R2.64+0x1800] ;
+      [B------:R-:W5:-:S04]         /*00d0*/                   LDG.E.STRONG.GPU R11, desc[UR4][R2.64+0x2000] ;
+      [B------:R-:W5:-:S04]         /*00e0*/                   LDG.E.STRONG.GPU R13, desc[UR4][R2.64+0x2800] ;
+      [B------:R-:W5:-:S04]         /*00f0*/                   LDG.E.STRONG.GPU R15, desc[UR4][R2.64+0x3000] ;
+      [B------:R-:W5:-:S04]         /*0100*/                   LDG.E.STRONG.GPU R17, desc[UR4][R2.64+0x3800] ;
+      [B------:R-:W5:-:S04]         /*0110*/                   LDG.E.STRONG.GPU R19, desc[UR4][R2.64+0x4000] ;
+      [B------:R-:W5:-:S04]         /*0120*/                   LDG.E.STRONG.GPU R21, desc[UR4][R2.64+0x4800] ;
+      [B------:R-:W5:-:S04]         /*0130*/                   LDG.E.STRONG.GPU R23, desc[UR4][R2.64+0x5000] ;
+      [B------:R-:W5:-:S04]         /*0140*/                   LDG.E.STRONG.GPU R25, desc[UR4][R2.64+0x5800] ;
+      [B------:R-:W5:-:S04]         /*0150*/                   LDG.E.STRONG.GPU R27, desc[UR4][R2.64+0x6000] ;
+      [B------:R-:W5:-:S04]         /*0160*/                   LDG.E.STRONG.GPU R29, desc[UR4][R2.64+0x6800] ;
+      [B------:R-:W5:-:S04]         /*0170*/                   LDG.E.STRONG.GPU R31, desc[UR4][R2.64+0x7000] ;
+      [B------:R-:W5:-:S01]         /*0180*/                   LDG.E.STRONG.GPU R33, desc[UR4][R2.64+0x7800] ;
+      [B--2---:R-:W-:Y:S04]         /*0190*/                   FADD R0, RZ, R0 ;
+      [B---3--:R-:W-:Y:S04]         /*01a0*/                   FADD R0, R0, R5 ;
+      [B----4-:R-:W-:Y:S04]         /*01b0*/                   FADD R0, R0, R7 ;
+      [B-----5:R-:W-:Y:S04]         /*01c0*/                   FADD R0, R0, R9 ;
+      [B------:R-:W-:Y:S04]         /*01d0*/                   FADD R0, R0, R11 ;
+      [B------:R-:W-:Y:S04]         /*01e0*/                   FADD R0, R0, R13 ;
+      [B------:R-:W-:Y:S04]         /*01f0*/                   FADD R0, R0, R15 ;
+      [B------:R-:W-:Y:S04]         /*0200*/                   FADD R0, R0, R17 ;
+      [B------:R-:W-:Y:S04]         /*0210*/                   FADD R0, R0, R19 ;
+      [B------:R-:W-:Y:S04]         /*0220*/                   FADD R0, R0, R21 ;
+      [B------:R-:W-:Y:S04]         /*0230*/                   FADD R0, R0, R23 ;
+      [B------:R-:W-:Y:S04]         /*0240*/                   FADD R0, R0, R25 ;
+      [B------:R-:W-:Y:S04]         /*0250*/                   FADD R0, R0, R27 ;
+      [B------:R-:W-:Y:S04]         /*0260*/                   FADD R0, R0, R29 ;
+      [B------:R-:W-:Y:S04]         /*0270*/                   FADD R0, R0, R31 ;
+      [B------:R-:W-:Y:S05]         /*0280*/                   FADD R33, R0, R33 ;
+      [B------:R-:W-:Y:S13]         /*0290*/                   FSETP.NEU.AND P0, PT, R33, RZ, PT ;
+      [B------:R-:W-:-:S05]         /*02a0*/              @!P0 EXIT ;
+      [B------:R-:W-:-:S02]         /*02b0*/                   MOV R2, c[0x0][0x168] ;
+      [B------:R-:W-:Y:S05]         /*02c0*/                   MOV R3, c[0x0][0x16c] ;
+      [B------:R-:W-:-:S01]         /*02d0*/                   STG.E desc[UR4][R2.64], R33 ;
+      [B------:R-:W-:-:S05]         /*02e0*/                   EXIT ;
+  .L_x_0:
+      [B------:R-:W-:Y:S00]         /*02f0*/                   BRA `(.L_x_0);
+      [B------:R-:W-:Y:S00]         /*0300*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0310*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0320*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0330*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0340*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0350*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0360*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*0370*/                   NOP;
+  .L_x_1:
+
+  //-------------------------------------------------
+  //---------------- END of sections ----------------
+  //-------------------------------------------------
+
+
+// Program segment PT_PHDR, 5 
+  .__segment  "PT_PHDR", 5 
+  .__segment_offset  0xb80   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0xa8   		// file size, maybe updated by assembler 
+  .__segment_memsz   0xa8   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+
+// Program segment PT_LOAD, 5 
+  .__segment  "PT_LOAD", 5 
+  .__segment_offset  0x410   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0x4f0   		// file size, maybe updated by assembler 
+  .__segment_memsz   0x4f0   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+  .__segment_startsection    ".nv.constant0._Z22L2cacheBW_float_kernelPKfPf"  		// first section in this segment 
+  .__segment_endsection      ".text._Z22L2cacheBW_float_kernelPKfPf"  		// last  section in this segment 
+
+// Program segment PT_LOAD, 5 
+  .__segment  "PT_LOAD", 5 
+  .__segment_offset  0xb80   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0xa8   		// file size, maybe updated by assembler 
+  .__segment_memsz   0xa8   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+  .__segment_startsection    "@PROGRAM_HEADER"  		// first section in this segment 
+  .__segment_endsection      "@PROGRAM_HEADER"  		// last  section in this segment 
+
+
+  //-------------------------------------------------
+  //---------------- END of segments ----------------
+  //-------------------------------------------------
+
+

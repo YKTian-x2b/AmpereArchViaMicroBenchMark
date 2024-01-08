@@ -10,7 +10,7 @@
 #define GRD_SIZE 1
 // 16*8=128字节
 // 这里的BLK_SIZE最大是16，取32就会使测试结果从33cycles变为35cycles。可能是因为两次L1事务中间需要间隔2个cycle吗？
-// 结合L1的吞吐峰值是一个cycle64B，那么发射指令之后的两个cycle就会读两次64B作为一个整体结束，然后再读两次64B作为一个整体结束吗？
+// 结合L1的非向量加载吞吐峰值是一个cycle64B，那么发射指令之后的两个cycle就会读两次64B作为一个整体结束，然后再读两次64B作为一个整体结束吗？
 // 所以结束的时间点是按 每两次读取完全结束的时间算的，这两次就叫 一个transaction 吗？
 #define BLK_SIZE 16
 // [10, 50, 100, 200, 400] 别超过L0_I-Cache 都可以试试 结果差不多
@@ -54,7 +54,7 @@ __global__ void l1Cache_latency_test_kernel(uint32_t *startClk, uint32_t *stopCl
 }
 
 int main(){
-    // 为了非常精准的测试latency，理想情况需要，两个计时clock之间，全都是背靠背的访存指令
+    // 为了非常精准的测试latency，理想情况需要，两个计时clock之间，全都是有邻居依赖的背靠背访存指令
     // 所以这里除了要用pointerChase，还要让读取结果直接就是指针，而不是偏移量，移除掉指针计算的那条指令
     // 太精彩了写的
     CuPtr<void*> arr_d(BLK_SIZE);

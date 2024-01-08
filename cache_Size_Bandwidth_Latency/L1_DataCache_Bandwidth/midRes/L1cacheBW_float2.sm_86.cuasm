@@ -1,0 +1,1395 @@
+// --------------------- FileHeader --------------------------
+	// All file header info is kept as is (unless offset/size attributes)
+	// The original header flags is not complete, thus discarded. 
+	// 	.headerflags	@"EF_CUDA_TEXMODE_UNIFIED EF_CUDA_64BIT_ADDRESS EF_CUDA_SM86 EF_CUDA_VIRTUAL_SM(EF_CUDA_SM86)"
+	// 	.elftype	@"ET_EXEC"
+	// 
+	// 
+	.__elf_ident_osabi      51
+	.__elf_ident_abiversion 7
+	.__elf_type             ET_EXEC
+	.__elf_machine          EM_CUDA
+	.__elf_version          121 		// CUDA toolkit version 
+	.__elf_entry            0 		// entry point address 
+	.__elf_phoff            0x3c80 		// program header offset, maybe updated by assembler
+	.__elf_shoff            0x3a00 		// section header offset, maybe updated by assembler
+	.__elf_flags            0x560556 		// Flags, SM_86(0x56), COMPUTE_86(0x56) 
+	.__elf_ehsize           64 		// elf header size 
+	.__elf_phentsize        56 		// program entry size
+	.__elf_phnum            3 		// number of program entries
+	.__elf_shentsize        64 		// section entry size
+	.__elf_shnum            10 		// number of sections, currently no sections can be appended/removed
+	.__elf_shstrndx         1 		// Section name string table index 
+
+
+  //-------------------------------------------------
+  //------------ END of FileHeader ------------------
+  //-------------------------------------------------
+
+
+
+// ---------------------                                  --------------------------
+	// there will always be an empty section at index 0
+	.section  "", 0, SHT_NULL
+	.__section_name         0x0 	// offset in .shstrtab
+	.__section_type         SHT_NULL
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x0 	// maybe updated by assembler
+	.__section_size         0x0 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                0 	// equivalent to set sh_addralign
+
+// --------------------- .shstrtab                        --------------------------
+	.section  ".shstrtab", 0, SHT_STRTAB
+	// all strings in .shstrtab section will be kept as is.
+	.__section_name         0x1 	// offset in .shstrtab
+	.__section_type         SHT_STRTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x40 	// maybe updated by assembler
+	.__section_size         0x14c 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                1 	// equivalent to set sh_addralign
+    // .shstrtab[0] = b'\x00' 
+    /*0000*/ .byte 0x00
+
+    // .shstrtab[1] = b'.shstrtab\x00' 
+    /*0001*/ .byte 0x2e, 0x73, 0x68, 0x73, 0x74, 0x72, 0x74, 0x61
+    /*0009*/ .byte 0x62, 0x00
+
+    // .shstrtab[2] = b'.strtab\x00' 
+    /*000b*/ .byte 0x2e, 0x73, 0x74, 0x72, 0x74, 0x61, 0x62, 0x00
+
+    // .shstrtab[3] = b'.symtab\x00' 
+    /*0013*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x00
+
+    // .shstrtab[4] = b'.symtab_shndx\x00' 
+    /*001b*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x5f
+    /*0023*/ .byte 0x73, 0x68, 0x6e, 0x64, 0x78, 0x00
+
+    // .shstrtab[5] = b'.nv.uft.entry\x00' 
+    /*0029*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x75, 0x66, 0x74, 0x2e
+    /*0031*/ .byte 0x65, 0x6e, 0x74, 0x72, 0x79, 0x00
+
+    // .shstrtab[6] = b'.nv.info\x00' 
+    /*0037*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*003f*/ .byte 0x00
+
+    // .shstrtab[7] = b'.text._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_\x00' 
+    /*0040*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*0048*/ .byte 0x32, 0x35, 0x4c, 0x31, 0x44, 0x61, 0x74, 0x61
+    /*0050*/ .byte 0x63, 0x61, 0x63, 0x68, 0x65, 0x42, 0x57, 0x5f
+    /*0058*/ .byte 0x74, 0x65, 0x73, 0x74, 0x5f, 0x6b, 0x65, 0x72
+    /*0060*/ .byte 0x6e, 0x65, 0x6c, 0x50, 0x6a, 0x53, 0x5f, 0x50
+    /*0068*/ .byte 0x36, 0x66, 0x6c, 0x6f, 0x61, 0x74, 0x32, 0x53
+    /*0070*/ .byte 0x31, 0x5f, 0x00
+
+    // .shstrtab[8] = b'.nv.info._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_\x00' 
+    /*0073*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*007b*/ .byte 0x2e, 0x5f, 0x5a, 0x32, 0x35, 0x4c, 0x31, 0x44
+    /*0083*/ .byte 0x61, 0x74, 0x61, 0x63, 0x61, 0x63, 0x68, 0x65
+    /*008b*/ .byte 0x42, 0x57, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x5f
+    /*0093*/ .byte 0x6b, 0x65, 0x72, 0x6e, 0x65, 0x6c, 0x50, 0x6a
+    /*009b*/ .byte 0x53, 0x5f, 0x50, 0x36, 0x66, 0x6c, 0x6f, 0x61
+    /*00a3*/ .byte 0x74, 0x32, 0x53, 0x31, 0x5f, 0x00
+
+    // .shstrtab[9] = b'.nv.shared._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_\x00' 
+    /*00a9*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*00b1*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x32, 0x35, 0x4c
+    /*00b9*/ .byte 0x31, 0x44, 0x61, 0x74, 0x61, 0x63, 0x61, 0x63
+    /*00c1*/ .byte 0x68, 0x65, 0x42, 0x57, 0x5f, 0x74, 0x65, 0x73
+    /*00c9*/ .byte 0x74, 0x5f, 0x6b, 0x65, 0x72, 0x6e, 0x65, 0x6c
+    /*00d1*/ .byte 0x50, 0x6a, 0x53, 0x5f, 0x50, 0x36, 0x66, 0x6c
+    /*00d9*/ .byte 0x6f, 0x61, 0x74, 0x32, 0x53, 0x31, 0x5f, 0x00
+
+    // .shstrtab[10] = b'.nv.constant0._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_\x00' 
+    /*00e1*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*00e9*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*00f1*/ .byte 0x32, 0x35, 0x4c, 0x31, 0x44, 0x61, 0x74, 0x61
+    /*00f9*/ .byte 0x63, 0x61, 0x63, 0x68, 0x65, 0x42, 0x57, 0x5f
+    /*0101*/ .byte 0x74, 0x65, 0x73, 0x74, 0x5f, 0x6b, 0x65, 0x72
+    /*0109*/ .byte 0x6e, 0x65, 0x6c, 0x50, 0x6a, 0x53, 0x5f, 0x50
+    /*0111*/ .byte 0x36, 0x66, 0x6c, 0x6f, 0x61, 0x74, 0x32, 0x53
+    /*0119*/ .byte 0x31, 0x5f, 0x00
+
+    // .shstrtab[11] = b'.debug_frame\x00' 
+    /*011c*/ .byte 0x2e, 0x64, 0x65, 0x62, 0x75, 0x67, 0x5f, 0x66
+    /*0124*/ .byte 0x72, 0x61, 0x6d, 0x65, 0x00
+
+    // .shstrtab[12] = b'.rel.debug_frame\x00' 
+    /*0129*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x2e, 0x64, 0x65, 0x62
+    /*0131*/ .byte 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d, 0x65
+    /*0139*/ .byte 0x00
+
+    // .shstrtab[13] = b'.rela.debug_frame\x00' 
+    /*013a*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x61, 0x2e, 0x64, 0x65
+    /*0142*/ .byte 0x62, 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d
+    /*014a*/ .byte 0x65, 0x00
+
+
+// --------------------- .strtab                          --------------------------
+	.section  ".strtab", 0, SHT_STRTAB
+	// all strings in .strtab section will be kept as is.
+	.__section_name         0xb 	// offset in .shstrtab
+	.__section_type         SHT_STRTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x18c 	// maybe updated by assembler
+	.__section_size         0x180 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                1 	// equivalent to set sh_addralign
+    // .strtab[0] = b'\x00' 
+    /*0000*/ .byte 0x00
+
+    // .strtab[1] = b'.shstrtab\x00' 
+    /*0001*/ .byte 0x2e, 0x73, 0x68, 0x73, 0x74, 0x72, 0x74, 0x61
+    /*0009*/ .byte 0x62, 0x00
+
+    // .strtab[2] = b'.strtab\x00' 
+    /*000b*/ .byte 0x2e, 0x73, 0x74, 0x72, 0x74, 0x61, 0x62, 0x00
+
+    // .strtab[3] = b'.symtab\x00' 
+    /*0013*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x00
+
+    // .strtab[4] = b'.symtab_shndx\x00' 
+    /*001b*/ .byte 0x2e, 0x73, 0x79, 0x6d, 0x74, 0x61, 0x62, 0x5f
+    /*0023*/ .byte 0x73, 0x68, 0x6e, 0x64, 0x78, 0x00
+
+    // .strtab[5] = b'.nv.uft.entry\x00' 
+    /*0029*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x75, 0x66, 0x74, 0x2e
+    /*0031*/ .byte 0x65, 0x6e, 0x74, 0x72, 0x79, 0x00
+
+    // .strtab[6] = b'.nv.info\x00' 
+    /*0037*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*003f*/ .byte 0x00
+
+    // .strtab[7] = b'_Z25L1DatacacheBW_test_kernelPjS_P6float2S1_\x00' 
+    /*0040*/ .byte 0x5f, 0x5a, 0x32, 0x35, 0x4c, 0x31, 0x44, 0x61
+    /*0048*/ .byte 0x74, 0x61, 0x63, 0x61, 0x63, 0x68, 0x65, 0x42
+    /*0050*/ .byte 0x57, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x5f, 0x6b
+    /*0058*/ .byte 0x65, 0x72, 0x6e, 0x65, 0x6c, 0x50, 0x6a, 0x53
+    /*0060*/ .byte 0x5f, 0x50, 0x36, 0x66, 0x6c, 0x6f, 0x61, 0x74
+    /*0068*/ .byte 0x32, 0x53, 0x31, 0x5f, 0x00
+
+    // .strtab[8] = b'.text._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_\x00' 
+    /*006d*/ .byte 0x2e, 0x74, 0x65, 0x78, 0x74, 0x2e, 0x5f, 0x5a
+    /*0075*/ .byte 0x32, 0x35, 0x4c, 0x31, 0x44, 0x61, 0x74, 0x61
+    /*007d*/ .byte 0x63, 0x61, 0x63, 0x68, 0x65, 0x42, 0x57, 0x5f
+    /*0085*/ .byte 0x74, 0x65, 0x73, 0x74, 0x5f, 0x6b, 0x65, 0x72
+    /*008d*/ .byte 0x6e, 0x65, 0x6c, 0x50, 0x6a, 0x53, 0x5f, 0x50
+    /*0095*/ .byte 0x36, 0x66, 0x6c, 0x6f, 0x61, 0x74, 0x32, 0x53
+    /*009d*/ .byte 0x31, 0x5f, 0x00
+
+    // .strtab[9] = b'.nv.info._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_\x00' 
+    /*00a0*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x69, 0x6e, 0x66, 0x6f
+    /*00a8*/ .byte 0x2e, 0x5f, 0x5a, 0x32, 0x35, 0x4c, 0x31, 0x44
+    /*00b0*/ .byte 0x61, 0x74, 0x61, 0x63, 0x61, 0x63, 0x68, 0x65
+    /*00b8*/ .byte 0x42, 0x57, 0x5f, 0x74, 0x65, 0x73, 0x74, 0x5f
+    /*00c0*/ .byte 0x6b, 0x65, 0x72, 0x6e, 0x65, 0x6c, 0x50, 0x6a
+    /*00c8*/ .byte 0x53, 0x5f, 0x50, 0x36, 0x66, 0x6c, 0x6f, 0x61
+    /*00d0*/ .byte 0x74, 0x32, 0x53, 0x31, 0x5f, 0x00
+
+    // .strtab[10] = b'.nv.shared._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_\x00' 
+    /*00d6*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x73, 0x68, 0x61, 0x72
+    /*00de*/ .byte 0x65, 0x64, 0x2e, 0x5f, 0x5a, 0x32, 0x35, 0x4c
+    /*00e6*/ .byte 0x31, 0x44, 0x61, 0x74, 0x61, 0x63, 0x61, 0x63
+    /*00ee*/ .byte 0x68, 0x65, 0x42, 0x57, 0x5f, 0x74, 0x65, 0x73
+    /*00f6*/ .byte 0x74, 0x5f, 0x6b, 0x65, 0x72, 0x6e, 0x65, 0x6c
+    /*00fe*/ .byte 0x50, 0x6a, 0x53, 0x5f, 0x50, 0x36, 0x66, 0x6c
+    /*0106*/ .byte 0x6f, 0x61, 0x74, 0x32, 0x53, 0x31, 0x5f, 0x00
+
+    // .strtab[11] = b'.nv.constant0._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_\x00' 
+    /*010e*/ .byte 0x2e, 0x6e, 0x76, 0x2e, 0x63, 0x6f, 0x6e, 0x73
+    /*0116*/ .byte 0x74, 0x61, 0x6e, 0x74, 0x30, 0x2e, 0x5f, 0x5a
+    /*011e*/ .byte 0x32, 0x35, 0x4c, 0x31, 0x44, 0x61, 0x74, 0x61
+    /*0126*/ .byte 0x63, 0x61, 0x63, 0x68, 0x65, 0x42, 0x57, 0x5f
+    /*012e*/ .byte 0x74, 0x65, 0x73, 0x74, 0x5f, 0x6b, 0x65, 0x72
+    /*0136*/ .byte 0x6e, 0x65, 0x6c, 0x50, 0x6a, 0x53, 0x5f, 0x50
+    /*013e*/ .byte 0x36, 0x66, 0x6c, 0x6f, 0x61, 0x74, 0x32, 0x53
+    /*0146*/ .byte 0x31, 0x5f, 0x00
+
+    // .strtab[12] = b'_param\x00' 
+    /*0149*/ .byte 0x5f, 0x70, 0x61, 0x72, 0x61, 0x6d, 0x00
+
+    // .strtab[13] = b'.debug_frame\x00' 
+    /*0150*/ .byte 0x2e, 0x64, 0x65, 0x62, 0x75, 0x67, 0x5f, 0x66
+    /*0158*/ .byte 0x72, 0x61, 0x6d, 0x65, 0x00
+
+    // .strtab[14] = b'.rel.debug_frame\x00' 
+    /*015d*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x2e, 0x64, 0x65, 0x62
+    /*0165*/ .byte 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d, 0x65
+    /*016d*/ .byte 0x00
+
+    // .strtab[15] = b'.rela.debug_frame\x00' 
+    /*016e*/ .byte 0x2e, 0x72, 0x65, 0x6c, 0x61, 0x2e, 0x64, 0x65
+    /*0176*/ .byte 0x62, 0x75, 0x67, 0x5f, 0x66, 0x72, 0x61, 0x6d
+    /*017e*/ .byte 0x65, 0x00
+
+
+// --------------------- .symtab                          --------------------------
+	.section  ".symtab", 0, SHT_SYMTAB
+	// all symbols in .symtab sections will be kept
+	// but the symbol size may be changed accordingly
+	.__section_name         0x13 	// offset in .shstrtab
+	.__section_type         SHT_SYMTAB
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x310 	// maybe updated by assembler
+	.__section_size         0x78 	// maybe updated by assembler
+	.__section_link         2
+	.__section_info         0x4
+	.__section_entsize      24
+	.align                8 	// equivalent to set sh_addralign
+    // Symbol[0] "": Container({'st_name': 0, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_NOTYPE'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 'SHN_UNDEF', 'st_value': 0, 'st_size': 0})
+    /*0000*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0008*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0010*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[1] ".text._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_": Container({'st_name': 109, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 9, 'st_value': 0, 'st_size': 0})
+    /*0018*/ .byte 0x6d, 0x00, 0x00, 0x00, 0x03, 0x00, 0x09, 0x00
+    /*0020*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0028*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[2] ".nv.constant0._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_": Container({'st_name': 270, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 8, 'st_value': 0, 'st_size': 0})
+    /*0030*/ .byte 0x0e, 0x01, 0x00, 0x00, 0x03, 0x00, 0x08, 0x00
+    /*0038*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0040*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[3] ".debug_frame": Container({'st_name': 336, 'st_info': Container({'bind': 'STB_LOCAL', 'type': 'STT_SECTION'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 4, 'st_value': 0, 'st_size': 0})
+    /*0048*/ .byte 0x50, 0x01, 0x00, 0x00, 0x03, 0x00, 0x04, 0x00
+    /*0050*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0058*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+    // Symbol[4] "_Z25L1DatacacheBW_test_kernelPjS_P6float2S1_": Container({'st_name': 64, 'st_info': Container({'bind': 'STB_GLOBAL', 'type': 'STT_FUNC'}), 'st_other': Container({'local': 0, 'visibility': 'STV_DEFAULT'}), 'st_shndx': 9, 'st_value': 0, 'st_size': 13184})
+    /*0060*/ .byte 0x40, 0x00, 0x00, 0x00, 0x12, 0x10, 0x09, 0x00
+    /*0068*/ .byte 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+    /*0070*/ .byte 0x80, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+
+
+// --------------------- .debug_frame                     --------------------------
+	.section	.debug_frame,"",@progbits
+	.__section_name         0x11c 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x388 	// maybe updated by assembler
+	.__section_size         0x70 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                1 	// equivalent to set sh_addralign
+  .debug_frame:
+          /*0000*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0x24, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0xff, 0xff, 0xff, 0xff
+          /*0010*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0x03, 0x00, 0x04, 0x7c, 0xff, 0xff, 0xff, 0xff, 0x0f, 0x0c, 0x81, 0x80
+          /*0020*/ 	.byte	0x80, 0x28, 0x00, 0x08, 0xff, 0x81, 0x80, 0x28, 0x08, 0x81, 0x80, 0x80, 0x28, 0x00, 0x00, 0x00
+          /*0030*/ 	.byte	0xff, 0xff, 0xff, 0xff, 0x34, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*0040*/ 	.byte	0x00, 0x00, 0x00, 0x00
+          /*0044*/ 	.dword	_Z25L1DatacacheBW_test_kernelPjS_P6float2S1_
+          /*004c*/ 	.byte	0x80, 0x33, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x04, 0x04, 0x00, 0x00, 0x00, 0x04, 0x70, 0x00
+          /*005c*/ 	.byte	0x00, 0x00, 0x0c, 0x81, 0x80, 0x80, 0x28, 0x00, 0x04, 0x28, 0x0c, 0x00, 0x00, 0x00, 0x00, 0x00
+          /*006c*/ 	.byte	0x00, 0x00, 0x00, 0x00
+  
+  
+// --------------------- .nv.info                         --------------------------
+	.section	.nv.info,"",@"SHT_CUDA_INFO"
+	.__section_name         0x37 	// offset in .shstrtab
+	.__section_type         1879048192
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x3f8 	// maybe updated by assembler
+	.__section_size         0x30 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x0
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  
+  
+  	//----- nvinfo : EIATTR_REGCOUNT
+  	.align		4
+          /*0000*/ 	.byte	0x04, 0x2f
+          /*0002*/ 	.short	(.L_1 - .L_0)
+  	.align		4
+  .L_0:
+          /*0004*/ 	.word	index@(_Z25L1DatacacheBW_test_kernelPjS_P6float2S1_)
+          /*0008*/ 	.word	0x00000027
+  
+  
+  	//----- nvinfo : EIATTR_MAX_STACK_SIZE
+  	.align		4
+  .L_1:
+          /*000c*/ 	.byte	0x04, 0x23
+          /*000e*/ 	.short	(.L_3 - .L_2)
+  	.align		4
+  .L_2:
+          /*0010*/ 	.word	index@(_Z25L1DatacacheBW_test_kernelPjS_P6float2S1_)
+          /*0014*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_MIN_STACK_SIZE
+  	.align		4
+  .L_3:
+          /*0018*/ 	.byte	0x04, 0x12
+          /*001a*/ 	.short	(.L_5 - .L_4)
+  	.align		4
+  .L_4:
+          /*001c*/ 	.word	index@(_Z25L1DatacacheBW_test_kernelPjS_P6float2S1_)
+          /*0020*/ 	.word	0x00000000
+  
+  
+  	//----- nvinfo : EIATTR_FRAME_SIZE
+  	.align		4
+  .L_5:
+          /*0024*/ 	.byte	0x04, 0x11
+          /*0026*/ 	.short	(.L_7 - .L_6)
+  	.align		4
+  .L_6:
+          /*0028*/ 	.word	index@(_Z25L1DatacacheBW_test_kernelPjS_P6float2S1_)
+          /*002c*/ 	.word	0x00000000
+  .L_7:
+  
+  
+// --------------------- .nv.info._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_ --------------------------
+	.section	.nv.info._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_,"",@"SHT_CUDA_INFO"
+	.__section_name         0x73 	// offset in .shstrtab
+	.__section_type         1879048192
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x428 	// maybe updated by assembler
+	.__section_size         0x68 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x9
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  
+  
+  	//----- nvinfo : EIATTR_CUDA_API_VERSION
+  	.align		4
+          /*0000*/ 	.byte	0x04, 0x37
+          /*0002*/ 	.short	(.L_9 - .L_8)
+  .L_8:
+          /*0004*/ 	.word	0x00000079
+  
+  
+  	//----- nvinfo : EIATTR_SW2861232_WAR
+  	.align		4
+  .L_9:
+          /*0008*/ 	.byte	0x01, 0x35
+  	.zero		2
+  
+  
+  	//----- nvinfo : EIATTR_PARAM_CBANK
+  	.align		4
+          /*000c*/ 	.byte	0x04, 0x0a
+          /*000e*/ 	.short	(.L_11 - .L_10)
+  	.align		4
+  .L_10:
+          /*0010*/ 	.word	index@(.nv.constant0._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_)
+          /*0014*/ 	.short	0x0160
+          /*0016*/ 	.short	0x0020
+  
+  
+  	//----- nvinfo : EIATTR_CBANK_PARAM_SIZE
+  	.align		4
+  .L_11:
+          /*0018*/ 	.byte	0x03, 0x19
+          /*001a*/ 	.short	0x0020
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+          /*001c*/ 	.byte	0x04, 0x17
+          /*001e*/ 	.short	(.L_13 - .L_12)
+  .L_12:
+          /*0020*/ 	.word	0x00000000
+          /*0024*/ 	.short	0x0003
+          /*0026*/ 	.short	0x0018
+          /*0028*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+  .L_13:
+          /*002c*/ 	.byte	0x04, 0x17
+          /*002e*/ 	.short	(.L_15 - .L_14)
+  .L_14:
+          /*0030*/ 	.word	0x00000000
+          /*0034*/ 	.short	0x0002
+          /*0036*/ 	.short	0x0010
+          /*0038*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+  .L_15:
+          /*003c*/ 	.byte	0x04, 0x17
+          /*003e*/ 	.short	(.L_17 - .L_16)
+  .L_16:
+          /*0040*/ 	.word	0x00000000
+          /*0044*/ 	.short	0x0001
+          /*0046*/ 	.short	0x0008
+          /*0048*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_KPARAM_INFO
+  	.align		4
+  .L_17:
+          /*004c*/ 	.byte	0x04, 0x17
+          /*004e*/ 	.short	(.L_19 - .L_18)
+  .L_18:
+          /*0050*/ 	.word	0x00000000
+          /*0054*/ 	.short	0x0000
+          /*0056*/ 	.short	0x0000
+          /*0058*/ 	.byte	0x00, 0xf0, 0x21, 0x00
+  
+  
+  	//----- nvinfo : EIATTR_MAXREG_COUNT
+  	.align		4
+  .L_19:
+          /*005c*/ 	.byte	0x03, 0x1b
+          /*005e*/ 	.short	0x00ff
+  
+  
+  	//----- nvinfo : EIATTR_EXIT_INSTR_OFFSETS
+  	.align		4
+          /*0060*/ 	.byte	0x04, 0x1c
+          /*0062*/ 	.short	(.L_21 - .L_20)
+  
+  
+  	//   ....[0]....
+  .L_20:
+          /*0064*/ 	.word	0x00003270
+  .L_21:
+  
+  
+// --------------------- .rel.debug_frame                 --------------------------
+	.section  ".rel.debug_frame", 0, SHT_REL
+	// all relocation sections will be dynamically generated by assembler 
+	// but most of the section header will be kept as is.
+	.__section_name         0x129 	// offset in .shstrtab
+	.__section_type         SHT_REL
+	.__section_flags        0x0
+	.__section_addr         0x0
+	.__section_offset       0x490 	// maybe updated by assembler
+	.__section_size         0x10 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x4
+	.__section_entsize      16
+	.align                8 	// equivalent to set sh_addralign
+    // Relocation[0] : _Z25L1DatacacheBW_test_kernelPjS_P6float2S1_, Container({'r_offset': 68, 'r_info': 17179869186, 'r_info_sym': 4, 'r_info_type': 2})
+
+// --------------------- .nv.constant0._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_ --------------------------
+	.section	.nv.constant0._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_,"a",@progbits
+	.__section_name         0xe1 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x2
+	.__section_addr         0x0
+	.__section_offset       0x4a0 	// maybe updated by assembler
+	.__section_size         0x180 	// maybe updated by assembler
+	.__section_link         0
+	.__section_info         0x9
+	.__section_entsize      0
+	.align                4 	// equivalent to set sh_addralign
+  	.align	4
+  .nv.constant0._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_:
+  	.zero		384
+  
+  
+// --------------------- .text._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_ --------------------------
+	.section	.text._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_,"ax",@progbits
+	.__section_name         0x40 	// offset in .shstrtab
+	.__section_type         SHT_PROGBITS
+	.__section_flags        0x100006
+	.__section_addr         0x0
+	.__section_offset       0x680 	// maybe updated by assembler
+	.__section_size         0x3380 	// maybe updated by assembler
+	.__section_link         5
+	.__section_info         0x27000004
+	.__section_entsize      0
+	.align                128 	// equivalent to set sh_addralign
+  	.sectionflags	@"SHF_BARRIERS=1"
+  	.sectioninfo	@"SHI_REGISTERS=39"
+  	.align	128
+          .global         _Z25L1DatacacheBW_test_kernelPjS_P6float2S1_
+          .type           _Z25L1DatacacheBW_test_kernelPjS_P6float2S1_,@function
+          .size           _Z25L1DatacacheBW_test_kernelPjS_P6float2S1_,(.L_x_1 - _Z25L1DatacacheBW_test_kernelPjS_P6float2S1_)
+          .other          _Z25L1DatacacheBW_test_kernelPjS_P6float2S1_,@"STO_CUDA_ENTRY STV_DEFAULT"
+  _Z25L1DatacacheBW_test_kernelPjS_P6float2S1_:
+  .text._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_:
+      [B------:R-:W-:Y:S02]         /*0000*/                   MOV R1, c[0x0][0x28] ;
+      [B------:R-:W0:-:S01]         /*0010*/                   S2R R0, SR_TID.X ;
+      [B------:R-:W-:-:S01]         /*0020*/                   MOV R31, 0x8 ;
+      [B------:R-:W-:Y:S04]         /*0030*/                   ULDC.64 UR4, c[0x0][0x118] ;
+      [B0-----:R-:W-:Y:S05]         /*0040*/                   IMAD.WIDE R34, R0, R31, c[0x0][0x178] ;
+      [B------:R-:W2:-:S04]         /*0050*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64] ;
+      [B------:R-:W3:-:S04]         /*0060*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x2000] ;
+      [B------:R-:W4:-:S04]         /*0070*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x4000] ;
+      [B------:R-:W5:-:S04]         /*0080*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x6000] ;
+      [B------:R-:W5:-:S04]         /*0090*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x8000] ;
+      [B------:R-:W5:-:S04]         /*00a0*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0xa000] ;
+      [B------:R-:W5:-:S04]         /*00b0*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0xc000] ;
+      [B------:R-:W5:-:S04]         /*00c0*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0xe000] ;
+      [B------:R-:W-:-:S06]         /*00d0*/                   BAR.SYNC 0x0 ;
+      [B--2---:R-:W-:-:S01]         /*00e0*/                   FADD R8, R8, R9 ;
+      [B---3--:R-:W-:Y:S03]         /*00f0*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S01]         /*0100*/                   FADD R8, RZ, R8 ;
+      [B----4-:R-:W-:Y:S03]         /*0110*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:-:S01]         /*0120*/                   FADD R8, R8, R11 ;
+      [B-----5:R-:W-:Y:S03]         /*0130*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S01]         /*0140*/                   FADD R8, R8, R13 ;
+      [B------:R-:W-:Y:S03]         /*0150*/                   FADD R17, R16, R17 ;
+      [B------:R-:W-:-:S01]         /*0160*/                   FADD R8, R8, R15 ;
+      [B------:R-:W-:Y:S03]         /*0170*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*0180*/                   FADD R8, R8, R17 ;
+      [B------:R-:W-:Y:S03]         /*0190*/                   FADD R4, R4, R5 ;
+      [B------:R-:W-:-:S01]         /*01a0*/                   FADD R3, R8, R3 ;
+      [B------:R-:W-:Y:S03]         /*01b0*/                   FADD R30, R6, R7 ;
+      [B------:R-:W-:Y:S01]         /*01c0*/                   FADD R33, R3, R4 ;
+      [B------:R-:W-:Y:S06]         /*01d0*/                   CS2R.32 R32, SR_CLOCKLO ;
+      [B------:R-:W2:-:S04]         /*01e0*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64] ;
+      [B------:R-:W3:-:S04]         /*01f0*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x100] ;
+      [B------:R-:W4:-:S04]         /*0200*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x200] ;
+      [B------:R-:W5:-:S04]         /*0210*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x300] ;
+      [B------:R-:W5:-:S04]         /*0220*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x400] ;
+      [B------:R-:W5:-:S04]         /*0230*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x500] ;
+      [B------:R-:W5:-:S04]         /*0240*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x600] ;
+      [B------:R-:W5:-:S04]         /*0250*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x700] ;
+      [B------:R-:W5:-:S04]         /*0260*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x800] ;
+      [B------:R-:W5:-:S04]         /*0270*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x900] ;
+      [B------:R-:W5:-:S04]         /*0280*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0xa00] ;
+      [B------:R-:W5:-:S04]         /*0290*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0xb00] ;
+      [B------:R-:W5:-:S01]         /*02a0*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0xc00] ;
+      [B--2---:R-:W-:Y:S03]         /*02b0*/                   FADD R28, R16, R17 ;
+      [B------:R-:W2:-:S01]         /*02c0*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0xd00] ;
+      [B---3--:R-:W-:-:S01]         /*02d0*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:Y:S04]         /*02e0*/                   FADD R28, RZ, R28 ;
+      [B------:R-:W-:-:S02]         /*02f0*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*0300*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0xe00] ;
+      [B----4-:R-:W-:Y:S04]         /*0310*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*0320*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*0330*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0xf00] ;
+      [B-----5:R-:W-:-:S01]         /*0340*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:Y:S03]         /*0350*/                   FADD R5, R4, R5 ;
+      [B------:R-:W-:-:S02]         /*0360*/                   FADD R28, R28, R7 ;
+      [B------:R-:W5:-:S02]         /*0370*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x1000] ;
+      [B------:R-:W-:-:S02]         /*0380*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*0390*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x1100] ;
+      [B------:R-:W-:Y:S04]         /*03a0*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*03b0*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*03c0*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x1200] ;
+      [B------:R-:W-:Y:S04]         /*03d0*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*03e0*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*03f0*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x1300] ;
+      [B------:R-:W-:Y:S04]         /*0400*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*0410*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*0420*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x1400] ;
+      [B------:R-:W-:-:S01]         /*0430*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:Y:S03]         /*0440*/                   FADD R26, R26, R27 ;
+      [B------:R-:W-:Y:S04]         /*0450*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:-:S02]         /*0460*/                   FADD R28, R3, R26 ;
+      [B------:R-:W5:-:S01]         /*0470*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x1500] ;
+      [B------:R-:W-:Y:S03]         /*0480*/                   FADD R25, R24, R25 ;
+      [B------:R-:W5:-:S01]         /*0490*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x1600] ;
+      [B------:R-:W-:-:S01]         /*04a0*/                   FADD R28, R28, R25 ;
+      [B------:R-:W-:-:S02]         /*04b0*/                   FADD R23, R22, R23 ;
+      [B------:R-:W5:-:S02]         /*04c0*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0x1700] ;
+      [B------:R-:W-:-:S02]         /*04d0*/                   FADD R28, R28, R23 ;
+      [B------:R-:W5:-:S01]         /*04e0*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0x1800] ;
+      [B------:R-:W-:Y:S04]         /*04f0*/                   FADD R19, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*0500*/                   FADD R28, R28, R19 ;
+      [B------:R-:W5:-:S01]         /*0510*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0x1900] ;
+      [B--2---:R-:W-:Y:S04]         /*0520*/                   FADD R17, R16, R17 ;
+      [B------:R-:W-:-:S02]         /*0530*/                   FADD R28, R28, R17 ;
+      [B------:R-:W2:-:S01]         /*0540*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x1a00] ;
+      [B---3--:R-:W-:Y:S04]         /*0550*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:-:S02]         /*0560*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*0570*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x1b00] ;
+      [B----4-:R-:W-:Y:S04]         /*0580*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*0590*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*05a0*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x1c00] ;
+      [B-----5:R-:W-:Y:S04]         /*05b0*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*05c0*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*05d0*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*05e0*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x1d00] ;
+      [B------:R-:W-:-:S02]         /*05f0*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*0600*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x1e00] ;
+      [B------:R-:W-:Y:S04]         /*0610*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*0620*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*0630*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x1f00] ;
+      [B------:R-:W-:Y:S04]         /*0640*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*0650*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*0660*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x2000] ;
+      [B------:R-:W-:Y:S04]         /*0670*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*0680*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*0690*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x2100] ;
+      [B------:R-:W-:Y:S04]         /*06a0*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*06b0*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:Y:S04]         /*06c0*/                   FADD R26, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*06d0*/                   FADD R28, R3, R26 ;
+      [B------:R-:W5:-:S01]         /*06e0*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x2200] ;
+      [B------:R-:W-:Y:S03]         /*06f0*/                   FADD R25, R24, R25 ;
+      [B------:R-:W5:-:S01]         /*0700*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x2300] ;
+      [B------:R-:W-:-:S01]         /*0710*/                   FADD R28, R28, R25 ;
+      [B------:R-:W-:-:S02]         /*0720*/                   FADD R23, R22, R23 ;
+      [B------:R-:W5:-:S02]         /*0730*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0x2400] ;
+      [B------:R-:W-:-:S02]         /*0740*/                   FADD R28, R28, R23 ;
+      [B------:R-:W5:-:S01]         /*0750*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0x2500] ;
+      [B------:R-:W-:Y:S04]         /*0760*/                   FADD R19, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*0770*/                   FADD R28, R28, R19 ;
+      [B------:R-:W5:-:S01]         /*0780*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0x2600] ;
+      [B--2---:R-:W-:Y:S04]         /*0790*/                   FADD R17, R16, R17 ;
+      [B------:R-:W-:-:S02]         /*07a0*/                   FADD R28, R28, R17 ;
+      [B------:R-:W2:-:S01]         /*07b0*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x2700] ;
+      [B---3--:R-:W-:Y:S04]         /*07c0*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:-:S02]         /*07d0*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*07e0*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x2800] ;
+      [B----4-:R-:W-:Y:S04]         /*07f0*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*0800*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*0810*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x2900] ;
+      [B-----5:R-:W-:Y:S04]         /*0820*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*0830*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*0840*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*0850*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x2a00] ;
+      [B------:R-:W-:-:S02]         /*0860*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*0870*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x2b00] ;
+      [B------:R-:W-:Y:S04]         /*0880*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*0890*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*08a0*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x2c00] ;
+      [B------:R-:W-:Y:S04]         /*08b0*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*08c0*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*08d0*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x2d00] ;
+      [B------:R-:W-:Y:S04]         /*08e0*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*08f0*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*0900*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x2e00] ;
+      [B------:R-:W-:Y:S04]         /*0910*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*0920*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:Y:S04]         /*0930*/                   FADD R26, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*0940*/                   FADD R28, R3, R26 ;
+      [B------:R-:W5:-:S01]         /*0950*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x2f00] ;
+      [B------:R-:W-:Y:S03]         /*0960*/                   FADD R25, R24, R25 ;
+      [B------:R-:W5:-:S01]         /*0970*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x3000] ;
+      [B------:R-:W-:-:S01]         /*0980*/                   FADD R28, R28, R25 ;
+      [B------:R-:W-:-:S02]         /*0990*/                   FADD R23, R22, R23 ;
+      [B------:R-:W5:-:S02]         /*09a0*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0x3100] ;
+      [B------:R-:W-:-:S02]         /*09b0*/                   FADD R28, R28, R23 ;
+      [B------:R-:W5:-:S01]         /*09c0*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0x3200] ;
+      [B------:R-:W-:Y:S04]         /*09d0*/                   FADD R19, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*09e0*/                   FADD R28, R28, R19 ;
+      [B------:R-:W5:-:S01]         /*09f0*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0x3300] ;
+      [B--2---:R-:W-:Y:S04]         /*0a00*/                   FADD R17, R16, R17 ;
+      [B------:R-:W-:-:S02]         /*0a10*/                   FADD R28, R28, R17 ;
+      [B------:R-:W2:-:S01]         /*0a20*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x3400] ;
+      [B---3--:R-:W-:Y:S04]         /*0a30*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:-:S02]         /*0a40*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*0a50*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x3500] ;
+      [B----4-:R-:W-:Y:S04]         /*0a60*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*0a70*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*0a80*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x3600] ;
+      [B-----5:R-:W-:Y:S04]         /*0a90*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*0aa0*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*0ab0*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*0ac0*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x3700] ;
+      [B------:R-:W-:-:S02]         /*0ad0*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*0ae0*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x3800] ;
+      [B------:R-:W-:Y:S04]         /*0af0*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*0b00*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*0b10*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x3900] ;
+      [B------:R-:W-:Y:S04]         /*0b20*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*0b30*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*0b40*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x3a00] ;
+      [B------:R-:W-:Y:S04]         /*0b50*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*0b60*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*0b70*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x3b00] ;
+      [B------:R-:W-:Y:S04]         /*0b80*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*0b90*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:Y:S04]         /*0ba0*/                   FADD R26, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*0bb0*/                   FADD R28, R3, R26 ;
+      [B------:R-:W5:-:S01]         /*0bc0*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x3c00] ;
+      [B------:R-:W-:Y:S03]         /*0bd0*/                   FADD R25, R24, R25 ;
+      [B------:R-:W5:-:S01]         /*0be0*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x3d00] ;
+      [B------:R-:W-:-:S01]         /*0bf0*/                   FADD R28, R28, R25 ;
+      [B------:R-:W-:-:S02]         /*0c00*/                   FADD R23, R22, R23 ;
+      [B------:R-:W5:-:S02]         /*0c10*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0x3e00] ;
+      [B------:R-:W-:-:S02]         /*0c20*/                   FADD R28, R28, R23 ;
+      [B------:R-:W5:-:S01]         /*0c30*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0x3f00] ;
+      [B------:R-:W-:Y:S04]         /*0c40*/                   FADD R19, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*0c50*/                   FADD R28, R28, R19 ;
+      [B------:R-:W5:-:S01]         /*0c60*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0x4000] ;
+      [B--2---:R-:W-:Y:S04]         /*0c70*/                   FADD R17, R16, R17 ;
+      [B------:R-:W-:-:S02]         /*0c80*/                   FADD R28, R28, R17 ;
+      [B------:R-:W2:-:S01]         /*0c90*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x4100] ;
+      [B---3--:R-:W-:Y:S04]         /*0ca0*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:-:S02]         /*0cb0*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*0cc0*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x4200] ;
+      [B----4-:R-:W-:Y:S04]         /*0cd0*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*0ce0*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*0cf0*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x4300] ;
+      [B-----5:R-:W-:Y:S04]         /*0d00*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*0d10*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*0d20*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*0d30*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x4400] ;
+      [B------:R-:W-:-:S02]         /*0d40*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*0d50*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x4500] ;
+      [B------:R-:W-:Y:S04]         /*0d60*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*0d70*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*0d80*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x4600] ;
+      [B------:R-:W-:Y:S04]         /*0d90*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*0da0*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*0db0*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x4700] ;
+      [B------:R-:W-:Y:S04]         /*0dc0*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*0dd0*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*0de0*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x4800] ;
+      [B------:R-:W-:Y:S04]         /*0df0*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*0e00*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:Y:S04]         /*0e10*/                   FADD R26, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*0e20*/                   FADD R28, R3, R26 ;
+      [B------:R-:W5:-:S01]         /*0e30*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x4900] ;
+      [B------:R-:W-:Y:S03]         /*0e40*/                   FADD R25, R24, R25 ;
+      [B------:R-:W5:-:S01]         /*0e50*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x4a00] ;
+      [B------:R-:W-:-:S01]         /*0e60*/                   FADD R28, R28, R25 ;
+      [B------:R-:W-:-:S02]         /*0e70*/                   FADD R23, R22, R23 ;
+      [B------:R-:W5:-:S02]         /*0e80*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0x4b00] ;
+      [B------:R-:W-:-:S02]         /*0e90*/                   FADD R28, R28, R23 ;
+      [B------:R-:W5:-:S01]         /*0ea0*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0x4c00] ;
+      [B------:R-:W-:Y:S04]         /*0eb0*/                   FADD R19, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*0ec0*/                   FADD R28, R28, R19 ;
+      [B------:R-:W5:-:S01]         /*0ed0*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0x4d00] ;
+      [B--2---:R-:W-:Y:S04]         /*0ee0*/                   FADD R17, R16, R17 ;
+      [B------:R-:W-:-:S02]         /*0ef0*/                   FADD R28, R28, R17 ;
+      [B------:R-:W2:-:S01]         /*0f00*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x4e00] ;
+      [B---3--:R-:W-:Y:S04]         /*0f10*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:-:S02]         /*0f20*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*0f30*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x4f00] ;
+      [B----4-:R-:W-:Y:S04]         /*0f40*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*0f50*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*0f60*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x5000] ;
+      [B-----5:R-:W-:Y:S04]         /*0f70*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*0f80*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*0f90*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*0fa0*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x5100] ;
+      [B------:R-:W-:-:S02]         /*0fb0*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*0fc0*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x5200] ;
+      [B------:R-:W-:Y:S04]         /*0fd0*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*0fe0*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*0ff0*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x5300] ;
+      [B------:R-:W-:Y:S04]         /*1000*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*1010*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*1020*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x5400] ;
+      [B------:R-:W-:Y:S04]         /*1030*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*1040*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*1050*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x5500] ;
+      [B------:R-:W-:Y:S04]         /*1060*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*1070*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:Y:S04]         /*1080*/                   FADD R26, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*1090*/                   FADD R28, R3, R26 ;
+      [B------:R-:W5:-:S01]         /*10a0*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x5600] ;
+      [B------:R-:W-:Y:S03]         /*10b0*/                   FADD R25, R24, R25 ;
+      [B------:R-:W5:-:S01]         /*10c0*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x5700] ;
+      [B------:R-:W-:-:S01]         /*10d0*/                   FADD R28, R28, R25 ;
+      [B------:R-:W-:-:S02]         /*10e0*/                   FADD R23, R22, R23 ;
+      [B------:R-:W5:-:S02]         /*10f0*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0x5800] ;
+      [B------:R-:W-:-:S02]         /*1100*/                   FADD R28, R28, R23 ;
+      [B------:R-:W5:-:S01]         /*1110*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0x5900] ;
+      [B------:R-:W-:Y:S04]         /*1120*/                   FADD R19, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*1130*/                   FADD R28, R28, R19 ;
+      [B------:R-:W5:-:S01]         /*1140*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0x5a00] ;
+      [B--2---:R-:W-:Y:S04]         /*1150*/                   FADD R17, R16, R17 ;
+      [B------:R-:W-:-:S02]         /*1160*/                   FADD R28, R28, R17 ;
+      [B------:R-:W2:-:S01]         /*1170*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x5b00] ;
+      [B---3--:R-:W-:Y:S04]         /*1180*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:-:S02]         /*1190*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*11a0*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x5c00] ;
+      [B----4-:R-:W-:Y:S04]         /*11b0*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*11c0*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*11d0*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x5d00] ;
+      [B-----5:R-:W-:Y:S04]         /*11e0*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*11f0*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*1200*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*1210*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x5e00] ;
+      [B------:R-:W-:-:S02]         /*1220*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*1230*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x5f00] ;
+      [B------:R-:W-:Y:S04]         /*1240*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*1250*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*1260*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x6000] ;
+      [B------:R-:W-:Y:S04]         /*1270*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*1280*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*1290*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x6100] ;
+      [B------:R-:W-:Y:S04]         /*12a0*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*12b0*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*12c0*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x6200] ;
+      [B------:R-:W-:Y:S04]         /*12d0*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*12e0*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:Y:S04]         /*12f0*/                   FADD R26, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*1300*/                   FADD R26, R3, R26 ;
+      [B------:R-:W5:-:S01]         /*1310*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x6300] ;
+      [B------:R-:W-:Y:S03]         /*1320*/                   FADD R27, R24, R25 ;
+      [B------:R-:W5:-:S01]         /*1330*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0x6400] ;
+      [B------:R-:W-:-:S01]         /*1340*/                   FADD R28, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*1350*/                   FADD R23, R22, R23 ;
+      [B------:R-:W5:-:S02]         /*1360*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x6500] ;
+      [B------:R-:W-:-:S02]         /*1370*/                   FADD R28, R28, R23 ;
+      [B------:R-:W5:-:S01]         /*1380*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0x6600] ;
+      [B------:R-:W-:Y:S04]         /*1390*/                   FADD R19, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*13a0*/                   FADD R28, R28, R19 ;
+      [B------:R-:W5:-:S01]         /*13b0*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0x6700] ;
+      [B--2---:R-:W-:Y:S04]         /*13c0*/                   FADD R17, R16, R17 ;
+      [B------:R-:W-:-:S02]         /*13d0*/                   FADD R28, R28, R17 ;
+      [B------:R-:W2:-:S01]         /*13e0*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x6800] ;
+      [B---3--:R-:W-:Y:S04]         /*13f0*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:-:S02]         /*1400*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*1410*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x6900] ;
+      [B----4-:R-:W-:Y:S04]         /*1420*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*1430*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*1440*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x6a00] ;
+      [B-----5:R-:W-:Y:S04]         /*1450*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*1460*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*1470*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*1480*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x6b00] ;
+      [B------:R-:W-:-:S02]         /*1490*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*14a0*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x6c00] ;
+      [B------:R-:W-:Y:S04]         /*14b0*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*14c0*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*14d0*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x6d00] ;
+      [B------:R-:W-:Y:S04]         /*14e0*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*14f0*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*1500*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x6e00] ;
+      [B------:R-:W-:Y:S04]         /*1510*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*1520*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*1530*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x6f00] ;
+      [B------:R-:W-:Y:S04]         /*1540*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*1550*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:-:S01]         /*1560*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:Y:S03]         /*1570*/                   FADD R27, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*1580*/                   FADD R24, R3, R24 ;
+      [B------:R-:W5:-:S02]         /*1590*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x7000] ;
+      [B------:R-:W-:-:S02]         /*15a0*/                   FADD R28, R24, R27 ;
+      [B------:R-:W5:-:S01]         /*15b0*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0x7100] ;
+      [B------:R-:W-:Y:S03]         /*15c0*/                   FADD R23, R22, R23 ;
+      [B------:R-:W5:-:S01]         /*15d0*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x7200] ;
+      [B------:R-:W-:Y:S03]         /*15e0*/                   FADD R28, R28, R23 ;
+      [B------:R-:W5:-:S01]         /*15f0*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0x7300] ;
+      [B------:R-:W-:Y:S04]         /*1600*/                   FADD R19, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*1610*/                   FADD R28, R28, R19 ;
+      [B------:R-:W5:-:S01]         /*1620*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0x7400] ;
+      [B--2---:R-:W-:Y:S04]         /*1630*/                   FADD R17, R16, R17 ;
+      [B------:R-:W-:-:S02]         /*1640*/                   FADD R28, R28, R17 ;
+      [B------:R-:W2:-:S01]         /*1650*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x7500] ;
+      [B---3--:R-:W-:Y:S04]         /*1660*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:-:S02]         /*1670*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*1680*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x7600] ;
+      [B----4-:R-:W-:Y:S04]         /*1690*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*16a0*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*16b0*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x7700] ;
+      [B-----5:R-:W-:Y:S04]         /*16c0*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*16d0*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*16e0*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*16f0*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x7800] ;
+      [B------:R-:W-:-:S02]         /*1700*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*1710*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x7900] ;
+      [B------:R-:W-:Y:S04]         /*1720*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*1730*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*1740*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x7a00] ;
+      [B------:R-:W-:Y:S04]         /*1750*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*1760*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*1770*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x7b00] ;
+      [B------:R-:W-:Y:S04]         /*1780*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*1790*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*17a0*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x7c00] ;
+      [B------:R-:W-:Y:S04]         /*17b0*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*17c0*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:-:S01]         /*17d0*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:Y:S03]         /*17e0*/                   FADD R27, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*17f0*/                   FADD R24, R3, R24 ;
+      [B------:R-:W5:-:S01]         /*1800*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x7d00] ;
+      [B------:R-:W-:-:S01]         /*1810*/                   FADD R22, R22, R23 ;
+      [B------:R-:W-:-:S02]         /*1820*/                   FADD R27, R24, R27 ;
+      [B------:R-:W5:-:S02]         /*1830*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0x7e00] ;
+      [B------:R-:W-:-:S02]         /*1840*/                   FADD R28, R27, R22 ;
+      [B------:R-:W5:-:S01]         /*1850*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x7f00] ;
+      [B------:R-:W-:Y:S03]         /*1860*/                   FADD R19, R18, R19 ;
+      [B------:R-:W5:-:S01]         /*1870*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0x8000] ;
+      [B------:R-:W-:Y:S03]         /*1880*/                   FADD R28, R28, R19 ;
+      [B------:R-:W5:-:S01]         /*1890*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0x8100] ;
+      [B--2---:R-:W-:Y:S04]         /*18a0*/                   FADD R17, R16, R17 ;
+      [B------:R-:W-:-:S02]         /*18b0*/                   FADD R28, R28, R17 ;
+      [B------:R-:W2:-:S01]         /*18c0*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x8200] ;
+      [B---3--:R-:W-:Y:S04]         /*18d0*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:-:S02]         /*18e0*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*18f0*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x8300] ;
+      [B----4-:R-:W-:Y:S04]         /*1900*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*1910*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*1920*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x8400] ;
+      [B-----5:R-:W-:Y:S04]         /*1930*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*1940*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*1950*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*1960*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x8500] ;
+      [B------:R-:W-:-:S02]         /*1970*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*1980*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x8600] ;
+      [B------:R-:W-:Y:S04]         /*1990*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*19a0*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*19b0*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x8700] ;
+      [B------:R-:W-:Y:S04]         /*19c0*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*19d0*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*19e0*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x8800] ;
+      [B------:R-:W-:Y:S04]         /*19f0*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*1a00*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*1a10*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x8900] ;
+      [B------:R-:W-:Y:S04]         /*1a20*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*1a30*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:-:S01]         /*1a40*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:Y:S03]         /*1a50*/                   FADD R27, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*1a60*/                   FADD R24, R3, R24 ;
+      [B------:R-:W5:-:S01]         /*1a70*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x8a00] ;
+      [B------:R-:W-:-:S01]         /*1a80*/                   FADD R22, R22, R23 ;
+      [B------:R-:W-:-:S02]         /*1a90*/                   FADD R27, R24, R27 ;
+      [B------:R-:W5:-:S01]         /*1aa0*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0x8b00] ;
+      [B------:R-:W-:-:S01]         /*1ab0*/                   FADD R19, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*1ac0*/                   FADD R22, R27, R22 ;
+      [B------:R-:W5:-:S02]         /*1ad0*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x8c00] ;
+      [B------:R-:W-:Y:S02]         /*1ae0*/                   FADD R28, R22, R19 ;
+      [B------:R-:W5:-:S04]         /*1af0*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0x8d00] ;
+      [B------:R-:W5:-:S01]         /*1b00*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0x8e00] ;
+      [B--2---:R-:W-:Y:S04]         /*1b10*/                   FADD R17, R16, R17 ;
+      [B------:R-:W-:-:S02]         /*1b20*/                   FADD R28, R28, R17 ;
+      [B------:R-:W2:-:S01]         /*1b30*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x8f00] ;
+      [B---3--:R-:W-:Y:S04]         /*1b40*/                   FADD R13, R12, R13 ;
+      [B------:R-:W-:-:S02]         /*1b50*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*1b60*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x9000] ;
+      [B----4-:R-:W-:Y:S04]         /*1b70*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*1b80*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*1b90*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x9100] ;
+      [B-----5:R-:W-:Y:S04]         /*1ba0*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*1bb0*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*1bc0*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*1bd0*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x9200] ;
+      [B------:R-:W-:-:S02]         /*1be0*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*1bf0*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0x9300] ;
+      [B------:R-:W-:Y:S04]         /*1c00*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*1c10*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*1c20*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0x9400] ;
+      [B------:R-:W-:Y:S04]         /*1c30*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*1c40*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*1c50*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0x9500] ;
+      [B------:R-:W-:Y:S04]         /*1c60*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*1c70*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*1c80*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0x9600] ;
+      [B------:R-:W-:Y:S04]         /*1c90*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*1ca0*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:-:S01]         /*1cb0*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:Y:S03]         /*1cc0*/                   FADD R27, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*1cd0*/                   FADD R24, R3, R24 ;
+      [B------:R-:W5:-:S01]         /*1ce0*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0x9700] ;
+      [B------:R-:W-:-:S01]         /*1cf0*/                   FADD R22, R22, R23 ;
+      [B------:R-:W-:-:S02]         /*1d00*/                   FADD R27, R24, R27 ;
+      [B------:R-:W5:-:S01]         /*1d10*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0x9800] ;
+      [B------:R-:W-:-:S01]         /*1d20*/                   FADD R19, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*1d30*/                   FADD R22, R27, R22 ;
+      [B------:R-:W5:-:S02]         /*1d40*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0x9900] ;
+      [B------:R-:W-:Y:S02]         /*1d50*/                   FADD R19, R22, R19 ;
+      [B------:R-:W5:-:S01]         /*1d60*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0x9a00] ;
+      [B--2---:R-:W-:Y:S04]         /*1d70*/                   FADD R16, R16, R17 ;
+      [B------:R-:W-:-:S02]         /*1d80*/                   FADD R28, R19, R16 ;
+      [B------:R-:W2:-:S01]         /*1d90*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0x9b00] ;
+      [B---3--:R-:W-:Y:S03]         /*1da0*/                   FADD R13, R12, R13 ;
+      [B------:R-:W3:-:S01]         /*1db0*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0x9c00] ;
+      [B------:R-:W-:Y:S03]         /*1dc0*/                   FADD R28, R28, R13 ;
+      [B------:R-:W3:-:S01]         /*1dd0*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0x9d00] ;
+      [B----4-:R-:W-:Y:S04]         /*1de0*/                   FADD R11, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*1df0*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*1e00*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0x9e00] ;
+      [B-----5:R-:W-:Y:S04]         /*1e10*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*1e20*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*1e30*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*1e40*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0x9f00] ;
+      [B------:R-:W-:-:S02]         /*1e50*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*1e60*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0xa000] ;
+      [B------:R-:W-:Y:S04]         /*1e70*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*1e80*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*1e90*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0xa100] ;
+      [B------:R-:W-:Y:S04]         /*1ea0*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*1eb0*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*1ec0*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0xa200] ;
+      [B------:R-:W-:Y:S04]         /*1ed0*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*1ee0*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*1ef0*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0xa300] ;
+      [B------:R-:W-:Y:S04]         /*1f00*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*1f10*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:-:S01]         /*1f20*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:Y:S03]         /*1f30*/                   FADD R27, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*1f40*/                   FADD R24, R3, R24 ;
+      [B------:R-:W5:-:S01]         /*1f50*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0xa400] ;
+      [B------:R-:W-:-:S01]         /*1f60*/                   FADD R22, R22, R23 ;
+      [B------:R-:W-:-:S02]         /*1f70*/                   FADD R27, R24, R27 ;
+      [B------:R-:W5:-:S02]         /*1f80*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0xa500] ;
+      [B------:R-:W-:-:S02]         /*1f90*/                   FADD R22, R27, R22 ;
+      [B------:R-:W5:-:S01]         /*1fa0*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0xa600] ;
+      [B--2---:R-:W-:Y:S04]         /*1fb0*/                   FADD R19, R18, R19 ;
+      [B------:R-:W-:-:S01]         /*1fc0*/                   FADD R19, R22, R19 ;
+      [B---3--:R-:W-:-:S01]         /*1fd0*/                   FADD R16, R16, R17 ;
+      [B------:R-:W2:-:S03]         /*1fe0*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0xa700] ;
+      [B------:R-:W-:-:S01]         /*1ff0*/                   FADD R16, R19, R16 ;
+      [B------:R-:W-:-:S01]         /*2000*/                   FADD R13, R12, R13 ;
+      [B------:R-:W3:-:S03]         /*2010*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0xa800] ;
+      [B------:R-:W-:Y:S02]         /*2020*/                   FADD R28, R16, R13 ;
+      [B------:R-:W3:-:S01]         /*2030*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0xa900] ;
+      [B----4-:R-:W-:Y:S03]         /*2040*/                   FADD R11, R10, R11 ;
+      [B------:R-:W4:-:S01]         /*2050*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0xaa00] ;
+      [B------:R-:W-:Y:S03]         /*2060*/                   FADD R28, R28, R11 ;
+      [B------:R-:W4:-:S01]         /*2070*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0xab00] ;
+      [B-----5:R-:W-:Y:S04]         /*2080*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*2090*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S01]         /*20a0*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S03]         /*20b0*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0xac00] ;
+      [B------:R-:W-:-:S02]         /*20c0*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*20d0*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0xad00] ;
+      [B------:R-:W-:Y:S04]         /*20e0*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*20f0*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*2100*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0xae00] ;
+      [B------:R-:W-:Y:S04]         /*2110*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*2120*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*2130*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0xaf00] ;
+      [B------:R-:W-:Y:S04]         /*2140*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*2150*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*2160*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0xb000] ;
+      [B------:R-:W-:Y:S04]         /*2170*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*2180*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:-:S01]         /*2190*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:Y:S03]         /*21a0*/                   FADD R27, R26, R27 ;
+      [B------:R-:W-:-:S02]         /*21b0*/                   FADD R24, R3, R24 ;
+      [B------:R-:W5:-:S02]         /*21c0*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0xb100] ;
+      [B------:R-:W-:-:S02]         /*21d0*/                   FADD R27, R24, R27 ;
+      [B------:R-:W5:-:S01]         /*21e0*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0xb200] ;
+      [B--2---:R-:W-:Y:S04]         /*21f0*/                   FADD R22, R22, R23 ;
+      [B------:R-:W-:-:S01]         /*2200*/                   FADD R22, R27, R22 ;
+      [B---3--:R-:W-:-:S01]         /*2210*/                   FADD R19, R18, R19 ;
+      [B------:R-:W2:-:S03]         /*2220*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0xb300] ;
+      [B------:R-:W-:-:S01]         /*2230*/                   FADD R19, R22, R19 ;
+      [B------:R-:W-:-:S01]         /*2240*/                   FADD R16, R16, R17 ;
+      [B------:R-:W3:-:S03]         /*2250*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0xb400] ;
+      [B------:R-:W-:-:S01]         /*2260*/                   FADD R16, R19, R16 ;
+      [B----4-:R-:W-:-:S01]         /*2270*/                   FADD R13, R12, R13 ;
+      [B------:R-:W4:-:S01]         /*2280*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0xb500] ;
+      [B------:R-:W-:Y:S02]         /*2290*/                   FADD R10, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*22a0*/                   FADD R13, R16, R13 ;
+      [B------:R-:W4:-:S02]         /*22b0*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0xb600] ;
+      [B------:R-:W-:-:S02]         /*22c0*/                   FADD R28, R13, R10 ;
+      [B------:R-:W4:-:S01]         /*22d0*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0xb700] ;
+      [B-----5:R-:W-:Y:S03]         /*22e0*/                   FADD R7, R6, R7 ;
+      [B------:R-:W5:-:S01]         /*22f0*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0xb800] ;
+      [B------:R-:W-:-:S01]         /*2300*/                   FADD R28, R28, R7 ;
+      [B------:R-:W-:-:S02]         /*2310*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S02]         /*2320*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0xb900] ;
+      [B------:R-:W-:-:S02]         /*2330*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*2340*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0xba00] ;
+      [B------:R-:W-:Y:S04]         /*2350*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*2360*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*2370*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0xbb00] ;
+      [B------:R-:W-:Y:S04]         /*2380*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*2390*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*23a0*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0xbc00] ;
+      [B------:R-:W-:Y:S04]         /*23b0*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*23c0*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*23d0*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0xbd00] ;
+      [B------:R-:W-:Y:S04]         /*23e0*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*23f0*/                   FADD R3, R28, R3 ;
+      [B------:R-:W-:Y:S04]         /*2400*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S02]         /*2410*/                   FADD R24, R3, R24 ;
+      [B------:R-:W5:-:S01]         /*2420*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0xbe00] ;
+      [B--2---:R-:W-:Y:S04]         /*2430*/                   FADD R27, R26, R27 ;
+      [B------:R-:W-:-:S01]         /*2440*/                   FADD R27, R24, R27 ;
+      [B---3--:R-:W-:-:S01]         /*2450*/                   FADD R22, R22, R23 ;
+      [B------:R-:W2:-:S03]         /*2460*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0xbf00] ;
+      [B------:R-:W-:-:S01]         /*2470*/                   FADD R22, R27, R22 ;
+      [B----4-:R-:W-:-:S01]         /*2480*/                   FADD R19, R18, R19 ;
+      [B------:R-:W3:-:S03]         /*2490*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0xc000] ;
+      [B------:R-:W-:-:S01]         /*24a0*/                   FADD R19, R22, R19 ;
+      [B------:R-:W-:-:S01]         /*24b0*/                   FADD R16, R16, R17 ;
+      [B------:R-:W4:-:S03]         /*24c0*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0xc100] ;
+      [B------:R-:W-:-:S01]         /*24d0*/                   FADD R16, R19, R16 ;
+      [B------:R-:W-:-:S01]         /*24e0*/                   FADD R13, R12, R13 ;
+      [B------:R-:W4:-:S01]         /*24f0*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0xc200] ;
+      [B-----5:R-:W-:Y:S02]         /*2500*/                   FADD R10, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*2510*/                   FADD R13, R16, R13 ;
+      [B------:R-:W5:-:S01]         /*2520*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0xc300] ;
+      [B------:R-:W-:-:S01]         /*2530*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S02]         /*2540*/                   FADD R10, R13, R10 ;
+      [B------:R-:W5:-:S02]         /*2550*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0xc400] ;
+      [B------:R-:W-:-:S02]         /*2560*/                   FADD R28, R10, R7 ;
+      [B------:R-:W5:-:S01]         /*2570*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0xc500] ;
+      [B------:R-:W-:Y:S03]         /*2580*/                   FADD R5, R4, R5 ;
+      [B------:R-:W5:-:S01]         /*2590*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0xc600] ;
+      [B------:R-:W-:Y:S03]         /*25a0*/                   FADD R28, R28, R5 ;
+      [B------:R-:W5:-:S01]         /*25b0*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0xc700] ;
+      [B------:R-:W-:Y:S04]         /*25c0*/                   FADD R9, R8, R9 ;
+      [B------:R-:W-:-:S02]         /*25d0*/                   FADD R28, R28, R9 ;
+      [B------:R-:W5:-:S01]         /*25e0*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0xc800] ;
+      [B------:R-:W-:Y:S04]         /*25f0*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*2600*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*2610*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0xc900] ;
+      [B------:R-:W-:Y:S04]         /*2620*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*2630*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*2640*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0xca00] ;
+      [B------:R-:W-:Y:S04]         /*2650*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*2660*/                   FADD R3, R28, R3 ;
+      [B--2---:R-:W-:Y:S04]         /*2670*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S01]         /*2680*/                   FADD R24, R3, R24 ;
+      [B---3--:R-:W-:-:S01]         /*2690*/                   FADD R27, R26, R27 ;
+      [B------:R-:W2:-:S03]         /*26a0*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0xcb00] ;
+      [B------:R-:W-:-:S01]         /*26b0*/                   FADD R27, R24, R27 ;
+      [B----4-:R-:W-:-:S01]         /*26c0*/                   FADD R22, R22, R23 ;
+      [B------:R-:W3:-:S03]         /*26d0*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0xcc00] ;
+      [B------:R-:W-:-:S01]         /*26e0*/                   FADD R22, R27, R22 ;
+      [B------:R-:W-:-:S01]         /*26f0*/                   FADD R19, R18, R19 ;
+      [B------:R-:W4:-:S03]         /*2700*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0xcd00] ;
+      [B------:R-:W-:-:S01]         /*2710*/                   FADD R19, R22, R19 ;
+      [B-----5:R-:W-:-:S01]         /*2720*/                   FADD R16, R16, R17 ;
+      [B------:R-:W5:-:S03]         /*2730*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0xce00] ;
+      [B------:R-:W-:-:S01]         /*2740*/                   FADD R16, R19, R16 ;
+      [B------:R-:W-:-:S01]         /*2750*/                   FADD R13, R12, R13 ;
+      [B------:R-:W5:-:S01]         /*2760*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0xcf00] ;
+      [B------:R-:W-:Y:S02]         /*2770*/                   FADD R10, R10, R11 ;
+      [B------:R-:W-:-:S02]         /*2780*/                   FADD R13, R16, R13 ;
+      [B------:R-:W5:-:S01]         /*2790*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0xd000] ;
+      [B------:R-:W-:-:S01]         /*27a0*/                   FADD R7, R6, R7 ;
+      [B------:R-:W-:-:S02]         /*27b0*/                   FADD R10, R13, R10 ;
+      [B------:R-:W5:-:S01]         /*27c0*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0xd100] ;
+      [B------:R-:W-:-:S01]         /*27d0*/                   FADD R6, R4, R5 ;
+      [B------:R-:W-:-:S02]         /*27e0*/                   FADD R7, R10, R7 ;
+      [B------:R-:W5:-:S02]         /*27f0*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0xd200] ;
+      [B------:R-:W-:Y:S02]         /*2800*/                   FADD R10, R7, R6 ;
+      [B------:R-:W5:-:S01]         /*2810*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0xd300] ;
+      [B------:R-:W-:Y:S03]         /*2820*/                   FADD R11, R8, R9 ;
+      [B------:R-:W5:-:S01]         /*2830*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0xd400] ;
+      [B------:R-:W-:Y:S03]         /*2840*/                   FADD R28, R10, R11 ;
+      [B------:R-:W5:-:S01]         /*2850*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0xd500] ;
+      [B------:R-:W-:Y:S04]         /*2860*/                   FADD R15, R14, R15 ;
+      [B------:R-:W-:-:S02]         /*2870*/                   FADD R28, R28, R15 ;
+      [B------:R-:W5:-:S01]         /*2880*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0xd600] ;
+      [B------:R-:W-:Y:S04]         /*2890*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*28a0*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*28b0*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0xd700] ;
+      [B--2---:R-:W-:Y:S04]         /*28c0*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*28d0*/                   FADD R3, R28, R3 ;
+      [B---3--:R-:W-:Y:S04]         /*28e0*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S01]         /*28f0*/                   FADD R24, R3, R24 ;
+      [B----4-:R-:W-:-:S01]         /*2900*/                   FADD R27, R26, R27 ;
+      [B------:R-:W2:-:S03]         /*2910*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0xd800] ;
+      [B------:R-:W-:-:S01]         /*2920*/                   FADD R27, R24, R27 ;
+      [B-----5:R-:W-:-:S01]         /*2930*/                   FADD R22, R22, R23 ;
+      [B------:R-:W3:-:S03]         /*2940*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0xd900] ;
+      [B------:R-:W-:-:S01]         /*2950*/                   FADD R22, R27, R22 ;
+      [B------:R-:W-:-:S01]         /*2960*/                   FADD R19, R18, R19 ;
+      [B------:R-:W4:-:S03]         /*2970*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0xda00] ;
+      [B------:R-:W-:-:S01]         /*2980*/                   FADD R19, R22, R19 ;
+      [B------:R-:W-:-:S01]         /*2990*/                   FADD R16, R16, R17 ;
+      [B------:R-:W5:-:S03]         /*29a0*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0xdb00] ;
+      [B------:R-:W-:-:S01]         /*29b0*/                   FADD R16, R19, R16 ;
+      [B------:R-:W-:-:S01]         /*29c0*/                   FADD R13, R12, R13 ;
+      [B------:R-:W5:-:S01]         /*29d0*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0xdc00] ;
+      [B------:R-:W-:Y:S02]         /*29e0*/                   FADD R12, R4, R5 ;
+      [B------:R-:W-:-:S01]         /*29f0*/                   FADD R13, R16, R13 ;
+      [B------:R-:W5:-:S03]         /*2a00*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0xdd00] ;
+      [B------:R-:W-:-:S01]         /*2a10*/                   FADD R12, R13, R12 ;
+      [B------:R-:W-:-:S02]         /*2a20*/                   FADD R13, R6, R7 ;
+      [B------:R-:W5:-:S02]         /*2a30*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0xde00] ;
+      [B------:R-:W-:-:S01]         /*2a40*/                   FADD R12, R12, R13 ;
+      [B------:R-:W-:Y:S02]         /*2a50*/                   FADD R13, R8, R9 ;
+      [B------:R-:W5:-:S02]         /*2a60*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0xdf00] ;
+      [B------:R-:W-:-:S01]         /*2a70*/                   FADD R12, R12, R13 ;
+      [B------:R-:W-:-:S02]         /*2a80*/                   FADD R13, R10, R11 ;
+      [B------:R-:W5:-:S02]         /*2a90*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0xe000] ;
+      [B------:R-:W-:-:S02]         /*2aa0*/                   FADD R16, R12, R13 ;
+      [B------:R-:W5:-:S01]         /*2ab0*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0xe100] ;
+      [B------:R-:W-:Y:S03]         /*2ac0*/                   FADD R17, R14, R15 ;
+      [B------:R-:W5:-:S01]         /*2ad0*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0xe200] ;
+      [B------:R-:W-:Y:S03]         /*2ae0*/                   FADD R28, R16, R17 ;
+      [B------:R-:W5:-:S01]         /*2af0*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0xe300] ;
+      [B------:R-:W-:Y:S04]         /*2b00*/                   FADD R21, R20, R21 ;
+      [B------:R-:W-:-:S02]         /*2b10*/                   FADD R28, R28, R21 ;
+      [B------:R-:W5:-:S01]         /*2b20*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0xe400] ;
+      [B--2---:R-:W-:Y:S04]         /*2b30*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*2b40*/                   FADD R3, R28, R3 ;
+      [B---3--:R-:W-:Y:S04]         /*2b50*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S01]         /*2b60*/                   FADD R24, R3, R24 ;
+      [B----4-:R-:W-:-:S01]         /*2b70*/                   FADD R27, R26, R27 ;
+      [B------:R-:W2:-:S03]         /*2b80*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0xe500] ;
+      [B------:R-:W-:-:S01]         /*2b90*/                   FADD R27, R24, R27 ;
+      [B-----5:R-:W-:-:S01]         /*2ba0*/                   FADD R22, R22, R23 ;
+      [B------:R-:W3:-:S03]         /*2bb0*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0xe600] ;
+      [B------:R-:W-:-:S01]         /*2bc0*/                   FADD R22, R27, R22 ;
+      [B------:R-:W-:-:S01]         /*2bd0*/                   FADD R19, R18, R19 ;
+      [B------:R-:W4:-:S03]         /*2be0*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0xe700] ;
+      [B------:R-:W-:-:S01]         /*2bf0*/                   FADD R19, R22, R19 ;
+      [B------:R-:W-:Y:S02]         /*2c00*/                   FADD R18, R4, R5 ;
+      [B------:R-:W5:-:S02]         /*2c10*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0xe800] ;
+      [B------:R-:W-:-:S01]         /*2c20*/                   FADD R18, R19, R18 ;
+      [B------:R-:W-:-:S02]         /*2c30*/                   FADD R19, R6, R7 ;
+      [B------:R-:W5:-:S02]         /*2c40*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0xe900] ;
+      [B------:R-:W-:-:S01]         /*2c50*/                   FADD R18, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*2c60*/                   FADD R19, R8, R9 ;
+      [B------:R-:W5:-:S02]         /*2c70*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0xea00] ;
+      [B------:R-:W-:-:S01]         /*2c80*/                   FADD R18, R18, R19 ;
+      [B------:R-:W-:Y:S02]         /*2c90*/                   FADD R19, R10, R11 ;
+      [B------:R-:W5:-:S02]         /*2ca0*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0xeb00] ;
+      [B------:R-:W-:-:S01]         /*2cb0*/                   FADD R18, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*2cc0*/                   FADD R19, R12, R13 ;
+      [B------:R-:W5:-:S02]         /*2cd0*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0xec00] ;
+      [B------:R-:W-:-:S01]         /*2ce0*/                   FADD R18, R18, R19 ;
+      [B------:R-:W-:-:S02]         /*2cf0*/                   FADD R19, R14, R15 ;
+      [B------:R-:W5:-:S02]         /*2d00*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0xed00] ;
+      [B------:R-:W-:-:S01]         /*2d10*/                   FADD R18, R18, R19 ;
+      [B------:R-:W-:Y:S02]         /*2d20*/                   FADD R19, R16, R17 ;
+      [B------:R-:W5:-:S02]         /*2d30*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0xee00] ;
+      [B------:R-:W-:-:S02]         /*2d40*/                   FADD R22, R18, R19 ;
+      [B------:R-:W5:-:S01]         /*2d50*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0xef00] ;
+      [B------:R-:W-:Y:S03]         /*2d60*/                   FADD R23, R20, R21 ;
+      [B------:R-:W5:-:S01]         /*2d70*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0xf000] ;
+      [B------:R-:W-:Y:S03]         /*2d80*/                   FADD R28, R22, R23 ;
+      [B------:R-:W5:-:S01]         /*2d90*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0xf100] ;
+      [B--2---:R-:W-:Y:S04]         /*2da0*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*2db0*/                   FADD R3, R28, R3 ;
+      [B---3--:R-:W-:-:S01]         /*2dc0*/                   FADD R24, R24, R25 ;
+      [B------:R-:W2:-:S03]         /*2dd0*/                   LDG.E.64.STRONG.SM R28, desc[UR4][R34.64+0xff00] ;
+      [B------:R-:W-:-:S01]         /*2de0*/                   FADD R24, R3, R24 ;
+      [B----4-:R-:W-:-:S01]         /*2df0*/                   FADD R27, R26, R27 ;
+      [B------:R-:W3:-:S03]         /*2e00*/                   LDG.E.64.STRONG.SM R2, desc[UR4][R34.64+0xf200] ;
+      [B------:R-:W-:-:S01]         /*2e10*/                   FADD R24, R24, R27 ;
+      [B-----5:R-:W-:-:S01]         /*2e20*/                   FADD R25, R4, R5 ;
+      [B------:R-:W4:-:S03]         /*2e30*/                   LDG.E.64.STRONG.SM R26, desc[UR4][R34.64+0xfe00] ;
+      [B------:R-:W-:-:S01]         /*2e40*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S01]         /*2e50*/                   FADD R25, R6, R7 ;
+      [B------:R-:W5:-:S03]         /*2e60*/                   LDG.E.64.STRONG.SM R4, desc[UR4][R34.64+0xf300] ;
+      [B------:R-:W-:-:S01]         /*2e70*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S01]         /*2e80*/                   FADD R25, R8, R9 ;
+      [B------:R-:W2:-:S03]         /*2e90*/                   LDG.E.64.STRONG.SM R6, desc[UR4][R34.64+0xf400] ;
+      [B------:R-:W-:-:S01]         /*2ea0*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S01]         /*2eb0*/                   FADD R25, R10, R11 ;
+      [B------:R-:W4:-:S03]         /*2ec0*/                   LDG.E.64.STRONG.SM R8, desc[UR4][R34.64+0xf500] ;
+      [B------:R-:W-:-:S01]         /*2ed0*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S01]         /*2ee0*/                   FADD R25, R12, R13 ;
+      [B------:R-:W4:-:S03]         /*2ef0*/                   LDG.E.64.STRONG.SM R10, desc[UR4][R34.64+0xf600] ;
+      [B------:R-:W-:-:S01]         /*2f00*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S01]         /*2f10*/                   FADD R25, R14, R15 ;
+      [B------:R-:W4:-:S03]         /*2f20*/                   LDG.E.64.STRONG.SM R12, desc[UR4][R34.64+0xf700] ;
+      [B------:R-:W-:-:S01]         /*2f30*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S01]         /*2f40*/                   FADD R25, R16, R17 ;
+      [B------:R-:W4:-:S03]         /*2f50*/                   LDG.E.64.STRONG.SM R14, desc[UR4][R34.64+0xf800] ;
+      [B------:R-:W-:-:S01]         /*2f60*/                   FADD R24, R24, R25 ;
+      [B------:R-:W4:-:S01]         /*2f70*/                   LDG.E.64.STRONG.SM R16, desc[UR4][R34.64+0xf900] ;
+      [B------:R-:W-:Y:S03]         /*2f80*/                   FADD R25, R18, R19 ;
+      [B------:R-:W4:-:S01]         /*2f90*/                   LDG.E.64.STRONG.SM R18, desc[UR4][R34.64+0xfa00] ;
+      [B------:R-:W-:-:S01]         /*2fa0*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S02]         /*2fb0*/                   FADD R25, R20, R21 ;
+      [B------:R-:W4:-:S02]         /*2fc0*/                   LDG.E.64.STRONG.SM R20, desc[UR4][R34.64+0xfb00] ;
+      [B------:R-:W-:-:S01]         /*2fd0*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S02]         /*2fe0*/                   FADD R25, R22, R23 ;
+      [B------:R-:W4:-:S02]         /*2ff0*/                   LDG.E.64.STRONG.SM R22, desc[UR4][R34.64+0xfc00] ;
+      [B------:R-:W-:Y:S02]         /*3000*/                   FADD R36, R24, R25 ;
+      [B------:R-:W4:-:S01]         /*3010*/                   LDG.E.64.STRONG.SM R24, desc[UR4][R34.64+0xfd00] ;
+      [B---3--:R-:W-:Y:S04]         /*3020*/                   FADD R3, R2, R3 ;
+      [B------:R-:W-:-:S01]         /*3030*/                   FADD R3, R36, R3 ;
+      [B-----5:R-:W-:Y:S04]         /*3040*/                   FADD R4, R4, R5 ;
+      [B------:R-:W-:-:S01]         /*3050*/                   FADD R3, R3, R4 ;
+      [B--2---:R-:W-:Y:S04]         /*3060*/                   FADD R6, R6, R7 ;
+      [B------:R-:W-:-:S01]         /*3070*/                   FADD R3, R3, R6 ;
+      [B----4-:R-:W-:Y:S04]         /*3080*/                   FADD R8, R8, R9 ;
+      [B------:R-:W-:-:S01]         /*3090*/                   FADD R3, R3, R8 ;
+      [B------:R-:W-:Y:S04]         /*30a0*/                   FADD R10, R10, R11 ;
+      [B------:R-:W-:-:S01]         /*30b0*/                   FADD R3, R3, R10 ;
+      [B------:R-:W-:Y:S04]         /*30c0*/                   FADD R12, R12, R13 ;
+      [B------:R-:W-:-:S01]         /*30d0*/                   FADD R3, R3, R12 ;
+      [B------:R-:W-:Y:S04]         /*30e0*/                   FADD R14, R14, R15 ;
+      [B------:R-:W-:-:S01]         /*30f0*/                   FADD R3, R3, R14 ;
+      [B------:R-:W-:-:S01]         /*3100*/                   FADD R16, R16, R17 ;
+      [B------:R-:W-:Y:S03]         /*3110*/                   FADD R18, R18, R19 ;
+      [B------:R-:W-:-:S01]         /*3120*/                   FADD R3, R3, R16 ;
+      [B------:R-:W-:Y:S03]         /*3130*/                   FADD R20, R20, R21 ;
+      [B------:R-:W-:Y:S04]         /*3140*/                   FADD R3, R3, R18 ;
+      [B------:R-:W-:-:S01]         /*3150*/                   FADD R3, R3, R20 ;
+      [B------:R-:W-:-:S01]         /*3160*/                   FADD R22, R22, R23 ;
+      [B------:R-:W-:Y:S03]         /*3170*/                   FADD R24, R24, R25 ;
+      [B------:R-:W-:-:S01]         /*3180*/                   FADD R3, R3, R22 ;
+      [B------:R-:W-:Y:S03]         /*3190*/                   FADD R26, R26, R27 ;
+      [B------:R-:W-:-:S01]         /*31a0*/                   FADD R3, R3, R24 ;
+      [B------:R-:W-:Y:S03]         /*31b0*/                   FADD R28, R28, R29 ;
+      [B------:R-:W-:Y:S01]         /*31c0*/                   FADD R3, R3, R26 ;
+      [B------:R-:W-:Y:S06]         /*31d0*/                   CS2R.32 R9, SR_CLOCKLO ;
+      [B------:R-:W-:-:S01]         /*31e0*/                   MOV R5, 0x4 ;
+      [B------:R-:W-:-:S01]         /*31f0*/                   FADD R28, R3, R28 ;
+      [B------:R-:W-:-:S01]         /*3200*/                   FADD R29, R33, R30 ;
+      [B------:R-:W-:Y:S04]         /*3210*/                   IMAD.WIDE R6, R0, R31, c[0x0][0x170] ;
+      [B------:R-:W-:Y:S04]         /*3220*/                   IMAD.WIDE R2, R0, R5, c[0x0][0x160] ;
+      [B------:R-:W-:-:S01]         /*3230*/                   IMAD.WIDE R4, R0, R5, c[0x0][0x168] ;
+      [B------:R-:W-:-:S04]         /*3240*/                   STG.E desc[UR4][R2.64], R32 ;
+      [B------:R-:W-:-:S04]         /*3250*/                   STG.E desc[UR4][R4.64], R9 ;
+      [B------:R-:W-:-:S01]         /*3260*/                   STG.E.64 desc[UR4][R6.64], R28 ;
+      [B------:R-:W-:-:S05]         /*3270*/                   EXIT ;
+  .L_x_0:
+      [B------:R-:W-:Y:S00]         /*3280*/                   BRA `(.L_x_0);
+      [B------:R-:W-:Y:S00]         /*3290*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*32a0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*32b0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*32c0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*32d0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*32e0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*32f0*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*3300*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*3310*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*3320*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*3330*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*3340*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*3350*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*3360*/                   NOP;
+      [B------:R-:W-:Y:S00]         /*3370*/                   NOP;
+  .L_x_1:
+
+  //-------------------------------------------------
+  //---------------- END of sections ----------------
+  //-------------------------------------------------
+
+
+// Program segment PT_PHDR, 5 
+  .__segment  "PT_PHDR", 5 
+  .__segment_offset  0x3c80   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0xa8   		// file size, maybe updated by assembler 
+  .__segment_memsz   0xa8   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+
+// Program segment PT_LOAD, 5 
+  .__segment  "PT_LOAD", 5 
+  .__segment_offset  0x4a0   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0x3560   		// file size, maybe updated by assembler 
+  .__segment_memsz   0x3560   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+  .__segment_startsection    ".nv.constant0._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_"  		// first section in this segment 
+  .__segment_endsection      ".text._Z25L1DatacacheBW_test_kernelPjS_P6float2S1_"  		// last  section in this segment 
+
+// Program segment PT_LOAD, 5 
+  .__segment  "PT_LOAD", 5 
+  .__segment_offset  0x3c80   		// maybe updated by assembler 
+  .__segment_vaddr   0x0   		// Seems always 0? 
+  .__segment_paddr   0x0   		// ??? 
+  .__segment_filesz  0xa8   		// file size, maybe updated by assembler 
+  .__segment_memsz   0xa8   		// file size + nobits sections, maybe updated by assembler 
+  .__segment_align     8   		//  
+  .__segment_startsection    "@PROGRAM_HEADER"  		// first section in this segment 
+  .__segment_endsection      "@PROGRAM_HEADER"  		// last  section in this segment 
+
+
+  //-------------------------------------------------
+  //---------------- END of segments ----------------
+  //-------------------------------------------------
+
+

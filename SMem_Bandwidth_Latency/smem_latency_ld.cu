@@ -25,8 +25,8 @@ __global__ void smem_ld_latency_test_kernel(uint32_t *startClk, uint32_t *stopCl
     Arr[tid] = tid * sizeof(uint32_t);
 
     uint32_t arr_addr;
-    // 只所以能64位强转32位，是因为共享内存就是靠偏移量访问的，而且多次共享内存的分配是连续的。
-    // 声明一个64位寄存器u64addr， 创建一个指向共享内存的通用指针并赋值给该寄存器，强转32位
+    // 之所以能64位强转32位，是因为共享内存是靠偏移量访问的（多次共享内存的分配是连续的）。
+    // 声明一个64位寄存器u64addr，将通用地址转换为指向共享内存空间的指针并赋值给该寄存器，截断高位。
     asm volatile (
         "{.reg .u64 u64addr;\n"
         " cvta.to.shared.u64 u64addr, %1;\n"
@@ -45,7 +45,7 @@ __global__ void smem_ld_latency_test_kernel(uint32_t *startClk, uint32_t *stopCl
             : "+r"(arr_addr) : : "memory"
         );
     }
-
+ 
     asm volatile ("mov.u32 %0, %%clock;" : "=r"(stop) :: "memory");
 
     startClk[tid] = start;

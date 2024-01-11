@@ -20,14 +20,13 @@ nvcc -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I../Utils -L /usr/local
 
 
 ## globalMem_bandwidth_YHs
+
 > 这份代码直接copy自：https://github.com/Yinghan-Li/YHs_Sample 作为参考
 
 
 
-
-
-
 # Global Memory Latency
+
 > 关于全局内存 L1/L2 TLB 的理论理解，我做的很差，所以MicroBenchmark和思路极有可能 是错的！！！
 ## 结论
 - globalMem_latency_None: In the case of L2 miss and L2 TLB hit, global memory load latency is: 543.532000 cycles

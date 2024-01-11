@@ -24,6 +24,7 @@ python3 test_warpSchedule_my.py
 
 
 # warpScheduleTest_t4
+
 ## 结论
 - TuringT4描述的 ***只启动两个活跃warp执行无邻居寄存器依赖FFMA序列，算浮点性能*** 的想法，我做不出来效果。
 

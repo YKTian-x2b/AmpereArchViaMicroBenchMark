@@ -18,18 +18,9 @@
 #define STRIDE 128
 
 __device__ __forceinline__
-void ldg_ca(void **&ldg_ptr) {
+void ldg_cv(void **&ldg_ptr) {
     asm volatile (
-        "ld.global.ca.b64 %0, [%0];\n"
-        : "+l"(ldg_ptr)
-        : : "memory"
-    );
-}
-
-__device__ __forceinline__
-void ldg_cg(void **&ldg_ptr) {
-    asm volatile (
-        "ld.global.cg.b64 %0, [%0];\n"
+        "ld.global.cv.b64 %0, [%0];\n"
         : "+l"(ldg_ptr)
         : : "memory"
     );
@@ -39,7 +30,7 @@ __global__ void gloMem_latency_test_kernel(uint32_t *startClk, uint32_t *stopClk
     int tid = threadIdx.x;
     void **ldg_ptr = arr +  tid;
     // populate L2 TLB
-    ldg_cg(ldg_ptr);
+    ldg_cv(ldg_ptr);
 
     uint32_t start, stop;
     asm volatile ("bar.sync 0;");
@@ -47,7 +38,7 @@ __global__ void gloMem_latency_test_kernel(uint32_t *startClk, uint32_t *stopClk
 
     #pragma unroll
     for(int i = 0; i < UNROLL; i++){
-        ldg_cg(ldg_ptr);
+        ldg_cv(ldg_ptr);
     }
 
     asm volatile ("mov.u32 %0, %%clock;" : "=r"(stop) :: "memory");

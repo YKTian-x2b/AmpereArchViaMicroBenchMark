@@ -7,24 +7,12 @@
 #include <iostream>
 #include <cstdio>
 
-// 如果用物理地址访问L2cache，则会用到L2TLB，就会存在TLB未命中的情况。 L2TLB的覆盖范围大概是32MB。
-// 开一个远大于 L2TLB 覆盖范围的数组 用足够大的步幅将要访问的元素缓存在L2cache中 但元素间隔会使 L2TLB 未命中
-// 观察是否存在 L2TLB 未命中的情况，以确定L2cache indexed by 虚拟地址还是物理地址
 #define GRD_SIZE 1
 #define BLK_SIZE 32
 #define UNROLL 100
 #define WARM_UP 100
 // 字节步幅为32MB 
 #define STRIDE (4 * 1024 * 1024)
-
-__device__ __forceinline__
-void ldg_ca(void **&ldg_ptr) {
-    asm volatile (
-        "ld.global.ca.b64 %0, [%0];\n"
-        : "+l"(ldg_ptr)
-        : : "memory"
-    );
-}
 
 __device__ __forceinline__
 void ldg_cg(void **&ldg_ptr) {

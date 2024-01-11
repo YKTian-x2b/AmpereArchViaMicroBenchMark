@@ -1,5 +1,5 @@
 # MicroBenchmark For Ampere
-> 写在最前面：大部分代码和思路都直接来自知乎 cloudcore 和 李少侠。详见参考。
+> 写在最前面：部分代码和思路都直接来自知乎 cloudcore 和 李少侠，详见参考。
 
 ## 3060测试结果
 ### Memory hierarchy
@@ -11,27 +11,6 @@
 | L2_D-Cache    | 3 MB                    | 1276.2 GB/s                     | -                     | 219 cycles  |
 | Shared Memory | 100/64/32/16/8/0 KB     | 214.4 GB/s per SM               | 217.6 GB/s per SM     | 23 cycles   |
 | Global Memory | 6 GB                    | 327.2 GB/s                      | 336 GB/s              | ~515 cycles |
-
-### Register Bank
-- 2_Bank
-- Reuse
-
-### Warp Schedule
-- scheduler_Idx = warp_Idx % 4;
-
-
-
-
-## 3090测试结果
-### Memory hierarchy
-|               | Size                    | Bandwidth                       | BW理论上限            | Latency     |
-| ------------- | ----------------------- | ------------------------------- | --------------------- | ----------- |
-| L0_I-Cache    | KB                    | -                               | -                     | -           |
-| L1_I-Cache    | KB                    | -                               | -                     | -           |
-| L1_D-Cache    | KB | B per cycle per SM | 64 B per cycle per SM | cycles   |
-| L2_D-Cache    | MB                    | GB/s                     | -                     | cycles  |
-| Shared Memory | KB     | GB/s per SM               | GB/s per SM     | cycles   |
-| Global Memory | GB                    | GB/s                      | GB/s              | cycles |
 
 ### Register Bank
 - 2_Bank

@@ -42,6 +42,8 @@ __global__ void L1_TLB_detect_kernel(uint32_t *startClk, uint32_t *stopClk, void
     // populate L1 cache
     #pragma unroll
     for(int i = 0; i < UNROLL; i++){
+        // 这里如果用ca结果无法解释,用cg可以看到类似TuringT4的情况
+        // ldg_ca(ldg_ptr);
         ldg_cg(ldg_ptr);
     } 
 
@@ -52,6 +54,8 @@ __global__ void L1_TLB_detect_kernel(uint32_t *startClk, uint32_t *stopClk, void
 
     #pragma unroll
     for(int i = 0; i < UNROLL; i++){
+        // 这里如果用ca结果无法解释,用cg可以看到类似TuringT4的情况
+        // ldg_ca(ldg_ptr);
         ldg_cg(ldg_ptr);
     }  
     
@@ -122,5 +126,5 @@ int main(){
 
 
 // nvcc -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I../Utils -L /usr/local/cuda/lib64 -l cuda -o res/L1_TLB_detect L1_TLB_detect.cu
-// 然后把结果复制到L1_TLB_detect_res_cg.txt里
+
 // python3 L1_TLB_detect_res_process.py

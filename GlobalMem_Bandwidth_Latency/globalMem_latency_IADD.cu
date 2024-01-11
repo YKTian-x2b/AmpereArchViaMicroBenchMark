@@ -16,10 +16,10 @@
 #define STRIDE 256
 
 __device__ __forceinline__
-uint32_t ldg_cg(const void *ptr) {
+uint32_t ldg_cv(const void *ptr) {
     uint32_t ret;
     asm volatile (
-        "ld.global.cg.b32 %0, [%1];"
+        "ld.global.cv.b32 %0, [%1];"
         : "=r"(ret)
         : "l"(ptr)
     );
@@ -31,7 +31,7 @@ __global__ void gloMem_latency_test_kernel(uint32_t *startClk, uint32_t *stopClk
     uint32_t *ldg_ptr = arr+tid;
     uint32_t val;
 
-    val = ldg_cg(ldg_ptr);
+    val = ldg_cv(ldg_ptr);
     ldg_ptr += val;
 
     uint32_t start, stop;
@@ -40,7 +40,7 @@ __global__ void gloMem_latency_test_kernel(uint32_t *startClk, uint32_t *stopClk
 
     #pragma unroll
     for(int i = 0; i < UNROLL; i++){
-        val = ldg_cg(ldg_ptr);
+        val = ldg_cv(ldg_ptr);
         ldg_ptr += val;
     }
 

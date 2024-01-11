@@ -16,27 +16,28 @@
 #define GRD_SIZE 90000
 #define UNROLL 16
 // Global Mem size 不到 6 * 1024*1024*1024字节
-const size_t N_DATA = 1024*1024*256;
+const size_t N_DATA = 1024*1024*128;
 
 __device__ __forceinline__
-float ldg_cv(const void *ptr) {
-    float ret;
+float2 ldg_cv_v2(const void *ptr) {
+    float2 ret;
     asm volatile (
-        "ld.global.cv.f32 %0, [%1];"
-        : "=f"(ret)
+        "ld.global.cv.v2.f32 {%0, %1}, [%2];"
+        : "=f"(ret.x), "=f"(ret.y)
         : "l"(ptr)
     );
     return ret;
 }
 
-__global__ void globalMemBW_test_kernel(const float *Arr, float *out) {
+__global__ void globalMemBW_test_kernel(const float2 *Arr, float *out) {
     int offset = (BLK_SIZE * UNROLL * blockIdx.x + threadIdx.x) % N_DATA;
-    const float *ldg_ptr = Arr + offset;
+    const float2 *ldg_ptr = Arr + offset;
     float sum = 0;
 
     #pragma unroll
     for (int i = 0; i < UNROLL; ++i) {
-        sum += ldg_cv(ldg_ptr + BLK_SIZE * i);
+        float2 tmp = ldg_cv_v2(ldg_ptr + BLK_SIZE * i);
+        sum += tmp.x + tmp.y;
     }
 
     if(sum != 0){
@@ -45,15 +46,15 @@ __global__ void globalMemBW_test_kernel(const float *Arr, float *out) {
 }
 
 int main(){
-    HostPtr<float> arr_h(N_DATA);
+    HostPtr<float2> arr_h(N_DATA);
     arr_h.SetZeros();
-    CuPtr<float> arr_d(arr_h);
-    CuPtr<float> y_d(N_DATA);
+    CuPtr<float2> arr_d(arr_h);
+    CuPtr<float> out_d(N_DATA);
 
     std::cout << "Warming Up ..." << std::endl;
     // warm up
     for (int i = 0; i < WARMUP_ITER; ++i) {
-        globalMemBW_test_kernel<<<GRD_SIZE, BLK_SIZE>>>(arr_d.GetPtr(), y_d.GetPtr());
+        globalMemBW_test_kernel<<<GRD_SIZE, BLK_SIZE>>>(arr_d.GetPtr(), out_d.GetPtr());
     }
 
     cudaEvent_t start, stop;
@@ -63,7 +64,7 @@ int main(){
     std::cout << "Running ..." << std::endl;
     checkCudaErrors(cudaEventRecord(start));
     for (int i = 0; i < BENCH_ITER ; ++i) {
-        globalMemBW_test_kernel<<<GRD_SIZE, BLK_SIZE>>>(arr_d.GetPtr(), y_d.GetPtr());
+        globalMemBW_test_kernel<<<GRD_SIZE, BLK_SIZE>>>(arr_d.GetPtr(), out_d.GetPtr());
     }
     checkCudaErrors(cudaEventRecord(stop));
     checkCudaErrors(cudaEventSynchronize(stop));
@@ -71,21 +72,19 @@ int main(){
     checkCudaErrors(cudaEventDestroy(start));
     checkCudaErrors(cudaEventDestroy(stop));
 
-    double gbps = ((double)((GRD_SIZE*BLK_SIZE*UNROLL) * sizeof(float)) / 1e9) /
+    double gbps = ((double)((GRD_SIZE*BLK_SIZE*UNROLL) * sizeof(float2)) / 1e9) /
                   ((double)time_ms / BENCH_ITER / 1e3);
     printf("Global Memory Bandwidth: %lfGB/s\n", gbps);
 }
 
-// nvcc -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I../Utils -L /usr/local/cuda/lib64 -l cuda -o res/globalMem_bandwidth globalMem_bandwidth.cu
+// nvcc -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I../Utils -L /usr/local/cuda/lib64 -l cuda -o res/globalMem_bandwidth_float2 globalMem_bandwidth_float2.cu
 
 // 驱动调试
-// nvcc --keep --keep-dir midRes -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I../Utils -L /usr/local/cuda/lib64 -l cuda -o res/globalMem_bandwidth globalMem_bandwidth.cu
-// cuasm --bin2asm midRes/globalMem_bandwidth.sm_86.cubin -o midRes/globalMem_bandwidth.sm_86.cuasm
+// nvcc --keep --keep-dir midRes -gencode=arch=compute_86,code=\"sm_86,compute_86\" -I../Utils -L /usr/local/cuda/lib64 -l cuda -o res/globalMem_bandwidth_float2 globalMem_bandwidth_float2.cu
+// cuasm --bin2asm midRes/globalMem_bandwidth_float2.sm_86.cubin -o midRes/globalMem_bandwidth_float2.sm_86.cuasm
 
-// cuasm --asm2bin midRes/globalMem_bandwidth.sm_86.cuasm -o midRes/globalMem_bandwidth.sm_86.cubin 
+// cuasm --asm2bin midRes/globalMem_bandwidth_float2.sm_86.cuasm -o midRes/globalMem_bandwidth_float2.sm_86.cubin 
 
 
-// GRD_SIZE 9000 的结果
-// Global Memory Bandwidth: 326.575679GB/s
 // GRD_SIZE 90000 的结果
-// Global Memory Bandwidth: 327.241499GB/s
+// Global Memory Bandwidth: 321.044992GB/s
